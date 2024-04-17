@@ -41,6 +41,8 @@
             this.createAppointmentButton = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.exitButton = new System.Windows.Forms.Button();
+            this.loggedInLabel = new System.Windows.Forms.Label();
+            this.userLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.customerDGV)).BeginInit();
             this.customerGroupBox.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -61,7 +63,7 @@
             this.customerGroupBox.Controls.Add(this.modifyCustomerButton);
             this.customerGroupBox.Controls.Add(this.addCustomerButton);
             this.customerGroupBox.Controls.Add(this.customerDGV);
-            this.customerGroupBox.Location = new System.Drawing.Point(12, 12);
+            this.customerGroupBox.Location = new System.Drawing.Point(12, 78);
             this.customerGroupBox.Name = "customerGroupBox";
             this.customerGroupBox.Size = new System.Drawing.Size(776, 237);
             this.customerGroupBox.TabIndex = 1;
@@ -110,7 +112,7 @@
             this.groupBox1.Controls.Add(this.modifyAppointmentButton);
             this.groupBox1.Controls.Add(this.createAppointmentButton);
             this.groupBox1.Controls.Add(this.dataGridView1);
-            this.groupBox1.Location = new System.Drawing.Point(12, 255);
+            this.groupBox1.Location = new System.Drawing.Point(12, 321);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(776, 237);
             this.groupBox1.TabIndex = 4;
@@ -184,19 +186,38 @@
             // 
             this.exitButton.BackColor = System.Drawing.Color.Silver;
             this.exitButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.exitButton.Location = new System.Drawing.Point(696, 549);
+            this.exitButton.Location = new System.Drawing.Point(696, 604);
             this.exitButton.Name = "exitButton";
             this.exitButton.Size = new System.Drawing.Size(92, 36);
             this.exitButton.TabIndex = 6;
             this.exitButton.Text = "Exit";
             this.exitButton.UseVisualStyleBackColor = false;
             // 
+            // loggedInLabel
+            // 
+            this.loggedInLabel.AutoSize = true;
+            this.loggedInLabel.Location = new System.Drawing.Point(5, 9);
+            this.loggedInLabel.Name = "loggedInLabel";
+            this.loggedInLabel.Size = new System.Drawing.Size(74, 13);
+            this.loggedInLabel.TabIndex = 7;
+            this.loggedInLabel.Text = "Logged in as: ";
+            // 
+            // userLabel
+            // 
+            this.userLabel.AutoSize = true;
+            this.userLabel.Location = new System.Drawing.Point(79, 9);
+            this.userLabel.Name = "userLabel";
+            this.userLabel.Size = new System.Drawing.Size(0, 13);
+            this.userLabel.TabIndex = 8;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(800, 597);
+            this.ClientSize = new System.Drawing.Size(800, 652);
+            this.Controls.Add(this.userLabel);
+            this.Controls.Add(this.loggedInLabel);
             this.Controls.Add(this.exitButton);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.customerGroupBox);
@@ -209,6 +230,7 @@
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -227,6 +249,8 @@
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label calendarFilterLabel;
         private System.Windows.Forms.Button exitButton;
+        private System.Windows.Forms.Label loggedInLabel;
+        private System.Windows.Forms.Label userLabel;
     }
 }
 
