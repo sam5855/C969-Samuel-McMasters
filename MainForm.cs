@@ -21,6 +21,8 @@ namespace C969_Samuel_McMasters
             InitializeComponent();
 
             //Creating SQL Connection
+
+            //Home PC Connection
             //MySqlConnection conn = new MySqlConnection("server=127.0.0.1;uid=root;pwd=5855;database=client_schedule");
             //conn.Open();
 
@@ -29,6 +31,17 @@ namespace C969_Samuel_McMasters
             //DataTable dt = new DataTable();
             //adp.Fill(dt);
             //customerDGV.DataSource = dt;
+
+
+            //VM PC Connection
+            MySqlConnection conn = new MySqlConnection("server=127.0.0.1;uid=sqlUser;pwd=Passw0rd!;database=client_schedule");
+            conn.Open();
+
+            MySqlCommand query = new MySqlCommand("SELECT * FROM appointment", conn);
+            MySqlDataAdapter adp = new MySqlDataAdapter(query);
+            DataTable dt = new DataTable();
+            adp.Fill(dt);
+            customerDGV.DataSource = dt;
 
         }
 
