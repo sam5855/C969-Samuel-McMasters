@@ -24,7 +24,9 @@ namespace C969_Samuel_McMasters
 
         private void loginButton_Click(object sender, EventArgs e)
         {
+            this.Hide();
             new MainForm().ShowDialog();
+            
         }
     }
 }
