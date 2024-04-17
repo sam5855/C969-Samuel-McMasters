@@ -19,7 +19,12 @@ namespace C969_Samuel_McMasters
 
         private void exitButton_Click(object sender, EventArgs e)
         {
-            Close();
+            Application.Exit();
+        }
+
+        private void loginButton_Click(object sender, EventArgs e)
+        {
+            new MainForm().ShowDialog();
         }
     }
 }
