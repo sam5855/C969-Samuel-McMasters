@@ -104,6 +104,10 @@
     <Compile Include="AddCustomerForm.Designer.cs">
       <DependentUpon>AddCustomerForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="DataModels\Appointment.cs" />
+    <Compile Include="DataModels\Customer.cs" />
+    <Compile Include="DataModels\DataHelper.cs" />
+    <Compile Include="DataModels\User.cs" />
     <Compile Include="LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>

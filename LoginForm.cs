@@ -30,8 +30,14 @@ namespace C969_Samuel_McMasters
             if (rdr.HasRows)
             {
                 rdr.Read();
-                DataHelper.Set
+                DataHelper.setCurrentUserId(Convert.ToInt32(rdr[0]));
+                DataHelper.setCurrentUserName(username);
+                rdr.Close();
+                c.Close();
+                return DataHelper.getCurrentUserId();
             }
+            return 0;
+
         }
 
 
@@ -42,8 +48,19 @@ namespace C969_Samuel_McMasters
 
         private void loginButton_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            new MainForm().ShowDialog();
+            if (FindUser(usernameTextBox.Text, passwordTextBox.Text) != 0)
+            {
+                this.Hide();
+                MainForm MainForm = new MainForm();
+                MainForm.Show();
+            }
+            
+            else
+            {
+                MessageBox.Show("Invalid User");
+            }
+            
+            
             
         }
     }
