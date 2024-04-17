@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace C969_Samuel_McMasters.DataModels
 {
-    public class User
+    public class City
     {
     }
 }

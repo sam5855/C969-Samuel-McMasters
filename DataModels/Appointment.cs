@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace C969_Samuel_McMasters.DataModels
 {
-    internal class Appointment
+    public class Appointment
     {
     }
 }
