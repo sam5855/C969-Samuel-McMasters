@@ -19,6 +19,8 @@ namespace C969_Samuel_McMasters
         public MainForm()
         {
             InitializeComponent();
+
+            //Creating SQL Connection
             MySqlConnection conn = new MySqlConnection("server=127.0.0.1;uid=root;pwd=5855;database=client_schedule");
             conn.Open();
 
@@ -32,7 +34,7 @@ namespace C969_Samuel_McMasters
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            //testing vm
         }
     }
 }
