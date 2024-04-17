@@ -40,7 +40,7 @@ C:\Users\Sam\source\repos\C969\C969-Samuel-McMasters\obj\Debug\C969-Samuel-McMas
 C:\Users\Sam\source\repos\C969\C969-Samuel-McMasters\obj\Debug\C969-Samuel-McMasters.csproj.CopyComplete
 C:\Users\Sam\source\repos\C969\C969-Samuel-McMasters\obj\Debug\C969-Samuel-McMasters.exe
 C:\Users\Sam\source\repos\C969\C969-Samuel-McMasters\obj\Debug\C969-Samuel-McMasters.pdb
-C:\Users\Sam\source\repos\C969\C969-Samuel-McMasters\obj\Debug\C969_Samuel_McMasters.MainScreen.resources
 C:\Users\Sam\source\repos\C969\C969-Samuel-McMasters\obj\Debug\C969_Samuel_McMasters.LoginForm.resources
 C:\Users\Sam\source\repos\C969\C969-Samuel-McMasters\obj\Debug\C969_Samuel_McMasters.AddCustomerForm.resources
 C:\Users\Sam\source\repos\C969\C969-Samuel-McMasters\obj\Debug\C969_Samuel_McMasters.ModifyCustomerForm.resources
+C:\Users\Sam\source\repos\C969\C969-Samuel-McMasters\obj\Debug\C969_Samuel_McMasters.MainForm.resources
