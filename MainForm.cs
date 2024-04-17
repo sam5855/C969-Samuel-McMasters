@@ -35,6 +35,8 @@ namespace C969_Samuel_McMasters
         private void Form1_Load(object sender, EventArgs e)
         {
             //testing vm
+            //testing more vm commits
+
         }
     }
 }
