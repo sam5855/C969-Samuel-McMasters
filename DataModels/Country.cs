@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace C969_Samuel_McMasters.DataModels
 {
-    internal class Country
+    public class Country
     {
+        public int CountryId { get; set; }
+        public string CountryName { get; set; }
+        public string CreatedBy { get; set; }
     }
 }

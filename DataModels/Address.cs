@@ -14,7 +14,7 @@ namespace C969_Samuel_McMasters.DataModels
         public string CityId { get; set; }
         public string PostalCode { get; set; }
         public string Phone { get; set; }
-        public string name { get; set; }
+        
 
 
     }
