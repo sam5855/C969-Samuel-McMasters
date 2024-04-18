@@ -36,7 +36,7 @@ namespace C969_Samuel_McMasters
 
 
             //VM PC Connection
-            MySqlConnection conn = new MySqlConnection(DataHelper.vmConnectionString);
+            MySqlConnection conn = new MySqlConnection(DataHelper.homeConnectionString);
             conn.Open();
 
             MySqlCommand query = new MySqlCommand("SELECT * FROM customer", conn);
