@@ -39,14 +39,14 @@
             this.button1 = new System.Windows.Forms.Button();
             this.modifyAppointmentButton = new System.Windows.Forms.Button();
             this.createAppointmentButton = new System.Windows.Forms.Button();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.appointmentDGV = new System.Windows.Forms.DataGridView();
             this.exitButton = new System.Windows.Forms.Button();
             this.loggedInLabel = new System.Windows.Forms.Label();
             this.userLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.customerDGV)).BeginInit();
             this.customerGroupBox.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.appointmentDGV)).BeginInit();
             this.SuspendLayout();
             // 
             // customerDGV
@@ -111,7 +111,7 @@
             this.groupBox1.Controls.Add(this.button1);
             this.groupBox1.Controls.Add(this.modifyAppointmentButton);
             this.groupBox1.Controls.Add(this.createAppointmentButton);
-            this.groupBox1.Controls.Add(this.dataGridView1);
+            this.groupBox1.Controls.Add(this.appointmentDGV);
             this.groupBox1.Location = new System.Drawing.Point(12, 321);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(776, 237);
@@ -174,13 +174,13 @@
             this.createAppointmentButton.Text = "Create Appointment";
             this.createAppointmentButton.UseVisualStyleBackColor = false;
             // 
-            // dataGridView1
+            // appointmentDGV
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(139, 19);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(631, 150);
-            this.dataGridView1.TabIndex = 0;
+            this.appointmentDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.appointmentDGV.Location = new System.Drawing.Point(139, 19);
+            this.appointmentDGV.Name = "appointmentDGV";
+            this.appointmentDGV.Size = new System.Drawing.Size(631, 150);
+            this.appointmentDGV.TabIndex = 0;
             // 
             // exitButton
             // 
@@ -192,6 +192,7 @@
             this.exitButton.TabIndex = 6;
             this.exitButton.Text = "Exit";
             this.exitButton.UseVisualStyleBackColor = false;
+            this.exitButton.Click += new System.EventHandler(this.exitButton_Click);
             // 
             // loggedInLabel
             // 
@@ -228,7 +229,7 @@
             this.customerGroupBox.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.appointmentDGV)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -245,7 +246,7 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button modifyAppointmentButton;
         private System.Windows.Forms.Button createAppointmentButton;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView appointmentDGV;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label calendarFilterLabel;
         private System.Windows.Forms.Button exitButton;

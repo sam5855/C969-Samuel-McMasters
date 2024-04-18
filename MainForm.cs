@@ -24,32 +24,38 @@ namespace C969_Samuel_McMasters
 
             //Creating SQL Connection
 
-            //Home PC Connection
-            //MySqlConnection conn = new MySqlConnection("server=127.0.0.1;uid=root;pwd=5855;database=client_schedule");
-            //conn.Open();
-
-            //MySqlCommand query = new MySqlCommand("SELECT * FROM city", conn);
-            //MySqlDataAdapter adp = new MySqlDataAdapter(query);
-            //DataTable dt = new DataTable();
-            //adp.Fill(dt);
-            //customerDGV.DataSource = dt;
-
-
-            //VM PC Connection
             MySqlConnection conn = new MySqlConnection(DataHelper.homeConnectionString);
             conn.Open();
 
+            //Populate Customer DataGrid
             MySqlCommand query = new MySqlCommand("SELECT * FROM customer", conn);
             MySqlDataAdapter adp = new MySqlDataAdapter(query);
             DataTable dt = new DataTable();
             adp.Fill(dt);
             customerDGV.DataSource = dt;
 
+            customerDGV.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            customerDGV.ReadOnly = true;
+            customerDGV.MultiSelect = false;
+            customerDGV.AllowUserToAddRows = false;
+
+            
+
+
+           
+           
+
+
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
             
+        }
+
+        private void exitButton_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }
