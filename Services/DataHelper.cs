@@ -10,9 +10,7 @@ namespace C969_Samuel_McMasters.DataModels
 {
     class DataHelper
     {
-        //Two connection strings to handle database on vm vs home pc
-        public static string vmConnectionString = "server=127.0.0.1;uid=sqlUser;pwd=Passw0rd!;database=client_schedule";
-        public static string homeConnectionString = "server=127.0.0.1;uid=root;pwd=5855;database=client_schedule";
+      
         public static int _currentUserId;
         public static string _currentUserName;
 
@@ -26,7 +24,7 @@ namespace C969_Samuel_McMasters.DataModels
             _currentUserId = currentUserID; 
         }
 
-        public static string getCurrentUserName()
+        public static string GetCurrentUserName()
         {
             return _currentUserName;
         }
@@ -36,7 +34,30 @@ namespace C969_Samuel_McMasters.DataModels
             _currentUserName = currentUserName;
         }
 
-      
+        public static string CreateTimeStamp()
+        {
+            return DateTime.Now.ToString("yyyy-MM-dd");
+        }
+
+        public static int NewID(List<int> idList)
+        {
+            int highestID = 0;
+            foreach (int id in idList)
+            {
+                if (id > highestID)
+                    highestID = id;
+            }
+            return highestID + 1;
+        }
+
+
+
+        //Loads Add Customer Form
+        public static void ShowAddCustomer()
+        {
+            AddCustomerForm AddCustomerForm = new AddCustomerForm();
+            AddCustomerForm.ShowDialog();
+        }
 
 
     }

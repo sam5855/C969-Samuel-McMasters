@@ -22,7 +22,7 @@ namespace C969_Samuel_McMasters
         //Method to authenticate user login
         public static int FindUser(string username, string password)
         {
-            MySqlConnection c = new MySqlConnection(DataHelper.homeConnectionString);
+            MySqlConnection c = new MySqlConnection(Services.Service.homeConnectionString);
             c.Open();
             MySqlCommand cmd = new MySqlCommand($"SELECT userId FROM user WHERE username = '{username}' AND password = '{password}'", c);
             MySqlDataReader rdr = cmd.ExecuteReader();
@@ -62,6 +62,11 @@ namespace C969_Samuel_McMasters
             
             
             
+        }
+
+        private void LoginForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

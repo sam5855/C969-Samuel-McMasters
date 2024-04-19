@@ -102,6 +102,7 @@
             this.addCustomerButton.TabIndex = 1;
             this.addCustomerButton.Text = "Add Customer";
             this.addCustomerButton.UseVisualStyleBackColor = false;
+            this.addCustomerButton.Click += new System.EventHandler(this.addCustomerButton_Click);
             // 
             // groupBox1
             // 
@@ -236,8 +237,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.DataGridView customerDGV;
         private System.Windows.Forms.GroupBox customerGroupBox;
         private System.Windows.Forms.Button addCustomerButton;
         private System.Windows.Forms.Button deleteCustomerButton;
@@ -252,6 +251,7 @@
         private System.Windows.Forms.Button exitButton;
         private System.Windows.Forms.Label loggedInLabel;
         private System.Windows.Forms.Label userLabel;
+        public System.Windows.Forms.DataGridView customerDGV;
     }
 }
 

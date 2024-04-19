@@ -20,11 +20,9 @@ namespace C969_Samuel_McMasters
         public MainForm()
         {
             InitializeComponent();
-            userLabel.Text = DataHelper.getCurrentUserName();
-
+            userLabel.Text = DataHelper.GetCurrentUserName();
             //Creating SQL Connection
-
-            MySqlConnection conn = new MySqlConnection(DataHelper.homeConnectionString);
+            MySqlConnection conn = new MySqlConnection(Services.Service.homeConnectionString);
             conn.Open();
 
             //Populate Customer DataGrid
@@ -33,6 +31,9 @@ namespace C969_Samuel_McMasters
             DataTable dt = new DataTable();
             adp.Fill(dt);
             customerDGV.DataSource = dt;
+
+
+
 
             customerDGV.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             customerDGV.ReadOnly = true;
@@ -57,5 +58,12 @@ namespace C969_Samuel_McMasters
         {
             Application.Exit();
         }
+
+        private void addCustomerButton_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            DataHelper.ShowAddCustomer();
+        }
+
     }
 }

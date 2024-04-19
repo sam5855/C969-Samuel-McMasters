@@ -41,34 +41,38 @@
             this.cityLabel = new System.Windows.Forms.Label();
             this.addressLabel = new System.Windows.Forms.Label();
             this.nameLabel = new System.Windows.Forms.Label();
+            this.customerPostalCodeTextBox = new System.Windows.Forms.TextBox();
+            this.zipLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // exitButton
             // 
             this.exitButton.BackColor = System.Drawing.Color.IndianRed;
             this.exitButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.exitButton.Location = new System.Drawing.Point(380, 308);
+            this.exitButton.Location = new System.Drawing.Point(380, 407);
             this.exitButton.Name = "exitButton";
             this.exitButton.Size = new System.Drawing.Size(75, 30);
             this.exitButton.TabIndex = 25;
             this.exitButton.Text = "Exit";
             this.exitButton.UseVisualStyleBackColor = false;
+            this.exitButton.Click += new System.EventHandler(this.exitButton_Click);
             // 
             // saveButton
             // 
             this.saveButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.saveButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.saveButton.Location = new System.Drawing.Point(176, 229);
+            this.saveButton.Location = new System.Drawing.Point(176, 268);
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(75, 30);
             this.saveButton.TabIndex = 24;
             this.saveButton.Text = "Save";
             this.saveButton.UseVisualStyleBackColor = false;
+            this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
             // 
             // clearButton
             // 
             this.clearButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.clearButton.Location = new System.Drawing.Point(264, 229);
+            this.clearButton.Location = new System.Drawing.Point(264, 268);
             this.clearButton.Name = "clearButton";
             this.clearButton.Size = new System.Drawing.Size(75, 30);
             this.clearButton.TabIndex = 23;
@@ -77,7 +81,7 @@
             // 
             // customerPhoneNumberTextBox
             // 
-            this.customerPhoneNumberTextBox.Location = new System.Drawing.Point(176, 192);
+            this.customerPhoneNumberTextBox.Location = new System.Drawing.Point(176, 231);
             this.customerPhoneNumberTextBox.Name = "customerPhoneNumberTextBox";
             this.customerPhoneNumberTextBox.Size = new System.Drawing.Size(163, 20);
             this.customerPhoneNumberTextBox.TabIndex = 22;
@@ -114,7 +118,7 @@
             // 
             this.phoneLabel.AutoSize = true;
             this.phoneLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.phoneLabel.Location = new System.Drawing.Point(47, 193);
+            this.phoneLabel.Location = new System.Drawing.Point(47, 232);
             this.phoneLabel.Name = "phoneLabel";
             this.phoneLabel.Size = new System.Drawing.Size(97, 16);
             this.phoneLabel.TabIndex = 17;
@@ -160,11 +164,30 @@
             this.nameLabel.TabIndex = 13;
             this.nameLabel.Text = "Name";
             // 
+            // customerPostalCodeTextBox
+            // 
+            this.customerPostalCodeTextBox.Location = new System.Drawing.Point(176, 196);
+            this.customerPostalCodeTextBox.Name = "customerPostalCodeTextBox";
+            this.customerPostalCodeTextBox.Size = new System.Drawing.Size(163, 20);
+            this.customerPostalCodeTextBox.TabIndex = 26;
+            // 
+            // zipLabel
+            // 
+            this.zipLabel.AutoSize = true;
+            this.zipLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.zipLabel.Location = new System.Drawing.Point(118, 197);
+            this.zipLabel.Name = "zipLabel";
+            this.zipLabel.Size = new System.Drawing.Size(26, 16);
+            this.zipLabel.TabIndex = 27;
+            this.zipLabel.Text = "Zip";
+            // 
             // AddCustomerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(467, 350);
+            this.ClientSize = new System.Drawing.Size(467, 449);
+            this.Controls.Add(this.zipLabel);
+            this.Controls.Add(this.customerPostalCodeTextBox);
             this.Controls.Add(this.exitButton);
             this.Controls.Add(this.saveButton);
             this.Controls.Add(this.clearButton);
@@ -200,5 +223,7 @@
         private System.Windows.Forms.Label cityLabel;
         private System.Windows.Forms.Label addressLabel;
         private System.Windows.Forms.Label nameLabel;
+        private System.Windows.Forms.TextBox customerPostalCodeTextBox;
+        private System.Windows.Forms.Label zipLabel;
     }
 }
