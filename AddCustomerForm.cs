@@ -25,6 +25,8 @@ namespace C969_Samuel_McMasters
         private void exitButton_Click(object sender, EventArgs e)
         {
             Close();
+            MainForm MainForm = new MainForm();
+            MainForm.Show();
         }
 
         private void saveButton_Click(object sender, EventArgs e)

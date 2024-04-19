@@ -50,9 +50,9 @@ namespace C969_Samuel_McMasters
         {
             if (FindUser(usernameTextBox.Text, passwordTextBox.Text) != 0)
             {
-                this.Hide();
                 MainForm MainForm = new MainForm();
                 MainForm.Show();
+                Hide();
             }
             
             else

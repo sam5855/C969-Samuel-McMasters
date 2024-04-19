@@ -224,6 +224,7 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.customerGroupBox);
             this.Name = "MainForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Scheduling Assistant ";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.customerDGV)).EndInit();
