@@ -19,6 +19,8 @@ namespace C969_Samuel_McMasters
         public ModifyCustomerForm(int selectedCustomer)
         {
             InitializeComponent();
+
+            
             
             customerDict = Service.GetCustomerDetails(selectedCustomer);
             modCustomerNameTextBox.Text = customerDict["customerName"];
@@ -40,6 +42,30 @@ namespace C969_Samuel_McMasters
             Close();
             MainForm MainForm = new MainForm();
             MainForm.Show();
+        }
+
+        private void saveButton_Click(object sender, EventArgs e)
+        {
+            int customerId = Convert.ToInt32(customerDict["CustomerId"]);
+
+
+            Dictionary<string, string> updatedForm = new Dictionary<string, string>();
+            updatedForm.Add("customerName", modCustomerNameTextBox.Text);
+            updatedForm.Add("phone", modCustomerPhoneNumberTextBox.Text);
+            updatedForm.Add("address", modCustomerAddressTextBox.Text);
+            updatedForm.Add("city", modCustomerCityTextBox.Text);
+            updatedForm.Add("zip", modCustomerPostalCodeTextBox.Text);
+            updatedForm.Add("country", modCustomerCountryTextBox.Text);
+            //updatedForm.Add("active", activeYes.Checked ? "1" : "0");
+
+            if (Service.updateCustomer(updatedForm, customerId))
+            {
+                MessageBox.Show("Update Complete!");
+            }
+            else
+            {
+                MessageBox.Show("Update Could not complete");
+            }
         }
     }
 }

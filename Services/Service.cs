@@ -80,6 +80,7 @@ namespace C969_Samuel_McMasters.Services
 
             Dictionary<string, string> customerDict = new Dictionary<string, string>();
             // Customer Table Details
+            customerDict.Add("customerId", customerId.ToString());
             customerDict.Add("customerName", rdr[1].ToString());
             customerDict.Add("addressId", rdr[2].ToString());
             customerDict.Add("active", rdr[3].ToString());
@@ -151,6 +152,32 @@ namespace C969_Samuel_McMasters.Services
             }
 
             return 0;
+        }
+
+        static public bool updateCustomer(Dictionary<string, string> updatedCustomer, int customerId)
+        {
+            MySqlConnection c = new MySqlConnection(homeConnectionString);
+            c.Open();
+
+            //Update Customer Table
+            string updateRecord = $"UPDATE customer" +
+                $" SET customerName = '{updatedCustomer["customerName"]}' active = '{updatedCustomer["active"]}', lastUpdate = '{DataHelper.CreateTimeStamp()}', lastUpdateBy = '{DataHelper.GetCurrentUserName()}'" +
+                $" WHERE customerId = '{customerId}'";
+            MySqlCommand cmd = new MySqlCommand(updateRecord, c);
+            int customerUpdated = cmd.ExecuteNonQuery();
+
+            c.Close();
+
+            if (customerUpdated != 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+
         }
 
     }
