@@ -91,6 +91,7 @@
             this.modifyCustomerButton.TabIndex = 2;
             this.modifyCustomerButton.Text = "Modify Customer";
             this.modifyCustomerButton.UseVisualStyleBackColor = false;
+            this.modifyCustomerButton.Click += new System.EventHandler(this.modifyCustomerButton_Click);
             // 
             // addCustomerButton
             // 

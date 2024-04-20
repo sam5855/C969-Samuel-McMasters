@@ -28,158 +28,170 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.nameLabel = new System.Windows.Forms.Label();
-            this.addressLabel = new System.Windows.Forms.Label();
-            this.cityLabel = new System.Windows.Forms.Label();
-            this.countryLabel = new System.Windows.Forms.Label();
-            this.phoneLabel = new System.Windows.Forms.Label();
-            this.customerNameTextBox = new System.Windows.Forms.TextBox();
-            this.customerAddressTextBox = new System.Windows.Forms.TextBox();
-            this.customerCityTextBox = new System.Windows.Forms.TextBox();
-            this.customerCountryTextBox = new System.Windows.Forms.TextBox();
-            this.customerPhoneNumberTextBox = new System.Windows.Forms.TextBox();
-            this.clearButton = new System.Windows.Forms.Button();
-            this.saveButton = new System.Windows.Forms.Button();
+            this.zipLabel = new System.Windows.Forms.Label();
+            this.modCustomerPostalCodeTextBox = new System.Windows.Forms.TextBox();
             this.exitButton = new System.Windows.Forms.Button();
+            this.saveButton = new System.Windows.Forms.Button();
+            this.modCustomerPhoneNumberTextBox = new System.Windows.Forms.TextBox();
+            this.modCustomerCountryTextBox = new System.Windows.Forms.TextBox();
+            this.modCustomerCityTextBox = new System.Windows.Forms.TextBox();
+            this.modCustomerAddressTextBox = new System.Windows.Forms.TextBox();
+            this.modCustomerNameTextBox = new System.Windows.Forms.TextBox();
+            this.phoneLabel = new System.Windows.Forms.Label();
+            this.countryLabel = new System.Windows.Forms.Label();
+            this.cityLabel = new System.Windows.Forms.Label();
+            this.addressLabel = new System.Windows.Forms.Label();
+            this.nameLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // nameLabel
+            // zipLabel
             // 
-            this.nameLabel.AutoSize = true;
-            this.nameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nameLabel.Location = new System.Drawing.Point(106, 66);
-            this.nameLabel.Name = "nameLabel";
-            this.nameLabel.Size = new System.Drawing.Size(44, 16);
-            this.nameLabel.TabIndex = 0;
-            this.nameLabel.Text = "Name";
+            this.zipLabel.AutoSize = true;
+            this.zipLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.zipLabel.Location = new System.Drawing.Point(118, 197);
+            this.zipLabel.Name = "zipLabel";
+            this.zipLabel.Size = new System.Drawing.Size(26, 16);
+            this.zipLabel.TabIndex = 42;
+            this.zipLabel.Text = "Zip";
             // 
-            // addressLabel
+            // modCustomerPostalCodeTextBox
             // 
-            this.addressLabel.AutoSize = true;
-            this.addressLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.addressLabel.Location = new System.Drawing.Point(92, 99);
-            this.addressLabel.Name = "addressLabel";
-            this.addressLabel.Size = new System.Drawing.Size(58, 16);
-            this.addressLabel.TabIndex = 1;
-            this.addressLabel.Text = "Address";
-            // 
-            // cityLabel
-            // 
-            this.cityLabel.AutoSize = true;
-            this.cityLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cityLabel.Location = new System.Drawing.Point(121, 134);
-            this.cityLabel.Name = "cityLabel";
-            this.cityLabel.Size = new System.Drawing.Size(29, 16);
-            this.cityLabel.TabIndex = 2;
-            this.cityLabel.Text = "City";
-            // 
-            // countryLabel
-            // 
-            this.countryLabel.AutoSize = true;
-            this.countryLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.countryLabel.Location = new System.Drawing.Point(98, 164);
-            this.countryLabel.Name = "countryLabel";
-            this.countryLabel.Size = new System.Drawing.Size(52, 16);
-            this.countryLabel.TabIndex = 3;
-            this.countryLabel.Text = "Country";
-            // 
-            // phoneLabel
-            // 
-            this.phoneLabel.AutoSize = true;
-            this.phoneLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.phoneLabel.Location = new System.Drawing.Point(53, 195);
-            this.phoneLabel.Name = "phoneLabel";
-            this.phoneLabel.Size = new System.Drawing.Size(97, 16);
-            this.phoneLabel.TabIndex = 4;
-            this.phoneLabel.Text = "Phone Number";
-            // 
-            // customerNameTextBox
-            // 
-            this.customerNameTextBox.Location = new System.Drawing.Point(182, 65);
-            this.customerNameTextBox.Name = "customerNameTextBox";
-            this.customerNameTextBox.Size = new System.Drawing.Size(163, 20);
-            this.customerNameTextBox.TabIndex = 5;
-            // 
-            // customerAddressTextBox
-            // 
-            this.customerAddressTextBox.Location = new System.Drawing.Point(182, 98);
-            this.customerAddressTextBox.Name = "customerAddressTextBox";
-            this.customerAddressTextBox.Size = new System.Drawing.Size(163, 20);
-            this.customerAddressTextBox.TabIndex = 6;
-            // 
-            // customerCityTextBox
-            // 
-            this.customerCityTextBox.Location = new System.Drawing.Point(182, 133);
-            this.customerCityTextBox.Name = "customerCityTextBox";
-            this.customerCityTextBox.Size = new System.Drawing.Size(163, 20);
-            this.customerCityTextBox.TabIndex = 7;
-            // 
-            // customerCountryTextBox
-            // 
-            this.customerCountryTextBox.Location = new System.Drawing.Point(182, 163);
-            this.customerCountryTextBox.Name = "customerCountryTextBox";
-            this.customerCountryTextBox.Size = new System.Drawing.Size(163, 20);
-            this.customerCountryTextBox.TabIndex = 8;
-            // 
-            // customerPhoneNumberTextBox
-            // 
-            this.customerPhoneNumberTextBox.Location = new System.Drawing.Point(182, 194);
-            this.customerPhoneNumberTextBox.Name = "customerPhoneNumberTextBox";
-            this.customerPhoneNumberTextBox.Size = new System.Drawing.Size(163, 20);
-            this.customerPhoneNumberTextBox.TabIndex = 9;
-            // 
-            // clearButton
-            // 
-            this.clearButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.clearButton.Location = new System.Drawing.Point(270, 231);
-            this.clearButton.Name = "clearButton";
-            this.clearButton.Size = new System.Drawing.Size(75, 30);
-            this.clearButton.TabIndex = 10;
-            this.clearButton.Text = "Clear";
-            this.clearButton.UseVisualStyleBackColor = true;
-            // 
-            // saveButton
-            // 
-            this.saveButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.saveButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.saveButton.Location = new System.Drawing.Point(182, 231);
-            this.saveButton.Name = "saveButton";
-            this.saveButton.Size = new System.Drawing.Size(75, 30);
-            this.saveButton.TabIndex = 11;
-            this.saveButton.Text = "Save";
-            this.saveButton.UseVisualStyleBackColor = false;
+            this.modCustomerPostalCodeTextBox.Location = new System.Drawing.Point(176, 196);
+            this.modCustomerPostalCodeTextBox.Name = "modCustomerPostalCodeTextBox";
+            this.modCustomerPostalCodeTextBox.Size = new System.Drawing.Size(163, 20);
+            this.modCustomerPostalCodeTextBox.TabIndex = 41;
             // 
             // exitButton
             // 
             this.exitButton.BackColor = System.Drawing.Color.IndianRed;
             this.exitButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.exitButton.Location = new System.Drawing.Point(380, 308);
+            this.exitButton.Location = new System.Drawing.Point(380, 407);
             this.exitButton.Name = "exitButton";
             this.exitButton.Size = new System.Drawing.Size(75, 30);
-            this.exitButton.TabIndex = 12;
+            this.exitButton.TabIndex = 40;
             this.exitButton.Text = "Exit";
             this.exitButton.UseVisualStyleBackColor = false;
+            this.exitButton.Click += new System.EventHandler(this.exitButton_Click);
+            // 
+            // saveButton
+            // 
+            this.saveButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.saveButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.saveButton.Location = new System.Drawing.Point(176, 268);
+            this.saveButton.Name = "saveButton";
+            this.saveButton.Size = new System.Drawing.Size(75, 30);
+            this.saveButton.TabIndex = 39;
+            this.saveButton.Text = "Save";
+            this.saveButton.UseVisualStyleBackColor = false;
+            // 
+            // modCustomerPhoneNumberTextBox
+            // 
+            this.modCustomerPhoneNumberTextBox.Location = new System.Drawing.Point(176, 231);
+            this.modCustomerPhoneNumberTextBox.Name = "modCustomerPhoneNumberTextBox";
+            this.modCustomerPhoneNumberTextBox.Size = new System.Drawing.Size(163, 20);
+            this.modCustomerPhoneNumberTextBox.TabIndex = 37;
+            // 
+            // modCustomerCountryTextBox
+            // 
+            this.modCustomerCountryTextBox.Location = new System.Drawing.Point(176, 161);
+            this.modCustomerCountryTextBox.Name = "modCustomerCountryTextBox";
+            this.modCustomerCountryTextBox.Size = new System.Drawing.Size(163, 20);
+            this.modCustomerCountryTextBox.TabIndex = 36;
+            // 
+            // modCustomerCityTextBox
+            // 
+            this.modCustomerCityTextBox.Location = new System.Drawing.Point(176, 131);
+            this.modCustomerCityTextBox.Name = "modCustomerCityTextBox";
+            this.modCustomerCityTextBox.Size = new System.Drawing.Size(163, 20);
+            this.modCustomerCityTextBox.TabIndex = 35;
+            // 
+            // modCustomerAddressTextBox
+            // 
+            this.modCustomerAddressTextBox.Location = new System.Drawing.Point(176, 96);
+            this.modCustomerAddressTextBox.Name = "modCustomerAddressTextBox";
+            this.modCustomerAddressTextBox.Size = new System.Drawing.Size(163, 20);
+            this.modCustomerAddressTextBox.TabIndex = 34;
+            // 
+            // modCustomerNameTextBox
+            // 
+            this.modCustomerNameTextBox.Location = new System.Drawing.Point(176, 63);
+            this.modCustomerNameTextBox.Name = "modCustomerNameTextBox";
+            this.modCustomerNameTextBox.Size = new System.Drawing.Size(163, 20);
+            this.modCustomerNameTextBox.TabIndex = 33;
+            // 
+            // phoneLabel
+            // 
+            this.phoneLabel.AutoSize = true;
+            this.phoneLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.phoneLabel.Location = new System.Drawing.Point(47, 232);
+            this.phoneLabel.Name = "phoneLabel";
+            this.phoneLabel.Size = new System.Drawing.Size(97, 16);
+            this.phoneLabel.TabIndex = 32;
+            this.phoneLabel.Text = "Phone Number";
+            // 
+            // countryLabel
+            // 
+            this.countryLabel.AutoSize = true;
+            this.countryLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.countryLabel.Location = new System.Drawing.Point(92, 162);
+            this.countryLabel.Name = "countryLabel";
+            this.countryLabel.Size = new System.Drawing.Size(52, 16);
+            this.countryLabel.TabIndex = 31;
+            this.countryLabel.Text = "Country";
+            // 
+            // cityLabel
+            // 
+            this.cityLabel.AutoSize = true;
+            this.cityLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cityLabel.Location = new System.Drawing.Point(115, 132);
+            this.cityLabel.Name = "cityLabel";
+            this.cityLabel.Size = new System.Drawing.Size(29, 16);
+            this.cityLabel.TabIndex = 30;
+            this.cityLabel.Text = "City";
+            // 
+            // addressLabel
+            // 
+            this.addressLabel.AutoSize = true;
+            this.addressLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.addressLabel.Location = new System.Drawing.Point(86, 97);
+            this.addressLabel.Name = "addressLabel";
+            this.addressLabel.Size = new System.Drawing.Size(58, 16);
+            this.addressLabel.TabIndex = 29;
+            this.addressLabel.Text = "Address";
+            // 
+            // nameLabel
+            // 
+            this.nameLabel.AutoSize = true;
+            this.nameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nameLabel.Location = new System.Drawing.Point(100, 64);
+            this.nameLabel.Name = "nameLabel";
+            this.nameLabel.Size = new System.Drawing.Size(44, 16);
+            this.nameLabel.TabIndex = 28;
+            this.nameLabel.Text = "Name";
             // 
             // ModifyCustomerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(467, 350);
+            this.ClientSize = new System.Drawing.Size(467, 449);
+            this.Controls.Add(this.zipLabel);
+            this.Controls.Add(this.modCustomerPostalCodeTextBox);
             this.Controls.Add(this.exitButton);
             this.Controls.Add(this.saveButton);
-            this.Controls.Add(this.clearButton);
-            this.Controls.Add(this.customerPhoneNumberTextBox);
-            this.Controls.Add(this.customerCountryTextBox);
-            this.Controls.Add(this.customerCityTextBox);
-            this.Controls.Add(this.customerAddressTextBox);
-            this.Controls.Add(this.customerNameTextBox);
+            this.Controls.Add(this.modCustomerPhoneNumberTextBox);
+            this.Controls.Add(this.modCustomerCountryTextBox);
+            this.Controls.Add(this.modCustomerCityTextBox);
+            this.Controls.Add(this.modCustomerAddressTextBox);
+            this.Controls.Add(this.modCustomerNameTextBox);
             this.Controls.Add(this.phoneLabel);
             this.Controls.Add(this.countryLabel);
             this.Controls.Add(this.cityLabel);
             this.Controls.Add(this.addressLabel);
             this.Controls.Add(this.nameLabel);
             this.Name = "ModifyCustomerForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Modify Customer";
+            this.Load += new System.EventHandler(this.ModifyCustomerForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -187,18 +199,19 @@
 
         #endregion
 
-        private System.Windows.Forms.Label nameLabel;
-        private System.Windows.Forms.Label addressLabel;
-        private System.Windows.Forms.Label cityLabel;
-        private System.Windows.Forms.Label countryLabel;
-        private System.Windows.Forms.Label phoneLabel;
-        private System.Windows.Forms.TextBox customerNameTextBox;
-        private System.Windows.Forms.TextBox customerAddressTextBox;
-        private System.Windows.Forms.TextBox customerCityTextBox;
-        private System.Windows.Forms.TextBox customerCountryTextBox;
-        private System.Windows.Forms.TextBox customerPhoneNumberTextBox;
-        private System.Windows.Forms.Button clearButton;
-        private System.Windows.Forms.Button saveButton;
+        private System.Windows.Forms.Label zipLabel;
+        private System.Windows.Forms.TextBox modCustomerPostalCodeTextBox;
         private System.Windows.Forms.Button exitButton;
+        private System.Windows.Forms.Button saveButton;
+        private System.Windows.Forms.TextBox modCustomerPhoneNumberTextBox;
+        private System.Windows.Forms.TextBox modCustomerCountryTextBox;
+        private System.Windows.Forms.TextBox modCustomerCityTextBox;
+        private System.Windows.Forms.TextBox modCustomerAddressTextBox;
+        private System.Windows.Forms.TextBox modCustomerNameTextBox;
+        private System.Windows.Forms.Label phoneLabel;
+        private System.Windows.Forms.Label countryLabel;
+        private System.Windows.Forms.Label cityLabel;
+        private System.Windows.Forms.Label addressLabel;
+        private System.Windows.Forms.Label nameLabel;
     }
 }

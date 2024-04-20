@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using C969_Samuel_McMasters.DataModels;
+using C969_Samuel_McMasters.Services;
 using MySql.Data;
 using MySql.Data.MySqlClient;
 
@@ -22,7 +23,7 @@ namespace C969_Samuel_McMasters
             InitializeComponent();
             userLabel.Text = DataHelper.GetCurrentUserName();
             //Creating SQL Connection
-            MySqlConnection conn = new MySqlConnection(Services.Service.homeConnectionString);
+            MySqlConnection conn = new MySqlConnection(Service.homeConnectionString);
             conn.Open();
 
             //Populate Customer DataGrid
@@ -65,5 +66,21 @@ namespace C969_Samuel_McMasters
             DataHelper.ShowAddCustomer();
         }
 
+        private void modifyCustomerButton_Click(object sender, EventArgs e)
+        {
+            //Grabs customer ID from selected DGV row
+            int selectedCustomer = Convert.ToInt32(customerDGV.CurrentRow.Cells[0].Value);
+
+            //Passes selected customer ID to modify form
+            ModifyCustomerForm ModifyCustomerForm = new ModifyCustomerForm(selectedCustomer);
+
+            this.Close();
+            ModifyCustomerForm.ShowDialog();
+
+
+
+            //this.Close();
+            //DataHelper.ShowModifyCustomer();
+        }
     }
 }

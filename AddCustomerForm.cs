@@ -50,5 +50,9 @@ namespace C969_Samuel_McMasters
             
         }
 
+        private void AddCustomerForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
+using C969_Samuel_McMasters.Services;
+
 
 namespace C969_Samuel_McMasters.DataModels
 {
@@ -58,6 +60,17 @@ namespace C969_Samuel_McMasters.DataModels
             AddCustomerForm AddCustomerForm = new AddCustomerForm();
             AddCustomerForm.ShowDialog();
         }
+
+
+        //Load Modify Customer Form
+        //public static void ShowModifyCustomer()
+        //{
+        //    ModifyCustomerForm ModifyCustomerForm = new ModifyCustomerForm();
+        //    ModifyCustomerForm.ShowDialog();
+        //}
+
+
+      
 
 
     }

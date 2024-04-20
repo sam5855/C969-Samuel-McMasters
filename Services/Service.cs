@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using C969_Samuel_McMasters.DataModels;
+using Org.BouncyCastle.Asn1.Tsp;
 
 
 namespace C969_Samuel_McMasters.Services
@@ -19,9 +20,9 @@ namespace C969_Samuel_McMasters.Services
         public static string homeConnectionString = "server=127.0.0.1;uid=root;pwd=5855;database=client_schedule";
 
 
-        
 
-        
+
+
 
         public static int CreateRecordId(string table)
         {
@@ -66,7 +67,91 @@ namespace C969_Samuel_McMasters.Services
         }
 
 
-        
+        //Get Customer Information
+        static public Dictionary<string, string> GetCustomerDetails(int customerId)
+        {
+            string query = $"SELECT * FROM customer WHERE customerId = '{customerId.ToString()}'";
+
+            MySqlConnection c = new MySqlConnection(homeConnectionString);
+            c.Open();
+            MySqlCommand cmd = new MySqlCommand(query, c);
+            MySqlDataReader rdr = cmd.ExecuteReader();
+            rdr.Read();
+
+            Dictionary<string, string> customerDict = new Dictionary<string, string>();
+            // Customer Table Details
+            customerDict.Add("customerName", rdr[1].ToString());
+            customerDict.Add("addressId", rdr[2].ToString());
+            customerDict.Add("active", rdr[3].ToString());
+            rdr.Close();
+
+            query = $"SELECT * FROM address WHERE addressId = '{customerDict["addressId"]}'";
+            cmd = new MySqlCommand(query, c);
+            rdr = cmd.ExecuteReader();
+            rdr.Read();
+
+            // Address Table Details
+            customerDict.Add("address", rdr[1].ToString());
+            customerDict.Add("cityId", rdr[3].ToString());
+            customerDict.Add("postalCode", rdr[4].ToString());
+            customerDict.Add("phone", rdr[5].ToString());
+            rdr.Close();
+
+            query = $"SELECT * FROM city WHERE cityId = '{customerDict["cityId"]}'";
+            cmd = new MySqlCommand(query, c);
+            rdr = cmd.ExecuteReader();
+            rdr.Read();
+
+            // City Table Details
+            customerDict.Add("cityName", rdr[1].ToString());
+            customerDict.Add("countryId", rdr[2].ToString());
+            rdr.Close();
+
+            query = $"SELECT * FROM country WHERE CountryId = '{customerDict["countryId"]}'";
+            cmd = new MySqlCommand(query, c);
+            rdr = cmd.ExecuteReader();
+            rdr.Read();
+
+            // Country Table Details
+            customerDict.Add("country", rdr[1].ToString());
+            rdr.Close();
+            c.Close();
+
+            return customerDict;
+        }
+
+
+        //Get CustomerId 
+        static public int GetCustomerId(string search)
+        {
+            int customerId;
+            string query;
+
+            if (int.TryParse(search, out customerId))
+            {
+                query = $"SELECT CustomerId FROM customer WHERE customerId = '{search}'";
+            }
+            else
+            {
+                query = $"SELECT customerId FROM customer WHERE customerName LIKE '{search}'";
+            }
+
+            MySqlConnection c = new MySqlConnection(homeConnectionString);
+            c.Open();
+            MySqlCommand cmd = new MySqlCommand(query, c);
+            MySqlDataReader rdr = cmd.ExecuteReader();
+
+            if (rdr.HasRows)
+            {
+                rdr.Read();
+                customerId = Convert.ToInt32(rdr[0]);
+                rdr.Close();
+                c.Close();
+                return customerId;
+            }
+
+            return 0;
+        }
 
     }
 }
