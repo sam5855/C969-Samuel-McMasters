@@ -46,6 +46,7 @@ namespace C969_Samuel_McMasters
 
         private void saveButton_Click(object sender, EventArgs e)
         {
+            customerDict = Service.GetCustomerDetails(selectedCustomer);
             int customerId = Convert.ToInt32(customerDict["CustomerId"]);
 
 
