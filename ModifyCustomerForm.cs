@@ -14,7 +14,7 @@ namespace C969_Samuel_McMasters
     public partial class ModifyCustomerForm : Form
     {
         public static Dictionary<string, string> customerDict = new Dictionary<string, string>();
-
+        
 
         public ModifyCustomerForm(int selectedCustomer)
         {
@@ -22,7 +22,9 @@ namespace C969_Samuel_McMasters
 
             
             
+            
             customerDict = Service.GetCustomerDetails(selectedCustomer);
+            modCustomerIdTextBox.Text = customerDict["customerId"];
             modCustomerNameTextBox.Text = customerDict["customerName"];
             modCustomerAddressTextBox.Text = customerDict["address"];
             modCustomerCityTextBox.Text = customerDict["cityName"];
@@ -46,11 +48,13 @@ namespace C969_Samuel_McMasters
 
         private void saveButton_Click(object sender, EventArgs e)
         {
-            customerDict = Service.GetCustomerDetails(selectedCustomer);
-            int customerId = Convert.ToInt32(customerDict["CustomerId"]);
+            //customerDict = Service.GetCustomerDetails(selectedCustomer);
+            //int customerId = Convert.ToInt32(updatedForm["customerId"]);
 
 
             Dictionary<string, string> updatedForm = new Dictionary<string, string>();
+            
+            updatedForm.Add("customerId", modCustomerIdTextBox.Text);
             updatedForm.Add("customerName", modCustomerNameTextBox.Text);
             updatedForm.Add("phone", modCustomerPhoneNumberTextBox.Text);
             updatedForm.Add("address", modCustomerAddressTextBox.Text);
@@ -58,10 +62,14 @@ namespace C969_Samuel_McMasters
             updatedForm.Add("zip", modCustomerPostalCodeTextBox.Text);
             updatedForm.Add("country", modCustomerCountryTextBox.Text);
             //updatedForm.Add("active", activeYes.Checked ? "1" : "0");
+            
 
-            if (Service.updateCustomer(updatedForm, customerId))
+            if (Service.updateCustomer(updatedForm))
             {
                 MessageBox.Show("Update Complete!");
+                Close();
+                MainForm MainForm = new MainForm();
+                MainForm.Show();
             }
             else
             {

@@ -154,15 +154,15 @@ namespace C969_Samuel_McMasters.Services
             return 0;
         }
 
-        static public bool updateCustomer(Dictionary<string, string> updatedCustomer, int customerId)
+        static public bool updateCustomer(Dictionary<string, string> updatedCustomer)
         {
             MySqlConnection c = new MySqlConnection(homeConnectionString);
             c.Open();
 
             //Update Customer Table
             string updateRecord = $"UPDATE customer" +
-                $" SET customerName = '{updatedCustomer["customerName"]}' active = '{updatedCustomer["active"]}', lastUpdate = '{DataHelper.CreateTimeStamp()}', lastUpdateBy = '{DataHelper.GetCurrentUserName()}'" +
-                $" WHERE customerId = '{customerId}'";
+                $" SET customerName = '{updatedCustomer["customerName"]}', lastUpdate = '{DataHelper.CreateTimeStamp()}', lastUpdateBy = '{DataHelper.GetCurrentUserName()}'" +
+                $" WHERE customerId = '{updatedCustomer["customerId"]}'";
             MySqlCommand cmd = new MySqlCommand(updateRecord, c);
             int customerUpdated = cmd.ExecuteNonQuery();
 
