@@ -48,8 +48,7 @@ namespace C969_Samuel_McMasters
 
         private void saveButton_Click(object sender, EventArgs e)
         {
-            //customerDict = Service.GetCustomerDetails(selectedCustomer);
-            //int customerId = Convert.ToInt32(updatedForm["customerId"]);
+           
 
 
             Dictionary<string, string> updatedForm = new Dictionary<string, string>();
@@ -61,7 +60,7 @@ namespace C969_Samuel_McMasters
             updatedForm.Add("city", modCustomerCityTextBox.Text);
             updatedForm.Add("zip", modCustomerPostalCodeTextBox.Text);
             updatedForm.Add("country", modCustomerCountryTextBox.Text);
-            //updatedForm.Add("active", activeYes.Checked ? "1" : "0");
+           
             
 
             if (Service.updateCustomer(updatedForm))

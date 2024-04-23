@@ -23,15 +23,16 @@ namespace C969_Samuel_McMasters
             InitializeComponent();
             userLabel.Text = DataHelper.GetCurrentUserName();
             //Creating SQL Connection
-            MySqlConnection conn = new MySqlConnection(Service.homeConnectionString);
-            conn.Open();
+            MySqlConnection c = new MySqlConnection(Service.homeConnectionString);
+            c.Open();
 
             //Populate Customer DataGrid
-            MySqlCommand query = new MySqlCommand("SELECT * FROM customer", conn);
+            MySqlCommand query = new MySqlCommand("SELECT * FROM customer", c);
             MySqlDataAdapter adp = new MySqlDataAdapter(query);
             DataTable dt = new DataTable();
             adp.Fill(dt);
             customerDGV.DataSource = dt;
+            c.Close();
 
 
 
@@ -79,8 +80,23 @@ namespace C969_Samuel_McMasters
 
 
 
-            //this.Close();
-            //DataHelper.ShowModifyCustomer();
+         
+        }
+
+        private void deleteCustomerButton_Click(object sender, EventArgs e)
+        {
+            int selectedCustomer = Convert.ToInt32(customerDGV.CurrentRow.Cells[0].Value);
+            Service.DeleteCustomer(selectedCustomer);
+
+
+            MySqlConnection c = new MySqlConnection(Service.homeConnectionString);
+            c.Open();
+            MySqlCommand query = new MySqlCommand("SELECT * FROM customer", c);
+            MySqlDataAdapter adp = new MySqlDataAdapter(query);
+            DataTable dt = new DataTable();
+            adp.Fill(dt);
+            customerDGV.DataSource = dt;
+            c.Close();
         }
     }
 }

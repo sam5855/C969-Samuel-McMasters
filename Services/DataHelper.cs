@@ -62,12 +62,7 @@ namespace C969_Samuel_McMasters.DataModels
         }
 
 
-        //Load Modify Customer Form
-        //public static void ShowModifyCustomer()
-        //{
-        //    ModifyCustomerForm ModifyCustomerForm = new ModifyCustomerForm();
-        //    ModifyCustomerForm.ShowDialog();
-        //}
+        
 
 
       

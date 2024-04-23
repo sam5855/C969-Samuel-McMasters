@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using C969_Samuel_McMasters.DataModels;
 using Org.BouncyCastle.Asn1.Tsp;
-
+using System.Data.SqlTypes;
 
 namespace C969_Samuel_McMasters.Services
 {
@@ -154,6 +154,8 @@ namespace C969_Samuel_McMasters.Services
             return 0;
         }
 
+
+        //Update customer information
         static public bool updateCustomer(Dictionary<string, string> updatedCustomer)
         {
             MySqlConnection c = new MySqlConnection(homeConnectionString);
@@ -179,6 +181,35 @@ namespace C969_Samuel_McMasters.Services
 
 
         }
+
+
+        //Delete customer information
+        //Check if I need to delete associated records as well 
+        static public bool DeleteCustomer(int customerId)
+        {
+            MySqlConnection c = new MySqlConnection(homeConnectionString);
+            c.Open();
+           
+            MySqlCommand cmd = c.CreateCommand();
+            cmd.CommandText = $"DELETE FROM customer WHERE customerId = {customerId}";
+            cmd.ExecuteNonQuery();
+
+            int customerUpdated = 1;
+
+            if (customerUpdated != 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+
+
+        }
+
+
 
     }
 }
