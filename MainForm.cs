@@ -22,6 +22,8 @@ namespace C969_Samuel_McMasters
         {
             InitializeComponent();
             userLabel.Text = DataHelper.GetCurrentUserName();
+
+          
             //Creating SQL Connection
             MySqlConnection c = new MySqlConnection(Service.homeConnectionString);
             c.Open();
@@ -32,8 +34,16 @@ namespace C969_Samuel_McMasters
             DataTable dt = new DataTable();
             adp.Fill(dt);
             customerDGV.DataSource = dt;
-            c.Close();
 
+            //Populate Appointments DataGrid
+            MySqlCommand aptQuery = new MySqlCommand("SELECT * FROM appointment", c);
+            MySqlDataAdapter aptAdp = new MySqlDataAdapter(aptQuery);
+            DataTable aptDt = new DataTable();
+            aptAdp.Fill(aptDt);
+            appointmentDGV.DataSource = aptDt;
+
+            c.Close();
+            
 
 
 
@@ -41,12 +51,15 @@ namespace C969_Samuel_McMasters
             customerDGV.ReadOnly = true;
             customerDGV.MultiSelect = false;
             customerDGV.AllowUserToAddRows = false;
+            appointmentDGV.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            appointmentDGV.ReadOnly = true;
+            appointmentDGV.MultiSelect = false;
+            appointmentDGV.AllowUserToAddRows = false;
 
-            
 
 
-           
-           
+
+
 
 
         }
