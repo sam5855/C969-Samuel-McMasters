@@ -176,6 +176,7 @@
             this.createAppointmentButton.TabIndex = 1;
             this.createAppointmentButton.Text = "Create Appointment";
             this.createAppointmentButton.UseVisualStyleBackColor = false;
+            this.createAppointmentButton.Click += new System.EventHandler(this.createAppointmentButton_Click);
             // 
             // appointmentDGV
             // 

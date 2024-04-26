@@ -111,5 +111,12 @@ namespace C969_Samuel_McMasters
             customerDGV.DataSource = dt;
             c.Close();
         }
+
+        private void createAppointmentButton_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            AddAppointmentForm aaf = new AddAppointmentForm();
+            aaf.ShowDialog();
+        }
     }
 }
