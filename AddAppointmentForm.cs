@@ -1,4 +1,6 @@
-﻿using C969_Samuel_McMasters.Services;
+﻿using C969_Samuel_McMasters.DataModels;
+using C969_Samuel_McMasters.Services;
+using Google.Protobuf.WellKnownTypes;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
@@ -9,6 +11,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
+
 
 namespace C969_Samuel_McMasters
 {
@@ -21,7 +25,7 @@ namespace C969_Samuel_McMasters
             //Populate customer DGV
             MySqlConnection c = new MySqlConnection(Service.homeConnectionString);
             c.Open();
-            MySqlCommand query = new MySqlCommand("SELECT customerName FROM customer", c);
+            MySqlCommand query = new MySqlCommand("SELECT customerId, customerName FROM customer", c);
             MySqlDataAdapter adp = new MySqlDataAdapter(query);
             DataTable dt = new DataTable();
             adp.Fill(dt);
@@ -33,7 +37,18 @@ namespace C969_Samuel_McMasters
             customerDGV.ReadOnly = true;
             customerDGV.MultiSelect = false;
             customerDGV.AllowUserToAddRows = false;
-            customerDGV.Columns[0].HeaderText = "Customer Name";
+            customerDGV.Columns[0].HeaderText = "Customer ID";
+            customerDGV.Columns[1].HeaderText = "Customer Name";
+
+            int userId = DataHelper.getCurrentUserId();
+            userIdTextBox.Text = userId.ToString();
+
+
+            startDatePicker.Format = DateTimePickerFormat.Custom;
+            startDatePicker.CustomFormat = "MM/dd/yyyy hh:mm:ss tt";
+
+            endDatePicker.Format = DateTimePickerFormat.Custom;
+            endDatePicker.CustomFormat = "MM/dd/yyyy hh:mm:ss tt";
 
 
         }
@@ -45,6 +60,60 @@ namespace C969_Samuel_McMasters
 
         private void exitButton_Click(object sender, EventArgs e)
         {
+            Close();
+            MainForm MainForm = new MainForm();
+            MainForm.Show();
+        }
+
+        private void createAppointmentButton_Click(object sender, EventArgs e)
+        {
+            //string timeStamp = DataHelper.CreateTimeStamp();
+            //string userName = DataHelper.GetCurrentUserName();
+
+            //Service s = new Service();
+            //Appointment apt = new Appointment();
+
+            ////apt.AppointmentId = 0;
+            //apt.CustomerId = Convert.ToInt32(customerDGV.CurrentRow.Cells[0].Value);
+            //apt.UserId = Convert.ToInt32(userIdTextBox.Text);
+            //apt.Title = "Not Needed";
+            //apt.Description = "Not Needed";
+            //apt.Location = "Not Needed";
+            //apt.Contact = "Not Needed";
+            //apt.Type = aptTypeTextBox.Text;
+            //apt.Url = "Not Needed";
+            //apt.StartDate = startDatePicker.Value;
+            //apt.EndDate = endDatePicker.Value;
+
+
+            //s.AddAppointment(apt);
+
+
+            string timeStamp = DataHelper.CreateTimeStamp();
+            string userName = DataHelper.GetCurrentUserName();
+
+            Service s = new Service();
+            Appointment apt = new Appointment();
+
+
+            apt.CustomerId = Convert.ToInt32(customerDGV.CurrentRow.Cells[0].Value);
+            apt.UserId = Convert.ToInt32(userIdTextBox.Text);
+            apt.Title = "Not Needed";
+            apt.Description = "Not Needed";
+            apt.Location = "Not Needed";
+            apt.Contact = "Not Needed";
+            apt.Type = aptTypeTextBox.Text;
+            apt.Url = "Not Needed";
+            apt.StartDate = startDatePicker.Value;
+            apt.EndDate = endDatePicker.Value;
+            
+            Service.CreateRecord(timeStamp, userName, "appointment", $"'{apt.CustomerId}', '{apt.Title}', '{startDatePicker.Value.ToUniversalTime().ToString("yyyyMMddHHmmss")}', '{endDatePicker.Value.ToUniversalTime().ToString("yyyyMMddHHmmss")}'," +
+                $"'{apt.Type}', '{apt.Description}', '{apt.Location}', '{apt.Contact}', '{apt.Url}'", apt.UserId);
+
+
+
+
+
             Close();
             MainForm MainForm = new MainForm();
             MainForm.Show();

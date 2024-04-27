@@ -17,8 +17,8 @@ namespace C969_Samuel_McMasters.DataModels
         public string Contact { get; set; }
         public string Type { get; set; }
         public string Url { get; set; }
-        public DateTime Start { get; set; }
-        public DateTime End { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
 
     }
 }

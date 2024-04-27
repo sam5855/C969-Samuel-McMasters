@@ -53,7 +53,7 @@ namespace C969_Samuel_McMasters.Services
             }
             else
             {
-                recordInsert = $"INSERT INTO {table} (appointmentId, customerId, start, end, type, userId, createDate, createdBy, lastUpdate, lastUpdateBy)" +
+                recordInsert = $"INSERT INTO {table} (appointmentId, customerId, title, start, end, type, description, location, contact, url, userId, createDate, createdBy, lastUpdate, lastUpdateBy)" +
                 $" VALUES ('{recordId}', {partOfQuery}, '{userId}', '{timeStamp}', '{userName}', '{timeStamp}', '{userName}')";
             }
 
@@ -189,7 +189,7 @@ namespace C969_Samuel_McMasters.Services
         {
             MySqlConnection c = new MySqlConnection(homeConnectionString);
             c.Open();
-           
+
             MySqlCommand cmd = c.CreateCommand();
             cmd.CommandText = $"DELETE FROM customer WHERE customerId = {customerId}";
             cmd.ExecuteNonQuery();
@@ -209,7 +209,45 @@ namespace C969_Samuel_McMasters.Services
 
         }
 
+        public int AddAppointment(Appointment apt)
+        {
+            MySqlConnection c = new MySqlConnection(homeConnectionString);
 
+            int aptId = -1;
 
+            try
+            {
+                c.Open();
+                MySqlCommand cmd = c.CreateCommand();
+                cmd.CommandText = "INSERT INTO appointment(customerId, userId, title, description, location, contact, type, url, start, end) VALUES(@customerId, @userId, @title, @description, @location, @contact, @type, @url, @start, @end);" +
+                    "SELECT appointmentId FROM appointment ORDER BY appointmentId DESC LIMIT 1";
+                //cmd.CommandText = "INSERT INTO appointment(customerId, userId, title, description, location, contact, type, url, start, end) VALUES(@customerId, @userId, @title, @description, @location, @contact, @type, @url, @start, @end)";
+
+                cmd.Parameters.AddWithValue("@customerId", apt.CustomerId);
+                cmd.Parameters.AddWithValue("@userId", apt.UserId);
+                cmd.Parameters.AddWithValue("@title", apt.Title);
+                cmd.Parameters.AddWithValue("@description", apt.Description);
+                cmd.Parameters.AddWithValue("@location", apt.Location);
+                cmd.Parameters.AddWithValue("@contact", apt.Contact);
+                cmd.Parameters.AddWithValue("@type", apt.Type);
+                cmd.Parameters.AddWithValue("@url", apt.Url);
+                cmd.Parameters.AddWithValue("@start", apt.StartDate);
+                cmd.Parameters.AddWithValue("@end", apt.EndDate);
+                aptId = (int)cmd.ExecuteScalar();
+            }
+            //catches errors in case the above code fails
+            catch (Exception ex)
+            {
+                Console.WriteLine("Exception thrown when adding appointment: " + ex);
+            }
+            //Close connection regardless of whether the try block executes or not.
+            finally
+            {
+                c.Close();
+            }
+
+            return aptId;
+
+        }
     }
 }
