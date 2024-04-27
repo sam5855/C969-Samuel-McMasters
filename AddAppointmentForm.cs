@@ -67,32 +67,13 @@ namespace C969_Samuel_McMasters
 
         private void createAppointmentButton_Click(object sender, EventArgs e)
         {
-            //string timeStamp = DataHelper.CreateTimeStamp();
-            //string userName = DataHelper.GetCurrentUserName();
-
-            //Service s = new Service();
-            //Appointment apt = new Appointment();
-
-            ////apt.AppointmentId = 0;
-            //apt.CustomerId = Convert.ToInt32(customerDGV.CurrentRow.Cells[0].Value);
-            //apt.UserId = Convert.ToInt32(userIdTextBox.Text);
-            //apt.Title = "Not Needed";
-            //apt.Description = "Not Needed";
-            //apt.Location = "Not Needed";
-            //apt.Contact = "Not Needed";
-            //apt.Type = aptTypeTextBox.Text;
-            //apt.Url = "Not Needed";
-            //apt.StartDate = startDatePicker.Value;
-            //apt.EndDate = endDatePicker.Value;
-
-
-            //s.AddAppointment(apt);
+            
 
 
             string timeStamp = DataHelper.CreateTimeStamp();
             string userName = DataHelper.GetCurrentUserName();
 
-            Service s = new Service();
+       
             Appointment apt = new Appointment();
 
 

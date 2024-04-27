@@ -38,7 +38,7 @@ namespace C969_Samuel_McMasters.DataModels
 
         public static string CreateTimeStamp()
         {
-            return DateTime.Now.ToString("yyyy-MM-dd");
+            return DateTime.Now.ToString("yyyyMMddHHmmss");
         }
 
         public static int NewID(List<int> idList)
