@@ -90,3 +90,4 @@ C:\Users\LabUser\source\repos\C969-Samuel-McMasters\obj\Debug\C969-Samuel-McMast
 C:\Users\LabUser\source\repos\C969-Samuel-McMasters\obj\Debug\C969-Samuel-McMasters.exe
 C:\Users\LabUser\source\repos\C969-Samuel-McMasters\obj\Debug\C969-Samuel-McMasters.pdb
 C:\Users\Sam\source\repos\C969\C969-Samuel-McMasters\obj\Debug\C969_Samuel_McMasters.AddAppointmentForm.resources
+C:\Users\Sam\source\repos\C969\C969-Samuel-McMasters\obj\Debug\C969_Samuel_McMasters.ModifyAppointmentForm.resources

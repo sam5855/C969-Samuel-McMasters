@@ -189,7 +189,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "AddAppointmentForm";
-            this.Text = "AddAppointmentForm";
+            this.Text = "Add Appointment";
             this.Load += new System.EventHandler(this.AddAppointmentForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.customerDGV)).EndInit();
             this.ResumeLayout(false);

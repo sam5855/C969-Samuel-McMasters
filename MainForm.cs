@@ -134,5 +134,17 @@ namespace C969_Samuel_McMasters
             appointmentDGV.DataSource = dt;
             c.Close();
         }
+
+        private void modifyAppointmentButton_Click(object sender, EventArgs e)
+        {
+            //Grabs appointment ID from selected DGV row
+            int selectedAppointment = Convert.ToInt32(appointmentDGV.CurrentRow.Cells[0].Value);
+            int customerId = Convert.ToInt32(appointmentDGV.CurrentRow.Cells[1].Value);
+            //Passes selected appointment ID to modify form
+            ModifyAppointmentForm ModifyAppointmentForm = new ModifyAppointmentForm(selectedAppointment, customerId);
+
+            this.Close();
+            ModifyAppointmentForm.ShowDialog();
+        }
     }
 }

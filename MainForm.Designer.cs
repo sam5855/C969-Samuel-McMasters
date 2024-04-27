@@ -166,6 +166,7 @@
             this.modifyAppointmentButton.TabIndex = 2;
             this.modifyAppointmentButton.Text = "Modify Appointment";
             this.modifyAppointmentButton.UseVisualStyleBackColor = false;
+            this.modifyAppointmentButton.Click += new System.EventHandler(this.modifyAppointmentButton_Click);
             // 
             // createAppointmentButton
             // 

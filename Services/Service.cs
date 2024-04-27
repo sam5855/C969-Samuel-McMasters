@@ -273,5 +273,61 @@ namespace C969_Samuel_McMasters.Services
 
 
         }
+
+
+        //Get Appointment Information
+        static public Dictionary<string, string> GetAppointmentDetails(int appointmentId)
+        {
+            string query = $"SELECT * FROM appointment WHERE appointmentId = '{appointmentId}'";
+
+            MySqlConnection c = new MySqlConnection(homeConnectionString);
+            c.Open();
+            MySqlCommand cmd = new MySqlCommand(query, c);
+            MySqlDataReader rdr = cmd.ExecuteReader();
+            rdr.Read();
+
+            Dictionary<string, string> appointmentDict = new Dictionary<string, string>();
+            // Customer Table Details
+            appointmentDict.Add("appointmentId", rdr[0].ToString());
+            appointmentDict.Add("userId", rdr[1].ToString());
+            appointmentDict.Add("startDate", rdr[9].ToString());
+            appointmentDict.Add("endDate", rdr[10].ToString());
+            appointmentDict.Add("type", rdr[7].ToString());
+            rdr.Close();
+            c.Close();
+
+         
+
+            return appointmentDict;
+        }
+
+
+        //Update appointment information
+        static public bool updateAppointment(Dictionary<string, string> updatedAppointment)
+        {
+            MySqlConnection c = new MySqlConnection(homeConnectionString);
+            c.Open();
+
+            //Update appointment table
+            string updateRecord = $"UPDATE appointment" +
+                $" SET start = '{updatedAppointment["startDate"]}', end = '{updatedAppointment["endDate"]}', type = '{updatedAppointment["type"]}', customerId = '{updatedAppointment["customerId"]}', lastUpdate = '{DataHelper.CreateTimeStamp()}', lastUpdateBy = '{DataHelper.GetCurrentUserName()}'" +
+                $" WHERE appointmentId = '{updatedAppointment["appointmentId"]}'";
+            MySqlCommand cmd = new MySqlCommand(updateRecord, c);
+            int appointmentUpdated = cmd.ExecuteNonQuery();
+
+            c.Close();
+
+            if (appointmentUpdated != 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+
+        }
+
     }
 }
