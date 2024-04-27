@@ -249,5 +249,29 @@ namespace C969_Samuel_McMasters.Services
             return aptId;
 
         }
+
+        static public bool DeleteAppointment(int appointmentId)
+        {
+            MySqlConnection c = new MySqlConnection(homeConnectionString);
+            c.Open();
+
+            MySqlCommand cmd = c.CreateCommand();
+            cmd.CommandText = $"DELETE FROM appointment WHERE appointmentId = {appointmentId}";
+            cmd.ExecuteNonQuery();
+
+            int appointmentUpdated = 1;
+
+            if (appointmentUpdated != 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+
+
+        }
     }
 }

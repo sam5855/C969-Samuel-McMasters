@@ -36,7 +36,7 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.calendarFilterLabel = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.deleteAppointmentButton = new System.Windows.Forms.Button();
             this.modifyAppointmentButton = new System.Windows.Forms.Button();
             this.createAppointmentButton = new System.Windows.Forms.Button();
             this.appointmentDGV = new System.Windows.Forms.DataGridView();
@@ -111,7 +111,7 @@
             this.groupBox1.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.groupBox1.Controls.Add(this.comboBox1);
             this.groupBox1.Controls.Add(this.calendarFilterLabel);
-            this.groupBox1.Controls.Add(this.button1);
+            this.groupBox1.Controls.Add(this.deleteAppointmentButton);
             this.groupBox1.Controls.Add(this.modifyAppointmentButton);
             this.groupBox1.Controls.Add(this.createAppointmentButton);
             this.groupBox1.Controls.Add(this.appointmentDGV);
@@ -144,16 +144,17 @@
             this.calendarFilterLabel.TabIndex = 4;
             this.calendarFilterLabel.Text = "Calendar Filter";
             // 
-            // button1
+            // deleteAppointmentButton
             // 
-            this.button1.BackColor = System.Drawing.Color.LightCoral;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Location = new System.Drawing.Point(678, 175);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(92, 36);
-            this.button1.TabIndex = 3;
-            this.button1.Text = "Delete";
-            this.button1.UseVisualStyleBackColor = false;
+            this.deleteAppointmentButton.BackColor = System.Drawing.Color.LightCoral;
+            this.deleteAppointmentButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.deleteAppointmentButton.Location = new System.Drawing.Point(678, 175);
+            this.deleteAppointmentButton.Name = "deleteAppointmentButton";
+            this.deleteAppointmentButton.Size = new System.Drawing.Size(92, 36);
+            this.deleteAppointmentButton.TabIndex = 3;
+            this.deleteAppointmentButton.Text = "Delete";
+            this.deleteAppointmentButton.UseVisualStyleBackColor = false;
+            this.deleteAppointmentButton.Click += new System.EventHandler(this.deleteAppointmentButton_Click);
             // 
             // modifyAppointmentButton
             // 
@@ -246,7 +247,7 @@
         private System.Windows.Forms.Button deleteCustomerButton;
         private System.Windows.Forms.Button modifyCustomerButton;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button deleteAppointmentButton;
         private System.Windows.Forms.Button modifyAppointmentButton;
         private System.Windows.Forms.Button createAppointmentButton;
         private System.Windows.Forms.DataGridView appointmentDGV;

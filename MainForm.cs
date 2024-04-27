@@ -118,5 +118,21 @@ namespace C969_Samuel_McMasters
             AddAppointmentForm aaf = new AddAppointmentForm();
             aaf.ShowDialog();
         }
+
+        private void deleteAppointmentButton_Click(object sender, EventArgs e)
+        {
+            int selectedAppointment = Convert.ToInt32(appointmentDGV.CurrentRow.Cells[0].Value);
+            Service.DeleteAppointment(selectedAppointment);
+
+
+            MySqlConnection c = new MySqlConnection(Service.homeConnectionString);
+            c.Open();
+            MySqlCommand query = new MySqlCommand("SELECT * FROM appointment", c);
+            MySqlDataAdapter adp = new MySqlDataAdapter(query);
+            DataTable dt = new DataTable();
+            adp.Fill(dt);
+            appointmentDGV.DataSource = dt;
+            c.Close();
+        }
     }
 }
