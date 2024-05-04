@@ -56,7 +56,11 @@ namespace C969_Samuel_McMasters
                     row.Selected = true;
             }
 
+            startDatePicker.Format = DateTimePickerFormat.Custom;
+            startDatePicker.CustomFormat = "MM/dd/yyyy hh:mm:ss tt";
 
+            endDatePicker.Format = DateTimePickerFormat.Custom;
+            endDatePicker.CustomFormat = "MM/dd/yyyy hh:mm:ss tt";
 
             appointmentDict = Service.GetAppointmentDetails(selectedAppointment);
             aptIdTextBox.Text = appointmentDict["appointmentId"];
@@ -86,9 +90,13 @@ namespace C969_Samuel_McMasters
         {
             Dictionary<string, string> updatedForm = new Dictionary<string, string>();
 
+            
+
+            updatedForm.Add("appointmentId", aptIdTextBox.Text);
             updatedForm.Add("userId", userIdTextBox.Text);
-            updatedForm.Add("startDate", startDatePicker.Text);
-            updatedForm.Add("endDate", endDatePicker.Text);
+            updatedForm.Add("startDate", startDatePicker.Value.ToUniversalTime().ToString("yyyyMMddHHmmss"));
+            updatedForm.Add("endDate", endDatePicker.Value.ToUniversalTime().ToString("yyyyMMddHHmmss"));
+            updatedForm.Add("type", aptTypeTextBox.Text);
             updatedForm.Add("customerId", Convert.ToString(customerDGV.CurrentRow.Cells[0].Value));
            
 

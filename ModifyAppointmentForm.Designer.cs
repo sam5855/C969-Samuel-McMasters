@@ -111,14 +111,14 @@
             // 
             this.endDatePicker.Location = new System.Drawing.Point(122, 164);
             this.endDatePicker.Name = "endDatePicker";
-            this.endDatePicker.Size = new System.Drawing.Size(173, 20);
+            this.endDatePicker.Size = new System.Drawing.Size(205, 20);
             this.endDatePicker.TabIndex = 24;
             // 
             // startDatePicker
             // 
             this.startDatePicker.Location = new System.Drawing.Point(122, 125);
             this.startDatePicker.Name = "startDatePicker";
-            this.startDatePicker.Size = new System.Drawing.Size(173, 20);
+            this.startDatePicker.Size = new System.Drawing.Size(205, 20);
             this.startDatePicker.TabIndex = 23;
             // 
             // aptTypeTextBox
@@ -202,6 +202,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "ModifyAppointmentForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Modify Appointment";
             this.Load += new System.EventHandler(this.ModifyAppointmentForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.customerDGV)).EndInit();
