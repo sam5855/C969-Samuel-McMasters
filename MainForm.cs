@@ -12,7 +12,7 @@ using C969_Samuel_McMasters.DataModels;
 using C969_Samuel_McMasters.Services;
 using MySql.Data;
 using MySql.Data.MySqlClient;
-
+using System.Globalization;
 
 namespace C969_Samuel_McMasters
 {
@@ -36,11 +36,11 @@ namespace C969_Samuel_McMasters
             customerDGV.DataSource = dt;
 
             //Populate Appointments DataGrid
-            MySqlCommand aptQuery = new MySqlCommand("SELECT * FROM appointment", c);
-            MySqlDataAdapter aptAdp = new MySqlDataAdapter(aptQuery);
-            DataTable aptDt = new DataTable();
-            aptAdp.Fill(aptDt);
-            appointmentDGV.DataSource = aptDt;
+            //MySqlCommand aptQuery = new MySqlCommand("SELECT userId, title, description FROM appointment", c);
+            //MySqlDataAdapter aptAdp = new MySqlDataAdapter(aptQuery);
+            //DataTable aptDt = new DataTable();
+            //aptAdp.Fill(aptDt);
+            //appointmentDGV.DataSource = aptDt;
 
             c.Close();
             
@@ -56,7 +56,8 @@ namespace C969_Samuel_McMasters
             appointmentDGV.MultiSelect = false;
             appointmentDGV.AllowUserToAddRows = false;
 
-
+            allAppointmentsRadioButton.Checked = true;
+          
 
 
 
@@ -145,6 +146,78 @@ namespace C969_Samuel_McMasters
 
             this.Close();
             ModifyAppointmentForm.ShowDialog();
+        }
+
+
+        //Filter sets appointment DGV to all appointments
+        //Removed this code block from top because this radio button 
+        //is enabled when the form loads, so this code is launched
+        private void allAppointmentsRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            MySqlConnection c = new MySqlConnection(Service.homeConnectionString);
+            c.Open();
+            MySqlCommand aptQuery = new MySqlCommand("SELECT * FROM appointment", c);
+            MySqlDataAdapter aptAdp = new MySqlDataAdapter(aptQuery);
+            DataTable aptDt = new DataTable();
+            aptAdp.Fill(aptDt);
+            appointmentDGV.DataSource = aptDt;
+
+            c.Close();
+
+        }
+
+        //Filter sets appointment DGV to current week appointments
+       
+        private void currentWeekRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            //CultureInfo myCI = new CultureInfo("en-US");
+            //Calendar myCal = myCI.Calendar;
+
+            //CalendarWeekRule myCWR = myCI.DateTimeFormat.CalendarWeekRule;
+            //DayOfWeek myFirstDOW = myCI.DateTimeFormat.FirstDayOfWeek;
+
+            //weekOfTheYear = myCal.GetWeekOfYear(DateTime.Now, myCWR, myFirstDOW);
+
+
+
+            //MySqlConnection c = new MySqlConnection(Service.homeConnectionString);
+            //c.Open();
+
+
+
+
+            //c.Close();
+
+
+            int currentUserId = DataHelper.getCurrentUserId();
+
+            List<Appointment> currentWeekAppointments = Service.GetWeekAppointments(currentUserId);
+            appointmentDGV.DataSource = currentWeekAppointments;
+
+
+
+            //appointmentDGV.DataSource = Service.getWeekApt(currentUserId);
+
+
+
+
+
+
+
+
+
+
+
+        }
+
+        //Filter sets appointment DGV to current month appointments
+        private void currentMonthRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            MySqlConnection c = new MySqlConnection(Service.homeConnectionString);
+            c.Open();
+
+
+            c.Close();
         }
     }
 }

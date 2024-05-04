@@ -34,7 +34,6 @@
             this.modifyCustomerButton = new System.Windows.Forms.Button();
             this.addCustomerButton = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.calendarFilterLabel = new System.Windows.Forms.Label();
             this.deleteAppointmentButton = new System.Windows.Forms.Button();
             this.modifyAppointmentButton = new System.Windows.Forms.Button();
@@ -43,6 +42,9 @@
             this.exitButton = new System.Windows.Forms.Button();
             this.loggedInLabel = new System.Windows.Forms.Label();
             this.userLabel = new System.Windows.Forms.Label();
+            this.allAppointmentsRadioButton = new System.Windows.Forms.RadioButton();
+            this.currentWeekRadioButton = new System.Windows.Forms.RadioButton();
+            this.currentMonthRadioButton = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.customerDGV)).BeginInit();
             this.customerGroupBox.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -109,7 +111,9 @@
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.groupBox1.Controls.Add(this.comboBox1);
+            this.groupBox1.Controls.Add(this.currentMonthRadioButton);
+            this.groupBox1.Controls.Add(this.currentWeekRadioButton);
+            this.groupBox1.Controls.Add(this.allAppointmentsRadioButton);
             this.groupBox1.Controls.Add(this.calendarFilterLabel);
             this.groupBox1.Controls.Add(this.deleteAppointmentButton);
             this.groupBox1.Controls.Add(this.modifyAppointmentButton);
@@ -122,25 +126,13 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Appointments";
             // 
-            // comboBox1
-            // 
-            this.comboBox1.BackColor = System.Drawing.SystemColors.Menu;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "All Appointments",
-            "Current Week",
-            "Current Month"});
-            this.comboBox1.Location = new System.Drawing.Point(21, 54);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(91, 21);
-            this.comboBox1.TabIndex = 5;
-            // 
             // calendarFilterLabel
             // 
             this.calendarFilterLabel.AutoSize = true;
-            this.calendarFilterLabel.Location = new System.Drawing.Point(28, 38);
+            this.calendarFilterLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.calendarFilterLabel.Location = new System.Drawing.Point(24, 29);
             this.calendarFilterLabel.Name = "calendarFilterLabel";
-            this.calendarFilterLabel.Size = new System.Drawing.Size(74, 13);
+            this.calendarFilterLabel.Size = new System.Drawing.Size(89, 13);
             this.calendarFilterLabel.TabIndex = 4;
             this.calendarFilterLabel.Text = "Calendar Filter";
             // 
@@ -217,6 +209,42 @@
             this.userLabel.Size = new System.Drawing.Size(0, 13);
             this.userLabel.TabIndex = 8;
             // 
+            // allAppointmentsRadioButton
+            // 
+            this.allAppointmentsRadioButton.AutoSize = true;
+            this.allAppointmentsRadioButton.Location = new System.Drawing.Point(10, 54);
+            this.allAppointmentsRadioButton.Name = "allAppointmentsRadioButton";
+            this.allAppointmentsRadioButton.Size = new System.Drawing.Size(103, 17);
+            this.allAppointmentsRadioButton.TabIndex = 6;
+            this.allAppointmentsRadioButton.TabStop = true;
+            this.allAppointmentsRadioButton.Text = "All Appointments";
+            this.allAppointmentsRadioButton.UseVisualStyleBackColor = true;
+            this.allAppointmentsRadioButton.CheckedChanged += new System.EventHandler(this.allAppointmentsRadioButton_CheckedChanged);
+            // 
+            // currentWeekRadioButton
+            // 
+            this.currentWeekRadioButton.AutoSize = true;
+            this.currentWeekRadioButton.Location = new System.Drawing.Point(11, 77);
+            this.currentWeekRadioButton.Name = "currentWeekRadioButton";
+            this.currentWeekRadioButton.Size = new System.Drawing.Size(91, 17);
+            this.currentWeekRadioButton.TabIndex = 7;
+            this.currentWeekRadioButton.TabStop = true;
+            this.currentWeekRadioButton.Text = "Current Week";
+            this.currentWeekRadioButton.UseVisualStyleBackColor = true;
+            this.currentWeekRadioButton.CheckedChanged += new System.EventHandler(this.currentWeekRadioButton_CheckedChanged);
+            // 
+            // currentMonthRadioButton
+            // 
+            this.currentMonthRadioButton.AutoSize = true;
+            this.currentMonthRadioButton.Location = new System.Drawing.Point(10, 100);
+            this.currentMonthRadioButton.Name = "currentMonthRadioButton";
+            this.currentMonthRadioButton.Size = new System.Drawing.Size(92, 17);
+            this.currentMonthRadioButton.TabIndex = 8;
+            this.currentMonthRadioButton.TabStop = true;
+            this.currentMonthRadioButton.Text = "Current Month";
+            this.currentMonthRadioButton.UseVisualStyleBackColor = true;
+            this.currentMonthRadioButton.CheckedChanged += new System.EventHandler(this.currentMonthRadioButton_CheckedChanged);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -251,13 +279,15 @@
         private System.Windows.Forms.Button deleteAppointmentButton;
         private System.Windows.Forms.Button modifyAppointmentButton;
         private System.Windows.Forms.Button createAppointmentButton;
-        private System.Windows.Forms.DataGridView appointmentDGV;
-        private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label calendarFilterLabel;
         private System.Windows.Forms.Button exitButton;
         private System.Windows.Forms.Label loggedInLabel;
         private System.Windows.Forms.Label userLabel;
         public System.Windows.Forms.DataGridView customerDGV;
+        private System.Windows.Forms.RadioButton allAppointmentsRadioButton;
+        private System.Windows.Forms.RadioButton currentMonthRadioButton;
+        private System.Windows.Forms.RadioButton currentWeekRadioButton;
+        private System.Windows.Forms.DataGridView appointmentDGV;
     }
 }
 

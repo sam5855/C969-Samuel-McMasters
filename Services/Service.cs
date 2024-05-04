@@ -10,6 +10,8 @@ using System.Threading.Tasks;
 using C969_Samuel_McMasters.DataModels;
 using Org.BouncyCastle.Asn1.Tsp;
 using System.Data.SqlTypes;
+using System.Linq.Expressions;
+using System.Globalization;
 
 namespace C969_Samuel_McMasters.Services
 {
@@ -329,5 +331,60 @@ namespace C969_Samuel_McMasters.Services
 
         }
 
+        static public List<Appointment> GetWeekAppointments(int userId)
+        {
+            List<Appointment> appointmentList = new List<Appointment>();
+            MySqlConnection c = new MySqlConnection(Service.homeConnectionString);
+
+            DateTime currentDate = DateTime.Today;
+
+            DateTime startOfWeek = currentDate.AddDays(-(int)currentDate.DayOfWeek);
+
+            DateTime endOfWeek = startOfWeek.AddDays(6);
+
+            try
+            {
+
+
+                c.Open();
+                MySqlCommand cmd = c.CreateCommand();
+                cmd.CommandText = $"SELECT start, end, type, appointmentId, customerId FROM appointment WHERE userId = {userId} AND start >= {startOfWeek.ToUniversalTime().ToString("yyyyMMddHHmmss")} AND end <= {endOfWeek.ToUniversalTime().ToString("yyyyMMddHHmmss")}";
+
+                cmd.ExecuteNonQuery();
+
+                using (MySqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        appointmentList.Add(new Appointment()
+                        {
+                            StartDate = Convert.ToDateTime(reader["start"]),
+                            EndDate = Convert.ToDateTime(reader["end"]),
+                            Type = reader["type"].ToString(),
+                            AppointmentId = Convert.ToInt32(reader["appointmentId"]),
+                            CustomerId = Convert.ToInt32(reader["customerId"])
+                        });
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Exception thrown when getting current week appointments: " + ex);
+            }
+
+            finally
+            {
+                c.Close();
+            }
+           
+
+            return appointmentList;
+           
+        }
+
+      
+
+
+       
     }
 }
