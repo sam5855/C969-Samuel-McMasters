@@ -85,9 +85,11 @@ namespace C969_Samuel_McMasters
             apt.Contact = "Not Needed";
             apt.Type = aptTypeTextBox.Text;
             apt.Url = "Not Needed";
-            apt.StartDate = startDatePicker.Value;
-            apt.EndDate = endDatePicker.Value;
-            
+            apt.StartDate = startDatePicker.Value.ToLocalTime();
+            apt.EndDate = endDatePicker.Value.ToLocalTime();
+
+       
+
             Service.CreateRecord(timeStamp, userName, "appointment", $"'{apt.CustomerId}', '{apt.Title}', '{startDatePicker.Value.ToUniversalTime().ToString("yyyyMMddHHmmss")}', '{endDatePicker.Value.ToUniversalTime().ToString("yyyyMMddHHmmss")}'," +
                 $"'{apt.Type}', '{apt.Description}', '{apt.Location}', '{apt.Contact}', '{apt.Url}'", apt.UserId);
 

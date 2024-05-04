@@ -37,10 +37,6 @@ namespace C969_Samuel_McMasters
           
 
             //DGV Formatting
-
-
-
-
             customerDGV.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             customerDGV.ReadOnly = true;
             customerDGV.MultiSelect = false;

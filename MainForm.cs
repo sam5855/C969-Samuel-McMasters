@@ -23,30 +23,13 @@ namespace C969_Samuel_McMasters
             InitializeComponent();
             userLabel.Text = DataHelper.GetCurrentUserName();
 
-          
-            //Creating SQL Connection
-            MySqlConnection c = new MySqlConnection(Service.homeConnectionString);
-            c.Open();
+            //Populate customer DGV
+            customerDGV.DataSource = Service.loadCustomerInfo();
 
-            //Populate Customer DataGrid
-            MySqlCommand query = new MySqlCommand("SELECT * FROM customer", c);
-            MySqlDataAdapter adp = new MySqlDataAdapter(query);
-            DataTable dt = new DataTable();
-            adp.Fill(dt);
-            customerDGV.DataSource = dt;
+            //Populate appointment DGV
+            allAppointmentsRadioButton.Checked = true;
 
-            //Populate Appointments DataGrid
-            //MySqlCommand aptQuery = new MySqlCommand("SELECT userId, title, description FROM appointment", c);
-            //MySqlDataAdapter aptAdp = new MySqlDataAdapter(aptQuery);
-            //DataTable aptDt = new DataTable();
-            //aptAdp.Fill(aptDt);
-            //appointmentDGV.DataSource = aptDt;
-
-            c.Close();
-            
-
-
-
+            //DGV Formatting 
             customerDGV.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             customerDGV.ReadOnly = true;
             customerDGV.MultiSelect = false;
@@ -55,9 +38,16 @@ namespace C969_Samuel_McMasters
             appointmentDGV.ReadOnly = true;
             appointmentDGV.MultiSelect = false;
             appointmentDGV.AllowUserToAddRows = false;
+            appointmentDGV.Columns[3].Visible = false;
+            appointmentDGV.Columns[4].Visible = false;
+            appointmentDGV.Columns[5].Visible = false;
+            appointmentDGV.Columns[6].Visible = false;
+            appointmentDGV.Columns[8].Visible = false;
+            customerDGV.Columns[2].Visible = false;
+            customerDGV.Columns[4].Visible = false;
 
-            allAppointmentsRadioButton.Checked = true;
-          
+
+
 
 
 
@@ -125,15 +115,9 @@ namespace C969_Samuel_McMasters
             int selectedAppointment = Convert.ToInt32(appointmentDGV.CurrentRow.Cells[0].Value);
             Service.DeleteAppointment(selectedAppointment);
 
-
-            MySqlConnection c = new MySqlConnection(Service.homeConnectionString);
-            c.Open();
-            MySqlCommand query = new MySqlCommand("SELECT * FROM appointment", c);
-            MySqlDataAdapter adp = new MySqlDataAdapter(query);
-            DataTable dt = new DataTable();
-            adp.Fill(dt);
-            appointmentDGV.DataSource = dt;
-            c.Close();
+            int currentUserId = DataHelper.getCurrentUserId();
+            List<Appointment> allAppointments = Service.GetAllAppointments(currentUserId);
+            appointmentDGV.DataSource = allAppointments;
         }
 
         private void modifyAppointmentButton_Click(object sender, EventArgs e)
@@ -150,74 +134,27 @@ namespace C969_Samuel_McMasters
 
 
         //Filter sets appointment DGV to all appointments
-        //Removed this code block from top because this radio button 
-        //is enabled when the form loads, so this code is launched
         private void allAppointmentsRadioButton_CheckedChanged(object sender, EventArgs e)
         {
-            MySqlConnection c = new MySqlConnection(Service.homeConnectionString);
-            c.Open();
-            MySqlCommand aptQuery = new MySqlCommand("SELECT * FROM appointment", c);
-            MySqlDataAdapter aptAdp = new MySqlDataAdapter(aptQuery);
-            DataTable aptDt = new DataTable();
-            aptAdp.Fill(aptDt);
-            appointmentDGV.DataSource = aptDt;
-
-            c.Close();
-
+            int currentUserId = DataHelper.getCurrentUserId();
+            List<Appointment> allAppointments = Service.GetAllAppointments(currentUserId);
+            appointmentDGV.DataSource = allAppointments;
         }
 
         //Filter sets appointment DGV to current week appointments
-       
         private void currentWeekRadioButton_CheckedChanged(object sender, EventArgs e)
         {
-            //CultureInfo myCI = new CultureInfo("en-US");
-            //Calendar myCal = myCI.Calendar;
-
-            //CalendarWeekRule myCWR = myCI.DateTimeFormat.CalendarWeekRule;
-            //DayOfWeek myFirstDOW = myCI.DateTimeFormat.FirstDayOfWeek;
-
-            //weekOfTheYear = myCal.GetWeekOfYear(DateTime.Now, myCWR, myFirstDOW);
-
-
-
-            //MySqlConnection c = new MySqlConnection(Service.homeConnectionString);
-            //c.Open();
-
-
-
-
-            //c.Close();
-
-
             int currentUserId = DataHelper.getCurrentUserId();
-
             List<Appointment> currentWeekAppointments = Service.GetWeekAppointments(currentUserId);
             appointmentDGV.DataSource = currentWeekAppointments;
-
-
-
-            //appointmentDGV.DataSource = Service.getWeekApt(currentUserId);
-
-
-
-
-
-
-
-
-
-
-
         }
 
         //Filter sets appointment DGV to current month appointments
         private void currentMonthRadioButton_CheckedChanged(object sender, EventArgs e)
         {
-            MySqlConnection c = new MySqlConnection(Service.homeConnectionString);
-            c.Open();
-
-
-            c.Close();
+            int currentUserId = DataHelper.getCurrentUserId();
+            List<Appointment> currentWeekAppointments = Service.GetMonthAppointments(currentUserId);
+            appointmentDGV.DataSource = currentWeekAppointments;
         }
     }
 }

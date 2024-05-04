@@ -123,6 +123,53 @@ namespace C969_Samuel_McMasters.Services
             return customerDict;
         }
 
+        static public List<Customer> loadCustomerInfo()
+        {
+            List<Customer> customerList = new List<Customer>();
+            MySqlConnection c = new MySqlConnection(Service.homeConnectionString);
+            try
+            {
+                c.Open();
+                MySqlCommand cmd = c.CreateCommand();
+                cmd.CommandText = $"SELECT customerId, customerName, active FROM customer";
+
+                cmd.ExecuteNonQuery();
+
+                using (MySqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        int isActive = Convert.ToInt32(reader["active"]);
+                        bool active;
+                        if (isActive == 1)
+                        {
+                            active = true;
+                        }
+                        else
+                        {
+                            active = false;
+                        }
+                        customerList.Add(new Customer()
+                        {
+                            CustomerId = Convert.ToInt32(reader["customerId"]),
+                            CustomerName = reader["customerName"].ToString(),
+                            Active = active
+                        });
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Exception thrown when getting current week appointments: " + ex);
+            }
+
+            finally
+            {
+                c.Close();
+            }
+            return customerList;
+        }
+
 
         //Get CustomerId 
         static public int GetCustomerId(string search)
@@ -334,7 +381,7 @@ namespace C969_Samuel_McMasters.Services
         static public List<Appointment> GetWeekAppointments(int userId)
         {
             List<Appointment> appointmentList = new List<Appointment>();
-            MySqlConnection c = new MySqlConnection(Service.homeConnectionString);
+            MySqlConnection c = new MySqlConnection(homeConnectionString);
 
             DateTime currentDate = DateTime.Today;
 
@@ -356,13 +403,16 @@ namespace C969_Samuel_McMasters.Services
                 {
                     while (reader.Read())
                     {
+                        DateTime startDate = Convert.ToDateTime(reader["start"]);
+                        DateTime endDate = Convert.ToDateTime(reader["end"]);
                         appointmentList.Add(new Appointment()
                         {
-                            StartDate = Convert.ToDateTime(reader["start"]),
-                            EndDate = Convert.ToDateTime(reader["end"]),
+                            StartDate = startDate.ToLocalTime(),
+                            EndDate = endDate.ToLocalTime(),
                             Type = reader["type"].ToString(),
                             AppointmentId = Convert.ToInt32(reader["appointmentId"]),
-                            CustomerId = Convert.ToInt32(reader["customerId"])
+                            CustomerId = Convert.ToInt32(reader["customerId"]),
+                            UserId = userId
                         });
                     }
                 }
@@ -382,9 +432,123 @@ namespace C969_Samuel_McMasters.Services
            
         }
 
-      
+
+        static public List<Appointment> GetMonthAppointments(int userId)
+        {
+            List<Appointment> appointmentList = new List<Appointment>();
+            MySqlConnection c = new MySqlConnection(homeConnectionString);
+
+            DateTime currentDate = DateTime.Today;
+
+            DateTime startOfMonth = new DateTime(currentDate.Year, currentDate.Month, 1);
+
+            DateTime endOfMonth = startOfMonth.AddMonths(1).AddDays(-1);
+
+            try
+            {
 
 
-       
+                c.Open();
+                MySqlCommand cmd = c.CreateCommand();
+                cmd.CommandText = $"SELECT start, end, type, appointmentId, customerId FROM appointment WHERE userId = {userId} AND start >= {startOfMonth.ToUniversalTime().ToString("yyyyMMddHHmmss")} AND end <= {endOfMonth.ToUniversalTime().ToString("yyyyMMddHHmmss")}";
+
+                cmd.ExecuteNonQuery();
+
+                using (MySqlDataReader reader = cmd.ExecuteReader())
+                {
+                    //while (reader.Read())
+                    //{
+
+                    //    appointmentList.Add(new Appointment()
+                    //    {
+                    //        StartDate = Convert.ToDateTime(reader["start"]),
+                    //        EndDate = Convert.ToDateTime(reader["end"]),
+                    //        Type = reader["type"].ToString(),
+                    //        AppointmentId = Convert.ToInt32(reader["appointmentId"]),
+                    //        CustomerId = Convert.ToInt32(reader["customerId"]),
+                    //        UserId = userId
+                    //    }); ;
+                    //}
+                    while (reader.Read())
+                    {
+                        DateTime startDate = Convert.ToDateTime(reader["start"]);
+                        DateTime endDate = Convert.ToDateTime(reader["end"]);
+                        appointmentList.Add(new Appointment()
+                        {
+                            StartDate = startDate.ToLocalTime(),
+                            EndDate = endDate.ToLocalTime(),
+                            Type = reader["type"].ToString(),
+                            AppointmentId = Convert.ToInt32(reader["appointmentId"]),
+                            CustomerId = Convert.ToInt32(reader["customerId"]),
+                            UserId = userId
+                        }); ;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Exception thrown when getting current week appointments: " + ex);
+            }
+
+            finally
+            {
+                c.Close();
+            }
+
+
+            return appointmentList;
+
+        }
+
+        static public List<Appointment> GetAllAppointments(int userId)
+        {
+            List<Appointment> appointmentList = new List<Appointment>();
+            MySqlConnection c = new MySqlConnection(homeConnectionString);
+
+            try
+            {
+                c.Open();
+                MySqlCommand cmd = c.CreateCommand();
+                cmd.CommandText = $"SELECT start, end, type, appointmentId, customerId FROM appointment";
+
+                cmd.ExecuteNonQuery();
+
+                using (MySqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        DateTime startDate = Convert.ToDateTime(reader["start"]);
+                        DateTime endDate = Convert.ToDateTime(reader["end"]);                    
+                        appointmentList.Add(new Appointment()
+                        {
+                            StartDate = startDate.ToLocalTime(),
+                            EndDate = endDate.ToLocalTime(),
+                            Type = reader["type"].ToString(),
+                            AppointmentId = Convert.ToInt32(reader["appointmentId"]),
+                            CustomerId = Convert.ToInt32(reader["customerId"]),
+                            UserId = userId
+                        });
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Exception thrown when getting current week appointments: " + ex);
+            }
+
+            finally
+            {
+                c.Close();
+            }
+
+
+            return appointmentList;
+
+        }
+
+
+
+
+
     }
 }
