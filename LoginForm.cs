@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using C969_Samuel_McMasters.DataModels;
 using MySql.Data.MySqlClient;
 using C969_Samuel_McMasters.Services;
+using System.Globalization;
 
 namespace C969_Samuel_McMasters
 {
@@ -18,6 +19,7 @@ namespace C969_Samuel_McMasters
         public LoginForm()
         {
             InitializeComponent();
+            ShowLang();
         }
 
         private void exitButton_Click(object sender, EventArgs e)
@@ -45,5 +47,43 @@ namespace C969_Samuel_McMasters
         {
 
         }
+
+        private void ShowLang()
+        {
+            switch (CultureInfo.CurrentCulture.TwoLetterISOLanguageName)
+            {
+                case "en":
+                    ShowEnglish();
+                    break;
+                case "es":
+                    ShowSpanish();
+                    break;
+                default:
+                    ShowEnglish();
+                    break;
+             
+            }
+        }
+
+        private void ShowEnglish()
+        {
+            this.Text = "Login";
+            welcomeLabel.Text = "Welcome";
+            usernameLabel.Text = "Username:";
+            passwordLabel.Text = "Password:";
+            loginButton.Text = "Login";
+            exitButton.Text = "Exit";
+        }
+
+        private void ShowSpanish()
+        {
+            this.Text = "Acceso";
+            welcomeLabel.Text = "Bienvenido";
+            usernameLabel.Text = "Nombre de usuario:";
+            passwordLabel.Text = "Contrasena:";
+            loginButton.Text = "Acceso";
+            exitButton.Text = "Salida";
+        }
+
     }
 }

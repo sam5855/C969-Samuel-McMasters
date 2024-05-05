@@ -171,7 +171,6 @@ namespace C969_Samuel_McMasters.Services
             return customerList;
         }
 
-
         //Get CustomerId 
         static public int GetCustomerId(string search)
         {
@@ -204,7 +203,6 @@ namespace C969_Samuel_McMasters.Services
             return 0;
         }
 
-
         //Update customer information
         static public bool updateCustomer(Dictionary<string, string> updatedCustomer)
         {
@@ -231,7 +229,6 @@ namespace C969_Samuel_McMasters.Services
 
 
         }
-
 
         //Delete customer information 
         static public bool DeleteCustomer(int customerId)
@@ -611,6 +608,8 @@ namespace C969_Samuel_McMasters.Services
             return 0;
 
         }
+
+        
     }
 
 }

@@ -54,15 +54,12 @@ namespace C969_Samuel_McMasters.DataModels
             return highestID + 1;
         }
 
-
-
         //Loads Add Customer Form
         public static void ShowAddCustomer()
         {
             AddCustomerForm AddCustomerForm = new AddCustomerForm();
             AddCustomerForm.ShowDialog();
         }
-
 
         public static bool CheckBusinessHours(DateTime startTime, DateTime endTime)
         {
@@ -89,7 +86,7 @@ namespace C969_Samuel_McMasters.DataModels
             }
         }
 
-
+        
 
 
 
