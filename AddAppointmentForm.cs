@@ -67,39 +67,48 @@ namespace C969_Samuel_McMasters
 
         private void createAppointmentButton_Click(object sender, EventArgs e)
         {
-            
+
+            if (startDatePicker.Value < DataHelper.businessOpen || startDatePicker.Value > DataHelper.businessClose)
+            {
+                MessageBox.Show("Invalid appointment time. Please adjust appointment time between business hours 9:00am - 5:00pm");
+            }
+            else if (endDatePicker.Value < DataHelper.businessOpen || endDatePicker.Value > DataHelper.businessClose)
+            {
+                MessageBox.Show("Invalid appointment time. Please adjust appointment time between business hours 9:00am - 5:00pm");
+            }
+            else
+            {
+                string timeStamp = DataHelper.CreateTimeStamp();
+                string userName = DataHelper.GetCurrentUserName();
 
 
-            string timeStamp = DataHelper.CreateTimeStamp();
-            string userName = DataHelper.GetCurrentUserName();
-
-       
-            Appointment apt = new Appointment();
+                Appointment apt = new Appointment();
 
 
-            apt.CustomerId = Convert.ToInt32(customerDGV.CurrentRow.Cells[0].Value);
-            apt.UserId = Convert.ToInt32(userIdTextBox.Text);
-            apt.Title = "Not Needed";
-            apt.Description = "Not Needed";
-            apt.Location = "Not Needed";
-            apt.Contact = "Not Needed";
-            apt.Type = aptTypeTextBox.Text;
-            apt.Url = "Not Needed";
-            apt.StartDate = startDatePicker.Value.ToLocalTime();
-            apt.EndDate = endDatePicker.Value.ToLocalTime();
+                apt.CustomerId = Convert.ToInt32(customerDGV.CurrentRow.Cells[0].Value);
+                apt.UserId = Convert.ToInt32(userIdTextBox.Text);
+                apt.Title = "Not Needed";
+                apt.Description = "Not Needed";
+                apt.Location = "Not Needed";
+                apt.Contact = "Not Needed";
+                apt.Type = aptTypeTextBox.Text;
+                apt.Url = "Not Needed";
+                apt.StartDate = startDatePicker.Value.ToLocalTime();
+                apt.EndDate = endDatePicker.Value.ToLocalTime();
 
-       
 
-            Service.CreateRecord(timeStamp, userName, "appointment", $"'{apt.CustomerId}', '{apt.Title}', '{startDatePicker.Value.ToUniversalTime().ToString("yyyyMMddHHmmss")}', '{endDatePicker.Value.ToUniversalTime().ToString("yyyyMMddHHmmss")}'," +
-                $"'{apt.Type}', '{apt.Description}', '{apt.Location}', '{apt.Contact}', '{apt.Url}'", apt.UserId);
+
+                Service.CreateRecord(timeStamp, userName, "appointment", $"'{apt.CustomerId}', '{apt.Title}', '{startDatePicker.Value.ToUniversalTime().ToString("yyyyMMddHHmmss")}', '{endDatePicker.Value.ToUniversalTime().ToString("yyyyMMddHHmmss")}'," +
+                    $"'{apt.Type}', '{apt.Description}', '{apt.Location}', '{apt.Contact}', '{apt.Url}'", apt.UserId);
 
 
 
 
 
-            Close();
-            MainForm MainForm = new MainForm();
-            MainForm.Show();
+                Close();
+                MainForm MainForm = new MainForm();
+                MainForm.Show();
+            }
         }
     }
 }

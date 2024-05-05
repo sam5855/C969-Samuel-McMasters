@@ -12,6 +12,7 @@ using Org.BouncyCastle.Asn1.Tsp;
 using System.Data.SqlTypes;
 using System.Linq.Expressions;
 using System.Globalization;
+using System.Windows.Forms;
 
 namespace C969_Samuel_McMasters.Services
 {
@@ -22,7 +23,7 @@ namespace C969_Samuel_McMasters.Services
         public static string homeConnectionString = "server=127.0.0.1;uid=root;pwd=5855;database=client_schedule";
 
 
-
+        
 
 
 
@@ -232,29 +233,26 @@ namespace C969_Samuel_McMasters.Services
         }
 
 
-        //Delete customer information
-        //Check if I need to delete associated records as well 
+        //Delete customer information 
         static public bool DeleteCustomer(int customerId)
         {
-            MySqlConnection c = new MySqlConnection(homeConnectionString);
-            c.Open();
-
-            MySqlCommand cmd = c.CreateCommand();
-            cmd.CommandText = $"DELETE FROM customer WHERE customerId = {customerId}";
-            cmd.ExecuteNonQuery();
-
-            int customerUpdated = 1;
-
-            if (customerUpdated != 0)
+            
+            try
             {
+                MySqlConnection c = new MySqlConnection(homeConnectionString);
+                c.Open();
+                MySqlCommand cmd = c.CreateCommand();
+                cmd.CommandText = $"DELETE FROM customer WHERE customerId = {customerId}";
+                cmd.ExecuteNonQuery();             
                 return true;
             }
-            else
+            catch
             {
+                MessageBox.Show("Customer has associated appointment. Please delete all appointments before deleting customer" );
                 return false;
+                
             }
-
-
+            
 
         }
 

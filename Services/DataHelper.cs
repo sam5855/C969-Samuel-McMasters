@@ -16,7 +16,11 @@ namespace C969_Samuel_McMasters.DataModels
         public static int _currentUserId;
         public static string _currentUserName;
 
-        
+        public static DateTime businessOpen = new DateTime(DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day, 9, 0, 0);
+        public static DateTime businessClose = new DateTime(DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day, 17, 0, 0);
+
+
+
         public static int getCurrentUserId()
         {
             return _currentUserId;

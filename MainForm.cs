@@ -91,16 +91,7 @@ namespace C969_Samuel_McMasters
         {
             int selectedCustomer = Convert.ToInt32(customerDGV.CurrentRow.Cells[0].Value);
             Service.DeleteCustomer(selectedCustomer);
-
-
-            MySqlConnection c = new MySqlConnection(Service.homeConnectionString);
-            c.Open();
-            MySqlCommand query = new MySqlCommand("SELECT * FROM customer", c);
-            MySqlDataAdapter adp = new MySqlDataAdapter(query);
-            DataTable dt = new DataTable();
-            adp.Fill(dt);
-            customerDGV.DataSource = dt;
-            c.Close();
+            customerDGV.DataSource = Service.loadCustomerInfo();
         }
 
         private void createAppointmentButton_Click(object sender, EventArgs e)
