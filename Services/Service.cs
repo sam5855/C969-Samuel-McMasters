@@ -23,7 +23,7 @@ namespace C969_Samuel_McMasters.Services
         public static string homeConnectionString = "server=127.0.0.1;uid=root;pwd=5855;database=client_schedule";
 
 
-        
+
 
 
 
@@ -236,23 +236,23 @@ namespace C969_Samuel_McMasters.Services
         //Delete customer information 
         static public bool DeleteCustomer(int customerId)
         {
-            
+
             try
             {
                 MySqlConnection c = new MySqlConnection(homeConnectionString);
                 c.Open();
                 MySqlCommand cmd = c.CreateCommand();
                 cmd.CommandText = $"DELETE FROM customer WHERE customerId = {customerId}";
-                cmd.ExecuteNonQuery();             
+                cmd.ExecuteNonQuery();
                 return true;
             }
             catch
             {
-                MessageBox.Show("Customer has associated appointment. Please delete all appointments before deleting customer" );
+                MessageBox.Show("Customer has associated appointment. Please delete all appointments before deleting customer");
                 return false;
-                
+
             }
-            
+
 
         }
 
@@ -297,6 +297,7 @@ namespace C969_Samuel_McMasters.Services
 
         }
 
+        //Deletes appointments
         static public bool DeleteAppointment(int appointmentId)
         {
             MySqlConnection c = new MySqlConnection(homeConnectionString);
@@ -343,7 +344,7 @@ namespace C969_Samuel_McMasters.Services
             rdr.Close();
             c.Close();
 
-         
+
 
             return appointmentDict;
         }
@@ -376,6 +377,7 @@ namespace C969_Samuel_McMasters.Services
 
         }
 
+        //Appointment DGV filter
         static public List<Appointment> GetWeekAppointments(int userId)
         {
             List<Appointment> appointmentList = new List<Appointment>();
@@ -424,13 +426,13 @@ namespace C969_Samuel_McMasters.Services
             {
                 c.Close();
             }
-           
+
 
             return appointmentList;
-           
+
         }
 
-
+        //Appointment DGV filter
         static public List<Appointment> GetMonthAppointments(int userId)
         {
             List<Appointment> appointmentList = new List<Appointment>();
@@ -498,6 +500,7 @@ namespace C969_Samuel_McMasters.Services
 
         }
 
+        //Appointment DGV filter
         static public List<Appointment> GetAllAppointments(int userId)
         {
             List<Appointment> appointmentList = new List<Appointment>();
@@ -516,7 +519,7 @@ namespace C969_Samuel_McMasters.Services
                     while (reader.Read())
                     {
                         DateTime startDate = Convert.ToDateTime(reader["start"]);
-                        DateTime endDate = Convert.ToDateTime(reader["end"]);                    
+                        DateTime endDate = Convert.ToDateTime(reader["end"]);
                         appointmentList.Add(new Appointment()
                         {
                             StartDate = startDate.ToLocalTime(),
@@ -544,9 +547,70 @@ namespace C969_Samuel_McMasters.Services
 
         }
 
+        //Checks for overalapping appointments
+        public static bool CheckOverlappingAppointments(DateTime startTime, DateTime endTime, int userId)
+        {
+
+            MySqlConnection c = new MySqlConnection(homeConnectionString);
+            bool overlap = false;
+
+
+            try
+            {
+
+
+                c.Open();
+                MySqlCommand cmd = c.CreateCommand();
+                cmd.CommandText = $"SELECT COUNT(*) FROM appointment WHERE userId = {userId} AND (('{startTime.ToUniversalTime().ToString("yyyyMMddHHmmss")}' < end AND '{endTime.ToUniversalTime().ToString("yyyyMMddHHmmss")}' > start) OR ('{endTime.ToUniversalTime().ToString("yyyyMMddHHmmss")}' > start AND '{startTime.ToUniversalTime().ToString("yyyyMMddHHmmss")}' < end))";
+
+
+                if (cmd.ExecuteScalar().ToString() != "0")
+                {
+                    overlap = true;
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Exception thrown when checking for overlapping appointments." + ex);
+            }
+            finally
+            {
+                
+                c.Close();
+            }
+
+            return overlap;
+                
+
+            
 
 
 
 
+        }
+
+        //Method to authenticate user login
+        public static int FindUser(string username, string password)
+        {
+            MySqlConnection c = new MySqlConnection(Services.Service.homeConnectionString);
+            c.Open();
+            MySqlCommand cmd = new MySqlCommand($"SELECT userId FROM user WHERE username = '{username}' AND password = '{password}'", c);
+            MySqlDataReader rdr = cmd.ExecuteReader();
+
+            if (rdr.HasRows)
+            {
+                rdr.Read();
+                DataHelper.setCurrentUserId(Convert.ToInt32(rdr[0]));
+                DataHelper.setCurrentUserName(username);
+                rdr.Close();
+                c.Close();
+                return DataHelper.getCurrentUserId();
+            }
+            return 0;
+
+        }
     }
+
 }

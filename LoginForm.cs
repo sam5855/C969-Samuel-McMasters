@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using C969_Samuel_McMasters.DataModels;
 using MySql.Data.MySqlClient;
+using C969_Samuel_McMasters.Services;
 
 namespace C969_Samuel_McMasters
 {
@@ -19,28 +20,6 @@ namespace C969_Samuel_McMasters
             InitializeComponent();
         }
 
-        //Method to authenticate user login
-        public static int FindUser(string username, string password)
-        {
-            MySqlConnection c = new MySqlConnection(Services.Service.homeConnectionString);
-            c.Open();
-            MySqlCommand cmd = new MySqlCommand($"SELECT userId FROM user WHERE username = '{username}' AND password = '{password}'", c);
-            MySqlDataReader rdr = cmd.ExecuteReader();
-
-            if (rdr.HasRows)
-            {
-                rdr.Read();
-                DataHelper.setCurrentUserId(Convert.ToInt32(rdr[0]));
-                DataHelper.setCurrentUserName(username);
-                rdr.Close();
-                c.Close();
-                return DataHelper.getCurrentUserId();
-            }
-            return 0;
-
-        }
-
-
         private void exitButton_Click(object sender, EventArgs e)
         {
             Application.Exit();
@@ -48,7 +27,7 @@ namespace C969_Samuel_McMasters
 
         private void loginButton_Click(object sender, EventArgs e)
         {
-            if (FindUser(usernameTextBox.Text, passwordTextBox.Text) != 0)
+            if (Service.FindUser(usernameTextBox.Text, passwordTextBox.Text) != 0)
             {
                 MainForm MainForm = new MainForm();
                 MainForm.Show();
@@ -59,9 +38,7 @@ namespace C969_Samuel_McMasters
             {
                 MessageBox.Show("Invalid User");
             }
-            
-            
-            
+       
         }
 
         private void LoginForm_Load(object sender, EventArgs e)

@@ -16,9 +16,6 @@ namespace C969_Samuel_McMasters.DataModels
         public static int _currentUserId;
         public static string _currentUserName;
 
-        public static DateTime businessOpen = new DateTime(DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day, 9, 0, 0);
-        public static DateTime businessClose = new DateTime(DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day, 17, 0, 0);
-
         
 
 
@@ -67,10 +64,33 @@ namespace C969_Samuel_McMasters.DataModels
         }
 
 
-        
+        public static bool CheckBusinessHours(DateTime startTime, DateTime endTime)
+        {
+            // Define business hours
+            TimeSpan openingTime = new TimeSpan(9, 0, 0); // 9:00am
+            TimeSpan closingTime = new TimeSpan(17, 0, 0); // 5:00pm
+
+            // Extract time component from startTime and endTime
+            TimeSpan startTimeOfDay = startTime.TimeOfDay;
+            TimeSpan endTimeOfDay = endTime.TimeOfDay;
+
+            // Check if startTime and endTime fall within business hours
+            if (startTimeOfDay >= openingTime && startTimeOfDay <= closingTime &&
+        endTimeOfDay >= openingTime && endTimeOfDay <= closingTime)
+            {
+                // Both startTime and endTime are within business hours
+                return true;
 
 
-      
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+
+
 
 
     }

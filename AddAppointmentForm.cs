@@ -65,49 +65,71 @@ namespace C969_Samuel_McMasters
             MainForm.Show();
         }
 
+
+        
+        
+
+
+
+
+
+
+
+
+
         private void createAppointmentButton_Click(object sender, EventArgs e)
         {
+            
 
-            if (startDatePicker.Value < DataHelper.businessOpen || startDatePicker.Value > DataHelper.businessClose)
+            DateTime startDate = startDatePicker.Value;
+            DateTime endDate = endDatePicker.Value;
+            int userId = Convert.ToInt32(userIdTextBox.Text);
+
+            if (DataHelper.CheckBusinessHours(startDate, endDate))
             {
-                MessageBox.Show("Invalid appointment time. Please adjust appointment time between business hours 9:00am - 5:00pm");
-            }
-            else if (endDatePicker.Value < DataHelper.businessOpen || endDatePicker.Value > DataHelper.businessClose)
-            {
-                MessageBox.Show("Invalid appointment time. Please adjust appointment time between business hours 9:00am - 5:00pm");
+                if (Service.CheckOverlappingAppointments(startDate, endDate, userId))
+                {
+                    MessageBox.Show("Appointment overlap error.");
+                }
+                else
+                {
+                    string timeStamp = DataHelper.CreateTimeStamp();
+                    string userName = DataHelper.GetCurrentUserName();
+
+
+                    Appointment apt = new Appointment();
+
+
+                    apt.CustomerId = Convert.ToInt32(customerDGV.CurrentRow.Cells[0].Value);
+                    apt.UserId = Convert.ToInt32(userIdTextBox.Text);
+                    apt.Title = "Not Needed";
+                    apt.Description = "Not Needed";
+                    apt.Location = "Not Needed";
+                    apt.Contact = "Not Needed";
+                    apt.Type = aptTypeTextBox.Text;
+                    apt.Url = "Not Needed";
+                    apt.StartDate = startDatePicker.Value.ToLocalTime();
+                    apt.EndDate = endDatePicker.Value.ToLocalTime();
+
+
+
+                    Service.CreateRecord(timeStamp, userName, "appointment", $"'{apt.CustomerId}', '{apt.Title}', '{startDatePicker.Value.ToUniversalTime().ToString("yyyyMMddHHmmss")}', '{endDatePicker.Value.ToUniversalTime().ToString("yyyyMMddHHmmss")}'," +
+                        $"'{apt.Type}', '{apt.Description}', '{apt.Location}', '{apt.Contact}', '{apt.Url}'", apt.UserId);
+
+
+
+
+                    MessageBox.Show("Appointment created!");
+                    Close();
+                    MainForm MainForm = new MainForm();
+                    MainForm.Show();
+                }
+
+
             }
             else
             {
-                string timeStamp = DataHelper.CreateTimeStamp();
-                string userName = DataHelper.GetCurrentUserName();
-
-
-                Appointment apt = new Appointment();
-
-
-                apt.CustomerId = Convert.ToInt32(customerDGV.CurrentRow.Cells[0].Value);
-                apt.UserId = Convert.ToInt32(userIdTextBox.Text);
-                apt.Title = "Not Needed";
-                apt.Description = "Not Needed";
-                apt.Location = "Not Needed";
-                apt.Contact = "Not Needed";
-                apt.Type = aptTypeTextBox.Text;
-                apt.Url = "Not Needed";
-                apt.StartDate = startDatePicker.Value.ToLocalTime();
-                apt.EndDate = endDatePicker.Value.ToLocalTime();
-
-
-
-                Service.CreateRecord(timeStamp, userName, "appointment", $"'{apt.CustomerId}', '{apt.Title}', '{startDatePicker.Value.ToUniversalTime().ToString("yyyyMMddHHmmss")}', '{endDatePicker.Value.ToUniversalTime().ToString("yyyyMMddHHmmss")}'," +
-                    $"'{apt.Type}', '{apt.Description}', '{apt.Location}', '{apt.Contact}', '{apt.Url}'", apt.UserId);
-
-
-
-
-
-                Close();
-                MainForm MainForm = new MainForm();
-                MainForm.Show();
+                MessageBox.Show("Appointment must start and end between 9:00am and 5:00pm.");
             }
         }
     }

@@ -45,6 +45,7 @@ namespace C969_Samuel_McMasters
             appointmentDGV.Columns[8].Visible = false;
             customerDGV.Columns[2].Visible = false;
             customerDGV.Columns[4].Visible = false;
+           
 
 
 
@@ -81,9 +82,6 @@ namespace C969_Samuel_McMasters
 
             this.Close();
             ModifyCustomerForm.ShowDialog();
-
-
-
          
         }
 
@@ -146,6 +144,11 @@ namespace C969_Samuel_McMasters
             int currentUserId = DataHelper.getCurrentUserId();
             List<Appointment> currentWeekAppointments = Service.GetMonthAppointments(currentUserId);
             appointmentDGV.DataSource = currentWeekAppointments;
+        }
+
+        private void customerGroupBox_Enter(object sender, EventArgs e)
+        {
+
         }
     }
 }

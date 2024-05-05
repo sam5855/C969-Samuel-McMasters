@@ -61,9 +61,13 @@ namespace C969_Samuel_McMasters
             appointmentDict = Service.GetAppointmentDetails(selectedAppointment);
             aptIdTextBox.Text = appointmentDict["appointmentId"];
             userIdTextBox.Text = appointmentDict["userId"];
-            startDatePicker.Value = Convert.ToDateTime(appointmentDict["startDate"]);
-            endDatePicker.Value = Convert.ToDateTime(appointmentDict["endDate"]);
             aptTypeTextBox.Text = appointmentDict["type"];
+
+            DateTime startDate = Convert.ToDateTime(appointmentDict["startDate"]);
+            startDatePicker.Value = startDate.ToLocalTime();
+            DateTime endDate = Convert.ToDateTime(appointmentDict["endDate"]);
+            endDatePicker.Value = endDate.ToLocalTime();
+            
             
 
 
@@ -84,31 +88,42 @@ namespace C969_Samuel_McMasters
 
         private void saveChangesButton_Click(object sender, EventArgs e)
         {
+
+            DateTime startDate = startDatePicker.Value;
+            DateTime endDate = endDatePicker.Value;
+            int userId = Convert.ToInt32(userIdTextBox.Text);
             Dictionary<string, string> updatedForm = new Dictionary<string, string>();
 
-            
-
-            updatedForm.Add("appointmentId", aptIdTextBox.Text);
-            updatedForm.Add("userId", userIdTextBox.Text);
-            updatedForm.Add("startDate", startDatePicker.Value.ToUniversalTime().ToString("yyyyMMddHHmmss"));
-            updatedForm.Add("endDate", endDatePicker.Value.ToUniversalTime().ToString("yyyyMMddHHmmss"));
-            updatedForm.Add("type", aptTypeTextBox.Text);
-            updatedForm.Add("customerId", Convert.ToString(customerDGV.CurrentRow.Cells[0].Value));
-           
-
-
-
-            if (Service.updateAppointment(updatedForm))
+            if (DataHelper.CheckBusinessHours(startDate, endDate))
             {
-                MessageBox.Show("Update Complete!");
-                Close();
-                MainForm MainForm = new MainForm();
-                MainForm.Show();
+                if (Service.CheckOverlappingAppointments(startDate, endDate, userId))
+                {
+                    MessageBox.Show("Appointment overlap error.");
+                }
+                else
+                {
+
+
+                    updatedForm.Add("appointmentId", aptIdTextBox.Text);
+                    updatedForm.Add("userId", userIdTextBox.Text);
+                    updatedForm.Add("startDate", startDatePicker.Value.ToUniversalTime().ToString("yyyyMMddHHmmss"));
+                    updatedForm.Add("endDate", endDatePicker.Value.ToUniversalTime().ToString("yyyyMMddHHmmss"));
+                    updatedForm.Add("type", aptTypeTextBox.Text);
+                    updatedForm.Add("customerId", Convert.ToString(customerDGV.CurrentRow.Cells[0].Value));
+                    if (Service.updateAppointment(updatedForm))
+                    {
+                        MessageBox.Show("Update Complete!");
+                        Close();
+                        MainForm MainForm = new MainForm();
+                        MainForm.Show();
+                    }
+                }
             }
             else
             {
-                MessageBox.Show("Update Could not complete");
+                MessageBox.Show("Appointment must start and end between 9:00am and 5:00pm.");
             }
+
         }
     }
 }

@@ -72,6 +72,7 @@
             this.customerGroupBox.TabIndex = 1;
             this.customerGroupBox.TabStop = false;
             this.customerGroupBox.Text = "Customer Info";
+            this.customerGroupBox.Enter += new System.EventHandler(this.customerGroupBox_Enter);
             // 
             // deleteCustomerButton
             // 
