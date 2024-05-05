@@ -20,6 +20,8 @@ namespace C969_Samuel_McMasters
         {
             InitializeComponent();
             ShowLang();
+
+            timeLabel.Text = DataHelper.getCurrentTime();
         }
 
         private void exitButton_Click(object sender, EventArgs e)
@@ -29,22 +31,30 @@ namespace C969_Samuel_McMasters
 
         private void loginButton_Click(object sender, EventArgs e)
         {
+            DateTime timeStamp = DateTime.Now;
+            string userName = usernameTextBox.Text;
+
+
             if (Service.FindUser(usernameTextBox.Text, passwordTextBox.Text) != 0)
             {
+                DataHelper.UserLogFile($"USER {userName} has logged in at {timeStamp}.");
                 MainForm MainForm = new MainForm();
                 MainForm.Show();
                 Hide();
             }
+            else
+            {
+                DataHelper.UserLogFile($"Failed log-in attempt with USER {userName} at {timeStamp}");
+                if (CultureInfo.CurrentCulture.TwoLetterISOLanguageName == "es")
+                {
+                    MessageBox.Show("Usuario invalido.");
+                }
+                else
+                {
+                    MessageBox.Show("Invalid User.");
+                }
+            }
             
-            else if (CultureInfo.CurrentCulture.TwoLetterISOLanguageName == "es")
-            {
-                MessageBox.Show("Usuario invalido.");
-                
-            }
-            else if (CultureInfo.CurrentCulture.TwoLetterISOLanguageName == "en")
-            {
-                MessageBox.Show("Invalid User.");
-            }
 
         }
 

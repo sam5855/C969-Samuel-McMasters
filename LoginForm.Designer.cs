@@ -35,6 +35,7 @@
             this.welcomeLabel = new System.Windows.Forms.Label();
             this.loginButton = new System.Windows.Forms.Button();
             this.exitButton = new System.Windows.Forms.Button();
+            this.timeLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // usernameTextBox
@@ -104,11 +105,21 @@
             this.exitButton.UseVisualStyleBackColor = false;
             this.exitButton.Click += new System.EventHandler(this.exitButton_Click);
             // 
+            // timeLabel
+            // 
+            this.timeLabel.AutoSize = true;
+            this.timeLabel.Location = new System.Drawing.Point(12, 322);
+            this.timeLabel.Name = "timeLabel";
+            this.timeLabel.Size = new System.Drawing.Size(67, 13);
+            this.timeLabel.TabIndex = 8;
+            this.timeLabel.Text = "Current Time";
+            // 
             // LoginForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(533, 352);
+            this.Controls.Add(this.timeLabel);
             this.Controls.Add(this.exitButton);
             this.Controls.Add(this.loginButton);
             this.Controls.Add(this.welcomeLabel);
@@ -135,5 +146,6 @@
         private System.Windows.Forms.Label welcomeLabel;
         private System.Windows.Forms.Button loginButton;
         private System.Windows.Forms.Button exitButton;
+        private System.Windows.Forms.Label timeLabel;
     }
 }
