@@ -21,7 +21,30 @@ namespace C969_Samuel_McMasters
         public MainForm()
         {
             InitializeComponent();
+
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             userLabel.Text = DataHelper.GetCurrentUserName();
+            
 
             //Populate customer DGV
             customerDGV.DataSource = Service.loadCustomerInfo();

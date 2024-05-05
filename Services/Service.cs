@@ -13,6 +13,8 @@ using System.Data.SqlTypes;
 using System.Linq.Expressions;
 using System.Globalization;
 using System.Windows.Forms;
+using Org.BouncyCastle.Asn1.X509;
+using System.Configuration;
 
 namespace C969_Samuel_McMasters.Services
 {
@@ -609,7 +611,44 @@ namespace C969_Samuel_McMasters.Services
 
         }
 
-        
+        //Alerts user if appointment is within 15 minutes of log-in time
+        public static void AlertUser(int userId)
+        {
+            DateTime currentTime = DateTime.UtcNow;
+            MySqlConnection c = new MySqlConnection(homeConnectionString);
+
+            try
+            {
+                c.Open();
+                MySqlCommand cmd = c.CreateCommand();
+                cmd.CommandText = $"SELECT COUNT(*) FROM appointment WHERE userId = @userId AND TIMESTAMPDIFF(MINUTE, start, @currentTime) <= 15 AND TIMESTAMPDIFF(MINUTE, start, @currentTime) >= 0";
+                cmd.Parameters.AddWithValue("@userId", userId);
+                cmd.Parameters.AddWithValue("@currentTime", currentTime.ToString("yyyyMMddHHmmss"));
+
+                int appointmentCount = Convert.ToInt32(cmd.ExecuteScalar());
+
+                if (appointmentCount > 0)
+                {
+                    MessageBox.Show("Upcoming appointment within 15 minutes!");
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Exception thrown when checking for overlapping appointments." + ex);
+            }
+            finally
+            {
+                c.Close();
+            }
+
+
+
+
+
+
+
+        }
     }
 
 }

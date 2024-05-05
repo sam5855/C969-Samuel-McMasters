@@ -62,11 +62,12 @@ namespace C969_Samuel_McMasters.DataModels
             AddCustomerForm.ShowDialog();
         }
 
+        //Checks if appointment time falls within business hours 
         public static bool CheckBusinessHours(DateTime startTime, DateTime endTime)
         {
             // Define business hours
             TimeSpan openingTime = new TimeSpan(9, 0, 0); // 9:00am
-            TimeSpan closingTime = new TimeSpan(17, 0, 0); // 5:00pm
+            TimeSpan closingTime = new TimeSpan(19, 0, 0); // 6:00pm
 
             // Extract time component from startTime and endTime
             TimeSpan startTimeOfDay = startTime.TimeOfDay;

@@ -37,10 +37,13 @@ namespace C969_Samuel_McMasters
 
             if (Service.FindUser(usernameTextBox.Text, passwordTextBox.Text) != 0)
             {
+                int userId = Service.FindUser(usernameTextBox.Text, passwordTextBox.Text);
                 DataHelper.UserLogFile($"USER {userName} has logged in at {timeStamp}.");
+                Service.AlertUser(userId);
                 MainForm MainForm = new MainForm();
                 MainForm.Show();
                 Hide();
+                
             }
             else
             {
@@ -99,6 +102,8 @@ namespace C969_Samuel_McMasters
             loginButton.Text = "Acceso";
             exitButton.Text = "Salida";
         }
+
+        
 
     }
 }
