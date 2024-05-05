@@ -36,11 +36,16 @@ namespace C969_Samuel_McMasters
                 Hide();
             }
             
-            else
+            else if (CultureInfo.CurrentCulture.TwoLetterISOLanguageName == "es")
             {
-                MessageBox.Show("Invalid User");
+                MessageBox.Show("Usuario invalido.");
+                
             }
-       
+            else if (CultureInfo.CurrentCulture.TwoLetterISOLanguageName == "en")
+            {
+                MessageBox.Show("Invalid User.");
+            }
+
         }
 
         private void LoginForm_Load(object sender, EventArgs e)
