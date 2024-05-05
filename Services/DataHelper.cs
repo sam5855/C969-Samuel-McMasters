@@ -96,25 +96,7 @@ namespace C969_Samuel_McMasters.DataModels
         //Creates log file, or appends to existing one
         public static void UserLogFile(string logText) 
         {
-            //Gets current directory
-            DirectoryInfo di = new DirectoryInfo("C:\\Users\\Sam\\Source\\Repos\\C969");
-
-            string logPath = di + "\\Login_History.txt";
-            if (!File.Exists(logPath))
-            {
-                var file = File.Create(logPath);
-                file.Close();
-                TextWriter writer = new StreamWriter(logPath);
-                writer.WriteLine(logText);
-                writer.Close();
-            }
-            else if (File.Exists(logPath))
-            {
-                using (var writer = new StreamWriter(logPath, true))
-                {
-                   writer.WriteLine(logText);   
-                }
-            }
+            using (StreamWriter writer = File.AppendText("..\\..\\Login_History.txt")) { writer.WriteLine(logText); }
 
         }
 
