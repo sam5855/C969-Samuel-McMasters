@@ -761,6 +761,46 @@ namespace C969_Samuel_McMasters.Services
 
         }
 
+        static public string GenerateReport3(string customerName)
+        {
+            int customerId = GetCustomerId(customerName);
+            MySqlConnection c = new MySqlConnection(homeConnectionString);
+         
+            int appointmentCount = 0;
+
+            try
+            {
+
+
+                c.Open();
+                MySqlCommand cmd = c.CreateCommand();
+                cmd.CommandText = "SELECT COUNT(*) FROM appointment WHERE customerId = @customerId";
+                cmd.Parameters.AddWithValue("@customerId", customerId);
+                
+
+                appointmentCount = Convert.ToInt32(cmd.ExecuteScalar());
+                Console.WriteLine($"Appoint Count: {appointmentCount}");
+
+                return appointmentCount.ToString();
+
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Exception thrown when getting current week appointments: " + ex);
+                return appointmentCount.ToString();
+            }
+
+            finally
+            {
+                c.Close();
+            }
+
+
+
+
+        }
+
     }
 
 }
