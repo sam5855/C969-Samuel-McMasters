@@ -45,6 +45,7 @@
             this.exitButton = new System.Windows.Forms.Button();
             this.loggedInLabel = new System.Windows.Forms.Label();
             this.userLabel = new System.Windows.Forms.Label();
+            this.reportsButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.customerDGV)).BeginInit();
             this.customerGroupBox.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -113,6 +114,7 @@
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.groupBox1.Controls.Add(this.reportsButton);
             this.groupBox1.Controls.Add(this.currentMonthRadioButton);
             this.groupBox1.Controls.Add(this.currentWeekRadioButton);
             this.groupBox1.Controls.Add(this.allAppointmentsRadioButton);
@@ -248,6 +250,18 @@
             this.userLabel.Size = new System.Drawing.Size(0, 13);
             this.userLabel.TabIndex = 8;
             // 
+            // reportsButton
+            // 
+            this.reportsButton.BackColor = System.Drawing.Color.Silver;
+            this.reportsButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.reportsButton.Location = new System.Drawing.Point(21, 175);
+            this.reportsButton.Name = "reportsButton";
+            this.reportsButton.Size = new System.Drawing.Size(92, 36);
+            this.reportsButton.TabIndex = 9;
+            this.reportsButton.Text = "View Reports";
+            this.reportsButton.UseVisualStyleBackColor = false;
+            this.reportsButton.Click += new System.EventHandler(this.reportsButton_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -291,6 +305,7 @@
         private System.Windows.Forms.RadioButton currentMonthRadioButton;
         private System.Windows.Forms.RadioButton currentWeekRadioButton;
         private System.Windows.Forms.DataGridView appointmentDGV;
+        private System.Windows.Forms.Button reportsButton;
     }
 }
 

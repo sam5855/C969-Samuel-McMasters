@@ -547,7 +547,7 @@ namespace C969_Samuel_McMasters.Services
         }
 
         //Checks for overalapping appointments
-        public static bool CheckOverlappingAppointments(DateTime startTime, DateTime endTime, int userId)
+        static public bool CheckOverlappingAppointments(DateTime startTime, DateTime endTime, int userId)
         {
 
             MySqlConnection c = new MySqlConnection(homeConnectionString);
@@ -591,7 +591,7 @@ namespace C969_Samuel_McMasters.Services
         }
 
         //Method to authenticate user login
-        public static int FindUser(string username, string password)
+        static public int FindUser(string username, string password)
         {
             MySqlConnection c = new MySqlConnection(Services.Service.homeConnectionString);
             c.Open();
@@ -612,7 +612,7 @@ namespace C969_Samuel_McMasters.Services
         }
 
         //Alerts user if appointment is within 15 minutes of log-in time
-        public static void AlertUser(int userId)
+        static public void AlertUser(int userId)
         {
             DateTime currentTime = DateTime.UtcNow;
             MySqlConnection c = new MySqlConnection(homeConnectionString);
@@ -642,13 +642,125 @@ namespace C969_Samuel_McMasters.Services
                 c.Close();
             }
 
+        }
+
+        //Sets Report Combo Box Data Source
+        static public List<string> GetAllUsers()
+        {
+            List<string> userList = new List<string>();
+            MySqlConnection c = new MySqlConnection(homeConnectionString);
+
+            try
+            {
+                c.Open();
+                MySqlCommand cmd = c.CreateCommand();
+                cmd.CommandText = "SELECT userName FROM user";
+
+                cmd.ExecuteNonQuery();
+
+                using (MySqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        userList.Add(reader["userName"].ToString());
+                        
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Exception thrown when getting current week appointments: " + ex);
+            }
+
+            finally
+            {
+                c.Close();
+            }
 
 
+            return userList;
+        }
+
+        //Sets Report Combo Box Data Source
+        static public List<string> GetAllCustomers()
+        {
+            List<string> customerList = new List<string>();
+            MySqlConnection c = new MySqlConnection(homeConnectionString);
+
+            try
+            {
+                c.Open();
+                MySqlCommand cmd = c.CreateCommand();
+                cmd.CommandText = "SELECT customerName FROM customer";
+
+                cmd.ExecuteNonQuery();
+
+                using (MySqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        customerList.Add(reader["customerName"].ToString());
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Exception thrown when getting current week appointments: " + ex);
+            }
+
+            finally
+            {
+                c.Close();
+            }
 
 
+            return customerList;
+        }
 
+        static public string GenerateReport1(DateTime month, string type)
+        {
+            List<int> appointmentList = new List<int>();
+            MySqlConnection c = new MySqlConnection(homeConnectionString);
+            DateTime currentDate = month;
+
+            DateTime startOfMonth = new DateTime(currentDate.Year, currentDate.Month, 1);
+
+            DateTime endOfMonth = startOfMonth.AddMonths(1).AddDays(-1);
+            int appointmentCount = 0;
+
+            try
+            {
+
+
+                c.Open();
+                MySqlCommand cmd = c.CreateCommand();
+                cmd.CommandText = "SELECT COUNT(*) FROM appointment WHERE type = @type AND start >= @start AND end <= @end";
+                cmd.Parameters.AddWithValue("@type", type);
+                cmd.Parameters.AddWithValue("@start", startOfMonth.ToUniversalTime().ToString("yyyyMMddHHmmss"));
+                cmd.Parameters.AddWithValue("@end", endOfMonth.ToUniversalTime().ToString("yyyyMMddHHmmss"));
+
+                appointmentCount = Convert.ToInt32(cmd.ExecuteScalar());
+                return appointmentCount.ToString();
+                
+               
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Exception thrown when getting current week appointments: " + ex);
+                return appointmentCount.ToString();
+            }
+
+            finally
+            {
+                c.Close();
+            }
+
+
+            
 
         }
+
     }
 
 }

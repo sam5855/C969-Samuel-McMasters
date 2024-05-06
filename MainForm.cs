@@ -22,27 +22,6 @@ namespace C969_Samuel_McMasters
         {
             InitializeComponent();
 
-            
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             userLabel.Text = DataHelper.GetCurrentUserName();
             
 
@@ -172,6 +151,13 @@ namespace C969_Samuel_McMasters
         private void customerGroupBox_Enter(object sender, EventArgs e)
         {
 
+        }
+
+        private void reportsButton_Click(object sender, EventArgs e)
+        {
+            ReportsForm reportsForm = new ReportsForm();
+            this.Close();
+            reportsForm.ShowDialog();
         }
     }
 }

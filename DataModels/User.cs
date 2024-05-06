@@ -8,5 +8,6 @@ namespace C969_Samuel_McMasters.DataModels
 {
     public class User
     {
+        public string UserName { get; set; }
     }
 }

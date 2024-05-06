@@ -106,7 +106,7 @@ namespace C969_Samuel_McMasters
                     apt.Description = "Not Needed";
                     apt.Location = "Not Needed";
                     apt.Contact = "Not Needed";
-                    apt.Type = aptTypeTextBox.Text;
+                    apt.Type = aptTypeComboBox.Text;
                     apt.Url = "Not Needed";
                     apt.StartDate = startDatePicker.Value.ToLocalTime();
                     apt.EndDate = endDatePicker.Value.ToLocalTime();

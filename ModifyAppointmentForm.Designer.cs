@@ -36,13 +36,13 @@
             this.exitButton = new System.Windows.Forms.Button();
             this.endDatePicker = new System.Windows.Forms.DateTimePicker();
             this.startDatePicker = new System.Windows.Forms.DateTimePicker();
-            this.aptTypeTextBox = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.aptIdTextBox = new System.Windows.Forms.TextBox();
+            this.aptTypeComboBox = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.customerDGV)).BeginInit();
             this.SuspendLayout();
             // 
@@ -111,22 +111,15 @@
             // 
             this.endDatePicker.Location = new System.Drawing.Point(122, 164);
             this.endDatePicker.Name = "endDatePicker";
-            this.endDatePicker.Size = new System.Drawing.Size(205, 20);
+            this.endDatePicker.Size = new System.Drawing.Size(196, 20);
             this.endDatePicker.TabIndex = 24;
             // 
             // startDatePicker
             // 
             this.startDatePicker.Location = new System.Drawing.Point(122, 125);
             this.startDatePicker.Name = "startDatePicker";
-            this.startDatePicker.Size = new System.Drawing.Size(205, 20);
+            this.startDatePicker.Size = new System.Drawing.Size(196, 20);
             this.startDatePicker.TabIndex = 23;
-            // 
-            // aptTypeTextBox
-            // 
-            this.aptTypeTextBox.Location = new System.Drawing.Point(122, 204);
-            this.aptTypeTextBox.Name = "aptTypeTextBox";
-            this.aptTypeTextBox.Size = new System.Drawing.Size(121, 20);
-            this.aptTypeTextBox.TabIndex = 22;
             // 
             // label4
             // 
@@ -181,11 +174,24 @@
             this.aptIdTextBox.Size = new System.Drawing.Size(121, 20);
             this.aptIdTextBox.TabIndex = 32;
             // 
+            // aptTypeComboBox
+            // 
+            this.aptTypeComboBox.FormattingEnabled = true;
+            this.aptTypeComboBox.Items.AddRange(new object[] {
+            "Presentation",
+            "Scrum",
+            "Review"});
+            this.aptTypeComboBox.Location = new System.Drawing.Point(122, 204);
+            this.aptTypeComboBox.Name = "aptTypeComboBox";
+            this.aptTypeComboBox.Size = new System.Drawing.Size(121, 21);
+            this.aptTypeComboBox.TabIndex = 33;
+            // 
             // ModifyAppointmentForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(458, 470);
+            this.Controls.Add(this.aptTypeComboBox);
             this.Controls.Add(this.aptIdTextBox);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.button1);
@@ -196,7 +202,6 @@
             this.Controls.Add(this.exitButton);
             this.Controls.Add(this.endDatePicker);
             this.Controls.Add(this.startDatePicker);
-            this.Controls.Add(this.aptTypeTextBox);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -221,12 +226,12 @@
         private System.Windows.Forms.Button exitButton;
         private System.Windows.Forms.DateTimePicker endDatePicker;
         private System.Windows.Forms.DateTimePicker startDatePicker;
-        private System.Windows.Forms.TextBox aptTypeTextBox;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox aptIdTextBox;
+        private System.Windows.Forms.ComboBox aptTypeComboBox;
     }
 }

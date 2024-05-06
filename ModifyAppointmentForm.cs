@@ -61,7 +61,7 @@ namespace C969_Samuel_McMasters
             appointmentDict = Service.GetAppointmentDetails(selectedAppointment);
             aptIdTextBox.Text = appointmentDict["appointmentId"];
             userIdTextBox.Text = appointmentDict["userId"];
-            aptTypeTextBox.Text = appointmentDict["type"];
+            aptTypeComboBox.Text = appointmentDict["type"];
 
             DateTime startDate = Convert.ToDateTime(appointmentDict["startDate"]);
             startDatePicker.Value = startDate.ToLocalTime();
@@ -108,7 +108,7 @@ namespace C969_Samuel_McMasters
                     updatedForm.Add("userId", userIdTextBox.Text);
                     updatedForm.Add("startDate", startDatePicker.Value.ToUniversalTime().ToString("yyyyMMddHHmmss"));
                     updatedForm.Add("endDate", endDatePicker.Value.ToUniversalTime().ToString("yyyyMMddHHmmss"));
-                    updatedForm.Add("type", aptTypeTextBox.Text);
+                    updatedForm.Add("type", aptTypeComboBox.Text);
                     updatedForm.Add("customerId", Convert.ToString(customerDGV.CurrentRow.Cells[0].Value));
                     if (Service.updateAppointment(updatedForm))
                     {

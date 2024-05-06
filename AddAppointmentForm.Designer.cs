@@ -32,7 +32,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.aptTypeTextBox = new System.Windows.Forms.TextBox();
             this.startDatePicker = new System.Windows.Forms.DateTimePicker();
             this.endDatePicker = new System.Windows.Forms.DateTimePicker();
             this.mySqlCommand1 = new MySql.Data.MySqlClient.MySqlCommand();
@@ -42,6 +41,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.userIdTextBox = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
+            this.aptTypeComboBox = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.customerDGV)).BeginInit();
             this.SuspendLayout();
             // 
@@ -81,25 +81,18 @@
             this.label4.TabIndex = 3;
             this.label4.Text = "End Time";
             // 
-            // aptTypeTextBox
-            // 
-            this.aptTypeTextBox.Location = new System.Drawing.Point(122, 158);
-            this.aptTypeTextBox.Name = "aptTypeTextBox";
-            this.aptTypeTextBox.Size = new System.Drawing.Size(121, 20);
-            this.aptTypeTextBox.TabIndex = 4;
-            // 
             // startDatePicker
             // 
             this.startDatePicker.Location = new System.Drawing.Point(122, 79);
             this.startDatePicker.Name = "startDatePicker";
-            this.startDatePicker.Size = new System.Drawing.Size(173, 20);
+            this.startDatePicker.Size = new System.Drawing.Size(196, 20);
             this.startDatePicker.TabIndex = 6;
             // 
             // endDatePicker
             // 
             this.endDatePicker.Location = new System.Drawing.Point(122, 118);
             this.endDatePicker.Name = "endDatePicker";
-            this.endDatePicker.Size = new System.Drawing.Size(173, 20);
+            this.endDatePicker.Size = new System.Drawing.Size(196, 20);
             this.endDatePicker.TabIndex = 7;
             // 
             // mySqlCommand1
@@ -170,11 +163,24 @@
             this.button1.Text = "Clear Inputs";
             this.button1.UseVisualStyleBackColor = false;
             // 
+            // aptTypeComboBox
+            // 
+            this.aptTypeComboBox.FormattingEnabled = true;
+            this.aptTypeComboBox.Items.AddRange(new object[] {
+            "Presentation",
+            "Scrum",
+            "Review"});
+            this.aptTypeComboBox.Location = new System.Drawing.Point(122, 158);
+            this.aptTypeComboBox.Name = "aptTypeComboBox";
+            this.aptTypeComboBox.Size = new System.Drawing.Size(121, 21);
+            this.aptTypeComboBox.TabIndex = 18;
+            // 
             // AddAppointmentForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(458, 424);
+            this.Controls.Add(this.aptTypeComboBox);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.userIdTextBox);
             this.Controls.Add(this.label5);
@@ -183,7 +189,6 @@
             this.Controls.Add(this.exitButton);
             this.Controls.Add(this.endDatePicker);
             this.Controls.Add(this.startDatePicker);
-            this.Controls.Add(this.aptTypeTextBox);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -204,7 +209,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox aptTypeTextBox;
         private System.Windows.Forms.DateTimePicker startDatePicker;
         private System.Windows.Forms.DateTimePicker endDatePicker;
         private MySql.Data.MySqlClient.MySqlCommand mySqlCommand1;
@@ -214,5 +218,6 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox userIdTextBox;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.ComboBox aptTypeComboBox;
     }
 }
