@@ -28,7 +28,7 @@ namespace C969_Samuel_McMasters.Services
 
 
 
-
+        //Returns number of records in table
         public static int CreateRecordId(string table)
         {
             MySqlConnection c = new MySqlConnection(homeConnectionString);
@@ -45,7 +45,7 @@ namespace C969_Samuel_McMasters.Services
             return DataHelper.NewID(idList);
         }
 
-
+        //Writes new records to database
         public static int CreateRecord(string timeStamp, string userName, string table, string partOfQuery, int userId = 0)
         {
             int recordId = CreateRecordId(table);
@@ -71,8 +71,7 @@ namespace C969_Samuel_McMasters.Services
             return recordId;
         }
 
-
-        //Get Customer Information
+        //Gets customer information
         static public Dictionary<string, string> GetCustomerDetails(int customerId)
         {
             string query = $"SELECT * FROM customer WHERE customerId = '{customerId.ToString()}'";
@@ -126,7 +125,8 @@ namespace C969_Samuel_McMasters.Services
             return customerDict;
         }
 
-        static public List<Customer> loadCustomerInfo()
+        //Gets customer information for MainForm DGV
+        static public List<Customer> LoadCustomerInfo()
         {
             List<Customer> customerList = new List<Customer>();
             MySqlConnection c = new MySqlConnection(Service.homeConnectionString);
@@ -173,7 +173,7 @@ namespace C969_Samuel_McMasters.Services
             return customerList;
         }
 
-        //Get CustomerId 
+        //Gets customerId 
         static public int GetCustomerId(string search)
         {
             int customerId;
@@ -206,7 +206,7 @@ namespace C969_Samuel_McMasters.Services
         }
 
         //Update customer information
-        static public bool updateCustomer(Dictionary<string, string> updatedCustomer)
+        static public bool UpdateCustomer(Dictionary<string, string> updatedCustomer)
         {
             MySqlConnection c = new MySqlConnection(homeConnectionString);
             c.Open();
@@ -255,47 +255,6 @@ namespace C969_Samuel_McMasters.Services
 
         }
 
-        public int AddAppointment(Appointment apt)
-        {
-            MySqlConnection c = new MySqlConnection(homeConnectionString);
-
-            int aptId = -1;
-
-            try
-            {
-                c.Open();
-                MySqlCommand cmd = c.CreateCommand();
-                cmd.CommandText = "INSERT INTO appointment(customerId, userId, title, description, location, contact, type, url, start, end) VALUES(@customerId, @userId, @title, @description, @location, @contact, @type, @url, @start, @end);" +
-                    "SELECT appointmentId FROM appointment ORDER BY appointmentId DESC LIMIT 1";
-                //cmd.CommandText = "INSERT INTO appointment(customerId, userId, title, description, location, contact, type, url, start, end) VALUES(@customerId, @userId, @title, @description, @location, @contact, @type, @url, @start, @end)";
-
-                cmd.Parameters.AddWithValue("@customerId", apt.CustomerId);
-                cmd.Parameters.AddWithValue("@userId", apt.UserId);
-                cmd.Parameters.AddWithValue("@title", apt.Title);
-                cmd.Parameters.AddWithValue("@description", apt.Description);
-                cmd.Parameters.AddWithValue("@location", apt.Location);
-                cmd.Parameters.AddWithValue("@contact", apt.Contact);
-                cmd.Parameters.AddWithValue("@type", apt.Type);
-                cmd.Parameters.AddWithValue("@url", apt.Url);
-                cmd.Parameters.AddWithValue("@start", apt.StartDate);
-                cmd.Parameters.AddWithValue("@end", apt.EndDate);
-                aptId = (int)cmd.ExecuteScalar();
-            }
-            //catches errors in case the above code fails
-            catch (Exception ex)
-            {
-                Console.WriteLine("Exception thrown when adding appointment: " + ex);
-            }
-            //Close connection regardless of whether the try block executes or not.
-            finally
-            {
-                c.Close();
-            }
-
-            return aptId;
-
-        }
-
         //Deletes appointments
         static public bool DeleteAppointment(int appointmentId)
         {
@@ -320,7 +279,6 @@ namespace C969_Samuel_McMasters.Services
 
 
         }
-
 
         //Get Appointment Information
         static public Dictionary<string, string> GetAppointmentDetails(int appointmentId)
@@ -348,9 +306,8 @@ namespace C969_Samuel_McMasters.Services
             return appointmentDict;
         }
 
-
         //Update appointment information
-        static public bool updateAppointment(Dictionary<string, string> updatedAppointment)
+        static public bool UpdateAppointment(Dictionary<string, string> updatedAppointment)
         {
             MySqlConnection c = new MySqlConnection(homeConnectionString);
             c.Open();
@@ -455,19 +412,7 @@ namespace C969_Samuel_McMasters.Services
 
                 using (MySqlDataReader reader = cmd.ExecuteReader())
                 {
-                    //while (reader.Read())
-                    //{
-
-                    //    appointmentList.Add(new Appointment()
-                    //    {
-                    //        StartDate = Convert.ToDateTime(reader["start"]),
-                    //        EndDate = Convert.ToDateTime(reader["end"]),
-                    //        Type = reader["type"].ToString(),
-                    //        AppointmentId = Convert.ToInt32(reader["appointmentId"]),
-                    //        CustomerId = Convert.ToInt32(reader["customerId"]),
-                    //        UserId = userId
-                    //    }); ;
-                    //}
+                    
                     while (reader.Read())
                     {
                         DateTime startDate = Convert.ToDateTime(reader["start"]);
@@ -601,11 +546,11 @@ namespace C969_Samuel_McMasters.Services
             if (rdr.HasRows)
             {
                 rdr.Read();
-                DataHelper.setCurrentUserId(Convert.ToInt32(rdr[0]));
-                DataHelper.setCurrentUserName(username);
+                DataHelper.SetCurrentUserId(Convert.ToInt32(rdr[0]));
+                DataHelper.SetCurrentUserName(username);
                 rdr.Close();
                 c.Close();
-                return DataHelper.getCurrentUserId();
+                return DataHelper.GetCurrentUserId();
             }
             return 0;
 
@@ -717,7 +662,8 @@ namespace C969_Samuel_McMasters.Services
 
             return customerList;
         }
-
+        
+        //Generates first report
         static public string GenerateReport1(DateTime month, string type)
         {
             List<int> appointmentList = new List<int>();
@@ -761,6 +707,7 @@ namespace C969_Samuel_McMasters.Services
 
         }
 
+        //Generates third report
         static public string GenerateReport3(string customerName)
         {
             int customerId = GetCustomerId(customerName);

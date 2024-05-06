@@ -30,7 +30,6 @@
         {
             this.exitButton = new System.Windows.Forms.Button();
             this.saveButton = new System.Windows.Forms.Button();
-            this.clearButton = new System.Windows.Forms.Button();
             this.customerPhoneNumberTextBox = new System.Windows.Forms.TextBox();
             this.customerCountryTextBox = new System.Windows.Forms.TextBox();
             this.customerCityTextBox = new System.Windows.Forms.TextBox();
@@ -43,6 +42,8 @@
             this.nameLabel = new System.Windows.Forms.Label();
             this.customerPostalCodeTextBox = new System.Windows.Forms.TextBox();
             this.zipLabel = new System.Windows.Forms.Label();
+            this.activeCheckBox = new System.Windows.Forms.CheckBox();
+            this.maskedTextBox1 = new System.Windows.Forms.MaskedTextBox();
             this.SuspendLayout();
             // 
             // exitButton
@@ -61,23 +62,13 @@
             // 
             this.saveButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.saveButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.saveButton.Location = new System.Drawing.Point(176, 268);
+            this.saveButton.Location = new System.Drawing.Point(264, 296);
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(75, 30);
             this.saveButton.TabIndex = 24;
             this.saveButton.Text = "Save";
             this.saveButton.UseVisualStyleBackColor = false;
             this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
-            // 
-            // clearButton
-            // 
-            this.clearButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.clearButton.Location = new System.Drawing.Point(264, 268);
-            this.clearButton.Name = "clearButton";
-            this.clearButton.Size = new System.Drawing.Size(75, 30);
-            this.clearButton.TabIndex = 23;
-            this.clearButton.Text = "Clear";
-            this.clearButton.UseVisualStyleBackColor = true;
             // 
             // customerPhoneNumberTextBox
             // 
@@ -181,16 +172,34 @@
             this.zipLabel.TabIndex = 27;
             this.zipLabel.Text = "Zip";
             // 
+            // activeCheckBox
+            // 
+            this.activeCheckBox.AutoSize = true;
+            this.activeCheckBox.Location = new System.Drawing.Point(176, 269);
+            this.activeCheckBox.Name = "activeCheckBox";
+            this.activeCheckBox.Size = new System.Drawing.Size(62, 17);
+            this.activeCheckBox.TabIndex = 28;
+            this.activeCheckBox.Text = "Active?";
+            this.activeCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // maskedTextBox1
+            // 
+            this.maskedTextBox1.Location = new System.Drawing.Point(176, 336);
+            this.maskedTextBox1.Name = "maskedTextBox1";
+            this.maskedTextBox1.Size = new System.Drawing.Size(100, 20);
+            this.maskedTextBox1.TabIndex = 29;
+            // 
             // AddCustomerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(467, 449);
+            this.Controls.Add(this.maskedTextBox1);
+            this.Controls.Add(this.activeCheckBox);
             this.Controls.Add(this.zipLabel);
             this.Controls.Add(this.customerPostalCodeTextBox);
             this.Controls.Add(this.exitButton);
             this.Controls.Add(this.saveButton);
-            this.Controls.Add(this.clearButton);
             this.Controls.Add(this.customerPhoneNumberTextBox);
             this.Controls.Add(this.customerCountryTextBox);
             this.Controls.Add(this.customerCityTextBox);
@@ -214,7 +223,6 @@
 
         private System.Windows.Forms.Button exitButton;
         private System.Windows.Forms.Button saveButton;
-        private System.Windows.Forms.Button clearButton;
         private System.Windows.Forms.TextBox customerPhoneNumberTextBox;
         private System.Windows.Forms.TextBox customerCountryTextBox;
         private System.Windows.Forms.TextBox customerCityTextBox;
@@ -227,5 +235,7 @@
         private System.Windows.Forms.Label nameLabel;
         private System.Windows.Forms.TextBox customerPostalCodeTextBox;
         private System.Windows.Forms.Label zipLabel;
+        private System.Windows.Forms.CheckBox activeCheckBox;
+        private System.Windows.Forms.MaskedTextBox maskedTextBox1;
     }
 }

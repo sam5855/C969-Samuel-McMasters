@@ -49,7 +49,7 @@ namespace C969_Samuel_McMasters
 
         private void generateReport2Button_Click(object sender, EventArgs e)
         {
-            int currentUserId = DataHelper.getCurrentUserId();
+            int currentUserId = DataHelper.GetCurrentUserId();
             List<Appointment> allAppointments = Service.GetAllAppointments(currentUserId);
             reportTwoDGV.DataSource = allAppointments;
         }

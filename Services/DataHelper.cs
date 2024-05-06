@@ -17,14 +17,11 @@ namespace C969_Samuel_McMasters.DataModels
         public static int _currentUserId;
         public static string _currentUserName;
 
-        
-
-
-        public static int getCurrentUserId()
+        public static int GetCurrentUserId()
         {
             return _currentUserId;
         }
-        public static void setCurrentUserId(int currentUserID)
+        public static void SetCurrentUserId(int currentUserID)
         {
             _currentUserId = currentUserID; 
         }
@@ -34,7 +31,7 @@ namespace C969_Samuel_McMasters.DataModels
             return _currentUserName;
         }
 
-        public static void setCurrentUserName(string currentUserName)
+        public static void SetCurrentUserName(string currentUserName)
         {
             _currentUserName = currentUserName;
         }
@@ -87,8 +84,7 @@ namespace C969_Samuel_McMasters.DataModels
                 return false;
             }
         }
-
-        public static string getCurrentTime()
+        public static string GetCurrentTime()
         {
             DateTime currentTime = DateTime.Now;
             return currentTime.ToString();

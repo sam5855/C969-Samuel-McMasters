@@ -94,36 +94,44 @@ namespace C969_Samuel_McMasters
             int userId = Convert.ToInt32(userIdTextBox.Text);
             Dictionary<string, string> updatedForm = new Dictionary<string, string>();
 
-            if (DataHelper.CheckBusinessHours(startDate, endDate))
+            if (String.IsNullOrEmpty(aptTypeComboBox.Text))
             {
-                if (Service.CheckOverlappingAppointments(startDate, endDate, userId))
-                {
-                    MessageBox.Show("Appointment overlap error.");
-                }
-                else
-                {
-
-
-                    updatedForm.Add("appointmentId", aptIdTextBox.Text);
-                    updatedForm.Add("userId", userIdTextBox.Text);
-                    updatedForm.Add("startDate", startDatePicker.Value.ToUniversalTime().ToString("yyyyMMddHHmmss"));
-                    updatedForm.Add("endDate", endDatePicker.Value.ToUniversalTime().ToString("yyyyMMddHHmmss"));
-                    updatedForm.Add("type", aptTypeComboBox.Text);
-                    updatedForm.Add("customerId", Convert.ToString(customerDGV.CurrentRow.Cells[0].Value));
-                    if (Service.updateAppointment(updatedForm))
-                    {
-                        MessageBox.Show("Update Complete!");
-                        Close();
-                        MainForm MainForm = new MainForm();
-                        MainForm.Show();
-                    }
-                }
+                MessageBox.Show("Please enter all fields.");
             }
             else
             {
-                MessageBox.Show("Appointment must start and end between 9:00am and 5:00pm.");
-            }
 
+
+                if (DataHelper.CheckBusinessHours(startDate, endDate))
+                {
+                    if (Service.CheckOverlappingAppointments(startDate, endDate, userId))
+                    {
+                        MessageBox.Show("Appointment overlap error.");
+                    }
+                    else
+                    {
+
+
+                        updatedForm.Add("appointmentId", aptIdTextBox.Text);
+                        updatedForm.Add("userId", userIdTextBox.Text);
+                        updatedForm.Add("startDate", startDatePicker.Value.ToUniversalTime().ToString("yyyyMMddHHmmss"));
+                        updatedForm.Add("endDate", endDatePicker.Value.ToUniversalTime().ToString("yyyyMMddHHmmss"));
+                        updatedForm.Add("type", aptTypeComboBox.Text);
+                        updatedForm.Add("customerId", Convert.ToString(customerDGV.CurrentRow.Cells[0].Value));
+                        if (Service.UpdateAppointment(updatedForm))
+                        {
+                            MessageBox.Show("Update Complete!");
+                            Close();
+                            MainForm MainForm = new MainForm();
+                            MainForm.Show();
+                        }
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Appointment must start and end between 9:00am and 5:00pm.");
+                }
+            }
         }
     }
 }

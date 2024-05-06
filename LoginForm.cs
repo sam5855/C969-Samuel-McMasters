@@ -21,7 +21,7 @@ namespace C969_Samuel_McMasters
             InitializeComponent();
             ShowLang();
 
-            timeLabel.Text = DataHelper.getCurrentTime();
+            timeLabel.Text = DataHelper.GetCurrentTime();
         }
 
         private void exitButton_Click(object sender, EventArgs e)
@@ -50,11 +50,11 @@ namespace C969_Samuel_McMasters
                 DataHelper.UserLogFile($"Failed log-in attempt with USER {userName} at {timeStamp}");
                 if (CultureInfo.CurrentCulture.TwoLetterISOLanguageName == "es")
                 {
-                    MessageBox.Show("Usuario invalido.");
+                    MessageBox.Show("Nombre de usuario y contraseña no coinciden.");
                 }
                 else
                 {
-                    MessageBox.Show("Invalid User.");
+                    MessageBox.Show("Username and Password do not match.");
                 }
             }
             

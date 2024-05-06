@@ -26,7 +26,7 @@ namespace C969_Samuel_McMasters
             
 
             //Populate customer DGV
-            customerDGV.DataSource = Service.loadCustomerInfo();
+            customerDGV.DataSource = Service.LoadCustomerInfo();
 
             //Populate appointment DGV
             allAppointmentsRadioButton.Checked = true;
@@ -91,7 +91,7 @@ namespace C969_Samuel_McMasters
         {
             int selectedCustomer = Convert.ToInt32(customerDGV.CurrentRow.Cells[0].Value);
             Service.DeleteCustomer(selectedCustomer);
-            customerDGV.DataSource = Service.loadCustomerInfo();
+            customerDGV.DataSource = Service.LoadCustomerInfo();
         }
 
         private void createAppointmentButton_Click(object sender, EventArgs e)
@@ -106,7 +106,7 @@ namespace C969_Samuel_McMasters
             int selectedAppointment = Convert.ToInt32(appointmentDGV.CurrentRow.Cells[0].Value);
             Service.DeleteAppointment(selectedAppointment);
 
-            int currentUserId = DataHelper.getCurrentUserId();
+            int currentUserId = DataHelper.GetCurrentUserId();
             List<Appointment> allAppointments = Service.GetAllAppointments(currentUserId);
             appointmentDGV.DataSource = allAppointments;
         }
@@ -125,7 +125,7 @@ namespace C969_Samuel_McMasters
 
         private void FilterAppointments(Func<int, List<Appointment>> filterFunction)
         {
-            int currentUserId = DataHelper.getCurrentUserId();
+            int currentUserId = DataHelper.GetCurrentUserId();
             appointmentDGV.DataSource = filterFunction(currentUserId);
         }
 

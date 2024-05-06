@@ -20,7 +20,7 @@ namespace C969_Samuel_McMasters
         {
             InitializeComponent();
 
-            
+
             
             
             customerDict = Service.GetCustomerDetails(selectedCustomer);
@@ -31,6 +31,7 @@ namespace C969_Samuel_McMasters
             modCustomerCountryTextBox.Text = customerDict["country"];
             modCustomerPostalCodeTextBox.Text = customerDict["postalCode"];
             modCustomerPhoneNumberTextBox.Text = customerDict["phone"];
+            
 
         }
 
@@ -48,31 +49,39 @@ namespace C969_Samuel_McMasters
 
         private void saveButton_Click(object sender, EventArgs e)
         {
-           
 
-
-            Dictionary<string, string> updatedForm = new Dictionary<string, string>();
-            
-            updatedForm.Add("customerId", modCustomerIdTextBox.Text);
-            updatedForm.Add("customerName", modCustomerNameTextBox.Text);
-            updatedForm.Add("phone", modCustomerPhoneNumberTextBox.Text);
-            updatedForm.Add("address", modCustomerAddressTextBox.Text);
-            updatedForm.Add("city", modCustomerCityTextBox.Text);
-            updatedForm.Add("zip", modCustomerPostalCodeTextBox.Text);
-            updatedForm.Add("country", modCustomerCountryTextBox.Text);
-           
-            
-
-            if (Service.updateCustomer(updatedForm))
+            if (string.IsNullOrEmpty(modCustomerNameTextBox.Text) || string.IsNullOrEmpty(modCustomerAddressTextBox.Text) || string.IsNullOrEmpty(modCustomerCityTextBox.Text) || string.IsNullOrEmpty(modCustomerCountryTextBox.Text)
+                || string.IsNullOrEmpty(modCustomerPostalCodeTextBox.Text) || string.IsNullOrEmpty(modCustomerPhoneNumberTextBox.Text))
             {
-                MessageBox.Show("Update Complete!");
-                Close();
-                MainForm MainForm = new MainForm();
-                MainForm.Show();
+                MessageBox.Show("Please fill out all customer information");
             }
             else
             {
-                MessageBox.Show("Update Could not complete");
+
+
+                Dictionary<string, string> updatedForm = new Dictionary<string, string>();
+
+                updatedForm.Add("customerId", modCustomerIdTextBox.Text);
+                updatedForm.Add("customerName", modCustomerNameTextBox.Text);
+                updatedForm.Add("phone", modCustomerPhoneNumberTextBox.Text);
+                updatedForm.Add("address", modCustomerAddressTextBox.Text);
+                updatedForm.Add("city", modCustomerCityTextBox.Text);
+                updatedForm.Add("zip", modCustomerPostalCodeTextBox.Text);
+                updatedForm.Add("country", modCustomerCountryTextBox.Text);
+
+
+
+                if (Service.UpdateCustomer(updatedForm))
+                {
+                    MessageBox.Show("Update Complete!");
+                    Close();
+                    MainForm MainForm = new MainForm();
+                    MainForm.Show();
+                }
+                else
+                {
+                    MessageBox.Show("Update Could not complete");
+                }
             }
         }
     }
