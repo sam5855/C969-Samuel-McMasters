@@ -123,30 +123,26 @@ namespace C969_Samuel_McMasters
             ModifyAppointmentForm.ShowDialog();
         }
 
+        private void FilterAppointments(Func<int, List<Appointment>> filterFunction)
+        {
+            int currentUserId = DataHelper.getCurrentUserId();
+            appointmentDGV.DataSource = filterFunction(currentUserId);
+        }
 
         //Filter sets appointment DGV to all appointments
-        private void allAppointmentsRadioButton_CheckedChanged(object sender, EventArgs e)
-        {
-            int currentUserId = DataHelper.getCurrentUserId();
-            List<Appointment> allAppointments = Service.GetAllAppointments(currentUserId);
-            appointmentDGV.DataSource = allAppointments;
-        }
+        //Lambda expression reduced amount of code 
+        private void allAppointmentsRadioButton_CheckedChanged(object sender, EventArgs e) => FilterAppointments(Service.GetAllAppointments);
+
 
         //Filter sets appointment DGV to current week appointments
-        private void currentWeekRadioButton_CheckedChanged(object sender, EventArgs e)
-        {
-            int currentUserId = DataHelper.getCurrentUserId();
-            List<Appointment> currentWeekAppointments = Service.GetWeekAppointments(currentUserId);
-            appointmentDGV.DataSource = currentWeekAppointments;
-        }
+        //Lambda expression reduced amount of code
+        private void currentWeekRadioButton_CheckedChanged(object sender, EventArgs e) => FilterAppointments(Service.GetWeekAppointments);
+
 
         //Filter sets appointment DGV to current month appointments
-        private void currentMonthRadioButton_CheckedChanged(object sender, EventArgs e)
-        {
-            int currentUserId = DataHelper.getCurrentUserId();
-            List<Appointment> currentWeekAppointments = Service.GetMonthAppointments(currentUserId);
-            appointmentDGV.DataSource = currentWeekAppointments;
-        }
+        //Lambda expression made code more readable
+        private void currentMonthRadioButton_CheckedChanged(object sender, EventArgs e) => FilterAppointments(Service.GetMonthAppointments);
+        
 
         private void customerGroupBox_Enter(object sender, EventArgs e)
         {
