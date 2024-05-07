@@ -18,7 +18,7 @@ namespace C969_Samuel_McMasters
         public AddCustomerForm()
         {
             InitializeComponent();
-
+            maskedPhoneNumber.Mask = "000-000-0000";
 
         }
 
@@ -32,7 +32,7 @@ namespace C969_Samuel_McMasters
         private void saveButton_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(customerNameTextBox.Text) || string.IsNullOrEmpty(customerAddressTextBox.Text) || string.IsNullOrEmpty(customerCityTextBox.Text) || string.IsNullOrEmpty(customerCountryTextBox.Text)
-                || string.IsNullOrEmpty(customerPostalCodeTextBox.Text) || string.IsNullOrEmpty(customerPhoneNumberTextBox.Text))
+                || string.IsNullOrEmpty(customerPostalCodeTextBox.Text) || string.IsNullOrEmpty(maskedPhoneNumber.Text))
             {
                 MessageBox.Show("Please fill out all customer information");
             }
@@ -47,7 +47,7 @@ namespace C969_Samuel_McMasters
 
                 int countryId = Service.CreateRecord(timeStamp, userName, "country", $"'{customerCountryTextBox.Text}'");
                 int cityId = Service.CreateRecord(timeStamp, userName, "city", $"'{customerCityTextBox.Text}', '{countryId}'");
-                int addressId = Service.CreateRecord(timeStamp, userName, "address", $"'{customerAddressTextBox.Text}', '', '{cityId}', '{customerPostalCodeTextBox.Text}', '{customerPhoneNumberTextBox.Text}'");
+                int addressId = Service.CreateRecord(timeStamp, userName, "address", $"'{customerAddressTextBox.Text}', '', '{cityId}', '{customerPostalCodeTextBox.Text}', '{maskedPhoneNumber.Text}'");
                 Service.CreateRecord(timeStamp, userName, "customer", $"'{customerNameTextBox.Text}', '{addressId}', '{(activeCheckBox.Checked ? 1 : 0)}'");
                 //Service.CreateRecord(timeStamp, userName, "customer", $"'{customerNameTextBox.Text}', '{addressId}', '{activeYes}'");
 

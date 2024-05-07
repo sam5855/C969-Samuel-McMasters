@@ -209,47 +209,53 @@ namespace C969_Samuel_McMasters.Services
         static public bool UpdateCustomer(Dictionary<string, string> updatedCustomer)
         {
             MySqlConnection c = new MySqlConnection(homeConnectionString);
-            c.Open();
 
-            //Update Customer Table
-            string updateRecord = $"UPDATE customer" +
-                $" SET customerName = '{updatedCustomer["customerName"]}', lastUpdate = '{DataHelper.CreateTimeStamp()}', lastUpdateBy = '{DataHelper.GetCurrentUserName()}'" +
-                $" WHERE customerId = '{updatedCustomer["customerId"]}'";
-            MySqlCommand cmd = new MySqlCommand(updateRecord, c);
-            int customerUpdated = cmd.ExecuteNonQuery();
-
-            c.Close();
-
-            if (customerUpdated != 0)
+            try
             {
+                c.Open();
+
+                //Update Customer Table
+                string updateRecord = $"UPDATE customer" +
+                    $" SET customerName = '{updatedCustomer["customerName"]}', lastUpdate = '{DataHelper.CreateTimeStamp()}', lastUpdateBy = '{DataHelper.GetCurrentUserName()}'" +
+                    $" WHERE customerId = '{updatedCustomer["customerId"]}'";
+                MySqlCommand cmd = new MySqlCommand(updateRecord, c);
+                int customerUpdated = cmd.ExecuteNonQuery();
+                
                 return true;
             }
-            else
+            catch
             {
                 return false;
             }
-
+            finally
+            {
+                c.Close();
+            }
 
         }
 
         //Delete customer information 
         static public bool DeleteCustomer(int customerId)
         {
-
+            MySqlConnection c = new MySqlConnection(homeConnectionString);
             try
             {
-                MySqlConnection c = new MySqlConnection(homeConnectionString);
+                
                 c.Open();
                 MySqlCommand cmd = c.CreateCommand();
                 cmd.CommandText = $"DELETE FROM customer WHERE customerId = {customerId}";
                 cmd.ExecuteNonQuery();
                 return true;
             }
-            catch
+            catch (Exception ex)
             {
-                MessageBox.Show("Customer has associated appointment. Please delete all appointments before deleting customer");
+                MessageBox.Show("Customer has associated appointment. Please delete all appointments before deleting customer ");
+                Console.WriteLine("Exception thrown when deleting customer: " + ex);
                 return false;
-
+            }
+            finally
+            {
+                c.Close();
             }
 
 
@@ -259,24 +265,26 @@ namespace C969_Samuel_McMasters.Services
         static public bool DeleteAppointment(int appointmentId)
         {
             MySqlConnection c = new MySqlConnection(homeConnectionString);
-            c.Open();
 
-            MySqlCommand cmd = c.CreateCommand();
-            cmd.CommandText = $"DELETE FROM appointment WHERE appointmentId = {appointmentId}";
-            cmd.ExecuteNonQuery();
-
-            int appointmentUpdated = 1;
-
-            if (appointmentUpdated != 0)
+            try
             {
+                c.Open();
+
+                MySqlCommand cmd = c.CreateCommand();
+                cmd.CommandText = $"DELETE FROM appointment WHERE appointmentId = {appointmentId}";
+                cmd.ExecuteNonQuery();
                 return true;
             }
-            else
+            catch (Exception ex)
             {
+                MessageBox.Show("Could not delete appointment. Please check logs.");
+                Console.WriteLine("Excpetion thrown when deleting appointment: " + ex);
                 return false;
             }
-
-
+            finally
+            {
+                c.Close();
+            }
 
         }
 
@@ -310,24 +318,29 @@ namespace C969_Samuel_McMasters.Services
         static public bool UpdateAppointment(Dictionary<string, string> updatedAppointment)
         {
             MySqlConnection c = new MySqlConnection(homeConnectionString);
-            c.Open();
 
-            //Update appointment table
-            string updateRecord = $"UPDATE appointment" +
-                $" SET start = '{updatedAppointment["startDate"]}', end = '{updatedAppointment["endDate"]}', type = '{updatedAppointment["type"]}', customerId = '{updatedAppointment["customerId"]}', lastUpdate = '{DataHelper.CreateTimeStamp()}', lastUpdateBy = '{DataHelper.GetCurrentUserName()}'" +
-                $" WHERE appointmentId = '{updatedAppointment["appointmentId"]}'";
-            MySqlCommand cmd = new MySqlCommand(updateRecord, c);
-            int appointmentUpdated = cmd.ExecuteNonQuery();
-
-            c.Close();
-
-            if (appointmentUpdated != 0)
+            try
             {
+
+                c.Open();
+
+                //Update appointment table
+                string updateRecord = $"UPDATE appointment" +
+                    $" SET start = '{updatedAppointment["startDate"]}', end = '{updatedAppointment["endDate"]}', type = '{updatedAppointment["type"]}', customerId = '{updatedAppointment["customerId"]}', lastUpdate = '{DataHelper.CreateTimeStamp()}', lastUpdateBy = '{DataHelper.GetCurrentUserName()}'" +
+                    $" WHERE appointmentId = '{updatedAppointment["appointmentId"]}'";
+                MySqlCommand cmd = new MySqlCommand(updateRecord, c);
+                cmd.ExecuteNonQuery();
                 return true;
             }
-            else
+            catch (Exception ex)
             {
+                
+                Console.WriteLine("Exception thrown when getting updating appointment: " + ex);
                 return false;
+            }
+            finally
+            {
+                c.Close();
             }
 
 

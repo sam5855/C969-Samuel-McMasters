@@ -32,7 +32,6 @@
             this.modCustomerPostalCodeTextBox = new System.Windows.Forms.TextBox();
             this.exitButton = new System.Windows.Forms.Button();
             this.saveButton = new System.Windows.Forms.Button();
-            this.modCustomerPhoneNumberTextBox = new System.Windows.Forms.TextBox();
             this.modCustomerCountryTextBox = new System.Windows.Forms.TextBox();
             this.modCustomerCityTextBox = new System.Windows.Forms.TextBox();
             this.modCustomerAddressTextBox = new System.Windows.Forms.TextBox();
@@ -44,6 +43,7 @@
             this.nameLabel = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.modCustomerIdTextBox = new System.Windows.Forms.TextBox();
+            this.maskedPhoneNumber = new System.Windows.Forms.MaskedTextBox();
             this.SuspendLayout();
             // 
             // zipLabel
@@ -86,13 +86,6 @@
             this.saveButton.Text = "Save";
             this.saveButton.UseVisualStyleBackColor = false;
             this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
-            // 
-            // modCustomerPhoneNumberTextBox
-            // 
-            this.modCustomerPhoneNumberTextBox.Location = new System.Drawing.Point(173, 269);
-            this.modCustomerPhoneNumberTextBox.Name = "modCustomerPhoneNumberTextBox";
-            this.modCustomerPhoneNumberTextBox.Size = new System.Drawing.Size(163, 20);
-            this.modCustomerPhoneNumberTextBox.TabIndex = 37;
             // 
             // modCustomerCountryTextBox
             // 
@@ -190,18 +183,25 @@
             this.modCustomerIdTextBox.Size = new System.Drawing.Size(163, 20);
             this.modCustomerIdTextBox.TabIndex = 44;
             // 
+            // maskedPhoneNumber
+            // 
+            this.maskedPhoneNumber.Location = new System.Drawing.Point(173, 270);
+            this.maskedPhoneNumber.Name = "maskedPhoneNumber";
+            this.maskedPhoneNumber.Size = new System.Drawing.Size(163, 20);
+            this.maskedPhoneNumber.TabIndex = 45;
+            // 
             // ModifyCustomerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(467, 449);
+            this.Controls.Add(this.maskedPhoneNumber);
             this.Controls.Add(this.modCustomerIdTextBox);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.zipLabel);
             this.Controls.Add(this.modCustomerPostalCodeTextBox);
             this.Controls.Add(this.exitButton);
             this.Controls.Add(this.saveButton);
-            this.Controls.Add(this.modCustomerPhoneNumberTextBox);
             this.Controls.Add(this.modCustomerCountryTextBox);
             this.Controls.Add(this.modCustomerCityTextBox);
             this.Controls.Add(this.modCustomerAddressTextBox);
@@ -226,7 +226,6 @@
         private System.Windows.Forms.TextBox modCustomerPostalCodeTextBox;
         private System.Windows.Forms.Button exitButton;
         private System.Windows.Forms.Button saveButton;
-        private System.Windows.Forms.TextBox modCustomerPhoneNumberTextBox;
         private System.Windows.Forms.TextBox modCustomerCountryTextBox;
         private System.Windows.Forms.TextBox modCustomerCityTextBox;
         private System.Windows.Forms.TextBox modCustomerAddressTextBox;
@@ -238,5 +237,6 @@
         private System.Windows.Forms.Label nameLabel;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox modCustomerIdTextBox;
+        private System.Windows.Forms.MaskedTextBox maskedPhoneNumber;
     }
 }

@@ -64,7 +64,7 @@ namespace C969_Samuel_McMasters.DataModels
         {
             // Define business hours
             TimeSpan openingTime = new TimeSpan(9, 0, 0); // 9:00am
-            TimeSpan closingTime = new TimeSpan(19, 0, 0); // 6:00pm
+            TimeSpan closingTime = new TimeSpan(17, 0, 0); // 5:00pm
 
             // Extract time component from startTime and endTime
             TimeSpan startTimeOfDay = startTime.TimeOfDay;
@@ -84,6 +84,7 @@ namespace C969_Samuel_McMasters.DataModels
                 return false;
             }
         }
+
         public static string GetCurrentTime()
         {
             DateTime currentTime = DateTime.Now;

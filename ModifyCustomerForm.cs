@@ -19,10 +19,10 @@ namespace C969_Samuel_McMasters
         public ModifyCustomerForm(int selectedCustomer)
         {
             InitializeComponent();
+            maskedPhoneNumber.Mask = "000-000-0000";
 
 
-            
-            
+
             customerDict = Service.GetCustomerDetails(selectedCustomer);
             modCustomerIdTextBox.Text = customerDict["customerId"];
             modCustomerNameTextBox.Text = customerDict["customerName"];
@@ -30,7 +30,7 @@ namespace C969_Samuel_McMasters
             modCustomerCityTextBox.Text = customerDict["cityName"];
             modCustomerCountryTextBox.Text = customerDict["country"];
             modCustomerPostalCodeTextBox.Text = customerDict["postalCode"];
-            modCustomerPhoneNumberTextBox.Text = customerDict["phone"];
+            maskedPhoneNumber.Text = customerDict["phone"];
             
 
         }
@@ -51,7 +51,7 @@ namespace C969_Samuel_McMasters
         {
 
             if (string.IsNullOrEmpty(modCustomerNameTextBox.Text) || string.IsNullOrEmpty(modCustomerAddressTextBox.Text) || string.IsNullOrEmpty(modCustomerCityTextBox.Text) || string.IsNullOrEmpty(modCustomerCountryTextBox.Text)
-                || string.IsNullOrEmpty(modCustomerPostalCodeTextBox.Text) || string.IsNullOrEmpty(modCustomerPhoneNumberTextBox.Text))
+                || string.IsNullOrEmpty(modCustomerPostalCodeTextBox.Text) || string.IsNullOrEmpty(maskedPhoneNumber.Text))
             {
                 MessageBox.Show("Please fill out all customer information");
             }
@@ -63,7 +63,7 @@ namespace C969_Samuel_McMasters
 
                 updatedForm.Add("customerId", modCustomerIdTextBox.Text);
                 updatedForm.Add("customerName", modCustomerNameTextBox.Text);
-                updatedForm.Add("phone", modCustomerPhoneNumberTextBox.Text);
+                updatedForm.Add("phone", maskedPhoneNumber.Text);
                 updatedForm.Add("address", modCustomerAddressTextBox.Text);
                 updatedForm.Add("city", modCustomerCityTextBox.Text);
                 updatedForm.Add("zip", modCustomerPostalCodeTextBox.Text);
@@ -83,6 +83,11 @@ namespace C969_Samuel_McMasters
                     MessageBox.Show("Update Could not complete");
                 }
             }
+        }
+
+        private void modCustomerPhoneNumberTextBox_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
