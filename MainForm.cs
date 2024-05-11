@@ -36,6 +36,8 @@ namespace C969_Samuel_McMasters
             customerDGV.ReadOnly = true;
             customerDGV.MultiSelect = false;
             customerDGV.AllowUserToAddRows = false;
+            customerDGV.Columns[2].Visible = false;
+            customerDGV.Columns[4].Visible = false;
             appointmentDGV.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             appointmentDGV.ReadOnly = true;
             appointmentDGV.MultiSelect = false;
@@ -45,8 +47,7 @@ namespace C969_Samuel_McMasters
             appointmentDGV.Columns[5].Visible = false;
             appointmentDGV.Columns[6].Visible = false;
             appointmentDGV.Columns[8].Visible = false;
-            customerDGV.Columns[2].Visible = false;
-            customerDGV.Columns[4].Visible = false;
+            
            
 
 

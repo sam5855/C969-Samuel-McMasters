@@ -24,6 +24,15 @@ namespace C969_Samuel_McMasters
 
             userComboBox.DataSource = Service.GetAllUsers();
             customerComboBox.DataSource = Service.GetAllCustomers();
+
+            //DGV Formatting
+            reportTwoDGV.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            reportTwoDGV.ReadOnly = true;
+            reportTwoDGV.MultiSelect = false;
+            reportTwoDGV.AllowUserToAddRows = false;
+            
+
+
         }
 
         private void ReportsForm_Load(object sender, EventArgs e)
@@ -48,11 +57,19 @@ namespace C969_Samuel_McMasters
 
         private void generateReport1Button_Click(object sender, EventArgs e)
         {
-            DateTime month = monthDateTimePicker.Value;
-            string type = aptTypeComboBox.Text;
-            countLabel.Text = Service.GenerateReport1(month, type);
-            monthLabel.Text = month.Month.ToString();
-            typeLabel.Text = type;
+            if (string.IsNullOrEmpty(aptTypeComboBox.Text)) 
+            { 
+                MessageBox.Show("Please fill out all report fields"); 
+            }
+            else
+            {
+                DateTime month = monthDateTimePicker.Value;
+                string type = aptTypeComboBox.Text;
+                countLabel.Text = Service.GenerateReport1(month, type);
+                monthLabel.Text = month.Month.ToString();
+                typeLabel.Text = type;
+            }
+ 
         }
 
 
@@ -60,6 +77,13 @@ namespace C969_Samuel_McMasters
         {
             int userId = Service.GetUserId(userComboBox.Text);
             reportTwoDGV.DataSource = Service.GenerateReport2(userId);
+            reportTwoDGV.Columns[2].Visible = false;
+            reportTwoDGV.Columns[3].Visible = false;
+            reportTwoDGV.Columns[4].Visible = false;
+            reportTwoDGV.Columns[5].Visible = false;
+            reportTwoDGV.Columns[6].Visible = false;
+            reportTwoDGV.Columns[8].Visible = false;
+            
         }
 
 
