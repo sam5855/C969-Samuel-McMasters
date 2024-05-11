@@ -43,13 +43,13 @@ namespace C969_Samuel_McMasters
                 string timeStamp = DataHelper.CreateTimeStamp();
                 string userName = DataHelper.GetCurrentUserName();
 
-                //int activeYes = 1;
+                
 
                 int countryId = Service.CreateRecord(timeStamp, userName, "country", $"'{customerCountryTextBox.Text}'");
                 int cityId = Service.CreateRecord(timeStamp, userName, "city", $"'{customerCityTextBox.Text}', '{countryId}'");
                 int addressId = Service.CreateRecord(timeStamp, userName, "address", $"'{customerAddressTextBox.Text}', '', '{cityId}', '{customerPostalCodeTextBox.Text}', '{maskedPhoneNumber.Text}'");
                 Service.CreateRecord(timeStamp, userName, "customer", $"'{customerNameTextBox.Text}', '{addressId}', '{(activeCheckBox.Checked ? 1 : 0)}'");
-                //Service.CreateRecord(timeStamp, userName, "customer", $"'{customerNameTextBox.Text}', '{addressId}', '{activeYes}'");
+                
 
 
                 Close();
