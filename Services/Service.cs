@@ -382,16 +382,12 @@ namespace C969_Samuel_McMasters.Services
         }
 
         //Appointment DGV filter
-        static public List<Appointment> GetWeekAppointments(int userId)
+        static public List<Appointment> GetSpecificAppointments(DateTime startDate, int userId)
         {
             List<Appointment> appointmentList = new List<Appointment>();
             MySqlConnection c = new MySqlConnection(homeConnectionString);
 
-            DateTime currentDate = DateTime.Today;
-
-            DateTime startOfWeek = currentDate.AddDays(-(int)currentDate.DayOfWeek);
-
-            DateTime endOfWeek = startOfWeek.AddDays(6);
+            
 
             try
             {
@@ -399,19 +395,24 @@ namespace C969_Samuel_McMasters.Services
 
                 c.Open();
                 MySqlCommand cmd = c.CreateCommand();
-                cmd.CommandText = $"SELECT start, end, type, appointmentId, customerId FROM appointment WHERE userId = {userId} AND start >= {startOfWeek.ToUniversalTime().ToString("yyyyMMddHHmmss")} AND end <= {endOfWeek.ToUniversalTime().ToString("yyyyMMddHHmmss")}";
+                cmd.CommandText = $"SELECT start, end, type, appointmentId, customerId " +
+                    "FROM appointment " +
+                    "WHERE userId = @userId AND start >= @startDate AND start < @nextDay";
 
+                cmd.Parameters.AddWithValue("@userId", userId);
+                cmd.Parameters.AddWithValue("@startDate", startDate.ToString("yyyyMMdd")); // Use only date part
+                cmd.Parameters.AddWithValue("@nextDay", startDate.Date.AddDays(1)); // Next day
                 cmd.ExecuteNonQuery();
 
                 using (MySqlDataReader reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())
                     {
-                        DateTime startDate = Convert.ToDateTime(reader["start"]);
+                        DateTime aptStartDate = Convert.ToDateTime(reader["start"]);
                         DateTime endDate = Convert.ToDateTime(reader["end"]);
                         appointmentList.Add(new Appointment()
                         {
-                            StartDate = startDate.ToLocalTime(),
+                            StartDate = aptStartDate.ToLocalTime(),
                             EndDate = endDate.ToLocalTime(),
                             Type = reader["type"].ToString(),
                             AppointmentId = Convert.ToInt32(reader["appointmentId"]),
@@ -710,108 +711,13 @@ namespace C969_Samuel_McMasters.Services
 
             return customerList;
         }
-        
-        ////Generates first report
-        //static public string GenerateReport1(DateTime month, string type)
-        //{
-        //    List<int> appointmentList = new List<int>();
-        //    MySqlConnection c = new MySqlConnection(homeConnectionString);
-        //    DateTime currentDate = month;
-
-        //    DateTime startOfMonth = new DateTime(currentDate.Year, currentDate.Month, 1);
-
-        //    DateTime endOfMonth = startOfMonth.AddMonths(1).AddDays(-1);
-        //    int appointmentCount = 0;
-
-        //    try
-        //    {
-
-
-        //        c.Open();
-        //        MySqlCommand cmd = c.CreateCommand();
-        //        cmd.CommandText = "SELECT COUNT(*) FROM appointment WHERE type = @type AND start >= @start AND end <= @end";
-        //        cmd.Parameters.AddWithValue("@type", type);
-        //        cmd.Parameters.AddWithValue("@start", startOfMonth.ToUniversalTime().ToString("yyyyMMddHHmmss"));
-        //        cmd.Parameters.AddWithValue("@end", endOfMonth.ToUniversalTime().ToString("yyyyMMddHHmmss"));
-
-        //        appointmentCount = Convert.ToInt32(cmd.ExecuteScalar());
-        //        return appointmentCount.ToString();
-                
-               
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        Console.WriteLine("Exception thrown when getting current week appointments: " + ex);
-        //        return appointmentCount.ToString();
-        //    }
-
-        //    finally
-        //    {
-        //        c.Close();
-        //    }
-
-
-            
-
-        //}
-
-        //Generates second report
-        //static public string GenerateReport2(int userId)
-        //{
-        //    string x = "x";
-        //    return x;
-        //}
-
-        //Generates third report
-        //static public string GenerateReport3(string customerName)
-        //{
-        //    int customerId = GetCustomerId(customerName);
-        //    MySqlConnection c = new MySqlConnection(homeConnectionString);
-         
-        //    int appointmentCount = 0;
-
-        //    try
-        //    {
-
-
-        //        c.Open();
-        //        MySqlCommand cmd = c.CreateCommand();
-        //        cmd.CommandText = "SELECT COUNT(*) FROM appointment WHERE customerId = @customerId";
-        //        cmd.Parameters.AddWithValue("@customerId", customerId);
-                
-
-        //        appointmentCount = Convert.ToInt32(cmd.ExecuteScalar());
-        //        Console.WriteLine($"Appoint Count: {appointmentCount}");
-
-        //        return appointmentCount.ToString();
-
-
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        Console.WriteLine("Exception thrown when getting current week appointments: " + ex);
-        //        return appointmentCount.ToString();
-        //    }
-
-        //    finally
-        //    {
-        //        c.Close();
-        //    }
-        //}
-
-
-
-
-
+   
 
         //=====================================================================
         //Delegate and Lambda functionality below
         //=====================================================================
 
 
-
-
-       
 
         //This lambda expression encapsultaes the database query to count the number of appointment, providing a more concise and readable approach
         public static Func<MySqlCommand, int> countAppointments = (cmd) =>

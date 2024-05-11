@@ -34,8 +34,10 @@
             this.modifyCustomerButton = new System.Windows.Forms.Button();
             this.addCustomerButton = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.appointmentDateTimePicker = new System.Windows.Forms.DateTimePicker();
+            this.reportsButton = new System.Windows.Forms.Button();
             this.currentMonthRadioButton = new System.Windows.Forms.RadioButton();
-            this.currentWeekRadioButton = new System.Windows.Forms.RadioButton();
+            this.specificDateRadioButton = new System.Windows.Forms.RadioButton();
             this.allAppointmentsRadioButton = new System.Windows.Forms.RadioButton();
             this.calendarFilterLabel = new System.Windows.Forms.Label();
             this.deleteAppointmentButton = new System.Windows.Forms.Button();
@@ -45,7 +47,6 @@
             this.exitButton = new System.Windows.Forms.Button();
             this.loggedInLabel = new System.Windows.Forms.Label();
             this.userLabel = new System.Windows.Forms.Label();
-            this.reportsButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.customerDGV)).BeginInit();
             this.customerGroupBox.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -114,9 +115,10 @@
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.groupBox1.Controls.Add(this.appointmentDateTimePicker);
             this.groupBox1.Controls.Add(this.reportsButton);
             this.groupBox1.Controls.Add(this.currentMonthRadioButton);
-            this.groupBox1.Controls.Add(this.currentWeekRadioButton);
+            this.groupBox1.Controls.Add(this.specificDateRadioButton);
             this.groupBox1.Controls.Add(this.allAppointmentsRadioButton);
             this.groupBox1.Controls.Add(this.calendarFilterLabel);
             this.groupBox1.Controls.Add(this.deleteAppointmentButton);
@@ -125,15 +127,36 @@
             this.groupBox1.Controls.Add(this.appointmentDGV);
             this.groupBox1.Location = new System.Drawing.Point(12, 321);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(776, 237);
+            this.groupBox1.Size = new System.Drawing.Size(776, 277);
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Appointments";
             // 
+            // appointmentDateTimePicker
+            // 
+            this.appointmentDateTimePicker.Enabled = false;
+            this.appointmentDateTimePicker.Location = new System.Drawing.Point(6, 123);
+            this.appointmentDateTimePicker.Name = "appointmentDateTimePicker";
+            this.appointmentDateTimePicker.Size = new System.Drawing.Size(121, 20);
+            this.appointmentDateTimePicker.TabIndex = 10;
+            this.appointmentDateTimePicker.ValueChanged += new System.EventHandler(this.appointmentDateTimePicker_ValueChanged);
+            // 
+            // reportsButton
+            // 
+            this.reportsButton.BackColor = System.Drawing.Color.Silver;
+            this.reportsButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.reportsButton.Location = new System.Drawing.Point(139, 228);
+            this.reportsButton.Name = "reportsButton";
+            this.reportsButton.Size = new System.Drawing.Size(92, 36);
+            this.reportsButton.TabIndex = 9;
+            this.reportsButton.Text = "View Reports";
+            this.reportsButton.UseVisualStyleBackColor = false;
+            this.reportsButton.Click += new System.EventHandler(this.reportsButton_Click);
+            // 
             // currentMonthRadioButton
             // 
             this.currentMonthRadioButton.AutoSize = true;
-            this.currentMonthRadioButton.Location = new System.Drawing.Point(10, 100);
+            this.currentMonthRadioButton.Location = new System.Drawing.Point(10, 77);
             this.currentMonthRadioButton.Name = "currentMonthRadioButton";
             this.currentMonthRadioButton.Size = new System.Drawing.Size(92, 17);
             this.currentMonthRadioButton.TabIndex = 8;
@@ -142,17 +165,17 @@
             this.currentMonthRadioButton.UseVisualStyleBackColor = true;
             this.currentMonthRadioButton.CheckedChanged += new System.EventHandler(this.currentMonthRadioButton_CheckedChanged);
             // 
-            // currentWeekRadioButton
+            // specificDateRadioButton
             // 
-            this.currentWeekRadioButton.AutoSize = true;
-            this.currentWeekRadioButton.Location = new System.Drawing.Point(11, 77);
-            this.currentWeekRadioButton.Name = "currentWeekRadioButton";
-            this.currentWeekRadioButton.Size = new System.Drawing.Size(91, 17);
-            this.currentWeekRadioButton.TabIndex = 7;
-            this.currentWeekRadioButton.TabStop = true;
-            this.currentWeekRadioButton.Text = "Current Week";
-            this.currentWeekRadioButton.UseVisualStyleBackColor = true;
-            this.currentWeekRadioButton.CheckedChanged += new System.EventHandler(this.currentWeekRadioButton_CheckedChanged);
+            this.specificDateRadioButton.AutoSize = true;
+            this.specificDateRadioButton.Location = new System.Drawing.Point(10, 100);
+            this.specificDateRadioButton.Name = "specificDateRadioButton";
+            this.specificDateRadioButton.Size = new System.Drawing.Size(89, 17);
+            this.specificDateRadioButton.TabIndex = 7;
+            this.specificDateRadioButton.TabStop = true;
+            this.specificDateRadioButton.Text = "Specific Date";
+            this.specificDateRadioButton.UseVisualStyleBackColor = true;
+            this.specificDateRadioButton.CheckedChanged += new System.EventHandler(this.currentWeekRadioButton_CheckedChanged);
             // 
             // allAppointmentsRadioButton
             // 
@@ -250,24 +273,12 @@
             this.userLabel.Size = new System.Drawing.Size(0, 13);
             this.userLabel.TabIndex = 8;
             // 
-            // reportsButton
-            // 
-            this.reportsButton.BackColor = System.Drawing.Color.Silver;
-            this.reportsButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.reportsButton.Location = new System.Drawing.Point(21, 175);
-            this.reportsButton.Name = "reportsButton";
-            this.reportsButton.Size = new System.Drawing.Size(92, 36);
-            this.reportsButton.TabIndex = 9;
-            this.reportsButton.Text = "View Reports";
-            this.reportsButton.UseVisualStyleBackColor = false;
-            this.reportsButton.Click += new System.EventHandler(this.reportsButton_Click);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(800, 652);
+            this.ClientSize = new System.Drawing.Size(800, 656);
             this.Controls.Add(this.userLabel);
             this.Controls.Add(this.loggedInLabel);
             this.Controls.Add(this.exitButton);
@@ -303,9 +314,10 @@
         public System.Windows.Forms.DataGridView customerDGV;
         private System.Windows.Forms.RadioButton allAppointmentsRadioButton;
         private System.Windows.Forms.RadioButton currentMonthRadioButton;
-        private System.Windows.Forms.RadioButton currentWeekRadioButton;
+        private System.Windows.Forms.RadioButton specificDateRadioButton;
         private System.Windows.Forms.DataGridView appointmentDGV;
         private System.Windows.Forms.Button reportsButton;
+        private System.Windows.Forms.DateTimePicker appointmentDateTimePicker;
     }
 }
 

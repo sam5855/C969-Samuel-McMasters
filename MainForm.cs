@@ -129,20 +129,29 @@ namespace C969_Samuel_McMasters
             appointmentDGV.DataSource = filterFunction(currentUserId);
         }
 
-        //Filter sets appointment DGV to all appointments
-        //Lambda expression reduced amount of code 
-        private void allAppointmentsRadioButton_CheckedChanged(object sender, EventArgs e) => FilterAppointments(Service.GetAllAppointments);
+        //Filter sets appointment DGV to all appointments    
+        private void allAppointmentsRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            FilterAppointments(Service.GetAllAppointments);
+            appointmentDateTimePicker.Enabled = false;
+        }
+
+        //Filter sets appointment DGV to specific day appointments 
+        private void currentWeekRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            appointmentDateTimePicker.Enabled = true;
+            
+            
+        }
 
 
-        //Filter sets appointment DGV to current week appointments
-        //Lambda expression reduced amount of code
-        private void currentWeekRadioButton_CheckedChanged(object sender, EventArgs e) => FilterAppointments(Service.GetWeekAppointments);
 
-
-        //Filter sets appointment DGV to current month appointments
-        //Lambda expression made code more readable
-        private void currentMonthRadioButton_CheckedChanged(object sender, EventArgs e) => FilterAppointments(Service.GetMonthAppointments);
-        
+        //Filter sets appointment DGV to current month appointments      
+        private void currentMonthRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            FilterAppointments(Service.GetMonthAppointments);
+            appointmentDateTimePicker.Enabled = false;
+        }
 
         private void customerGroupBox_Enter(object sender, EventArgs e)
         {
@@ -154,6 +163,14 @@ namespace C969_Samuel_McMasters
             ReportsForm reportsForm = new ReportsForm();
             this.Close();
             reportsForm.ShowDialog();
+        }
+
+        private void appointmentDateTimePicker_ValueChanged(object sender, EventArgs e)
+        {
+            DateTime selectedDate = appointmentDateTimePicker.Value;
+            DateTime startDate = selectedDate.Date;
+            int currentUserId = DataHelper.GetCurrentUserId();
+            appointmentDGV.DataSource = Service.GetSpecificAppointments(startDate, currentUserId);
         }
     }
 }
