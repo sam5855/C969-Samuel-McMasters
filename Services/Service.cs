@@ -313,7 +313,7 @@ namespace C969_Samuel_McMasters.Services
             catch (Exception ex)
             {
                 MessageBox.Show("Could not delete appointment. Please check logs.");
-                Console.WriteLine("Excpetion thrown when deleting appointment: " + ex);
+                Console.WriteLine("Exception thrown when deleting appointment: " + ex);
                 return false;
             }
             finally
