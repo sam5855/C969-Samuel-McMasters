@@ -40,7 +40,6 @@
             this.customerDGV = new System.Windows.Forms.DataGridView();
             this.label5 = new System.Windows.Forms.Label();
             this.userIdTextBox = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
             this.aptTypeComboBox = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.customerDGV)).BeginInit();
             this.SuspendLayout();
@@ -152,17 +151,6 @@
             this.userIdTextBox.Size = new System.Drawing.Size(121, 20);
             this.userIdTextBox.TabIndex = 14;
             // 
-            // button1
-            // 
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Location = new System.Drawing.Point(122, 331);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(132, 23);
-            this.button1.TabIndex = 17;
-            this.button1.Text = "Clear Inputs";
-            this.button1.UseVisualStyleBackColor = false;
-            // 
             // aptTypeComboBox
             // 
             this.aptTypeComboBox.FormattingEnabled = true;
@@ -181,7 +169,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(458, 424);
             this.Controls.Add(this.aptTypeComboBox);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.userIdTextBox);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.customerDGV);
@@ -217,7 +204,6 @@
         private System.Windows.Forms.DataGridView customerDGV;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox userIdTextBox;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ComboBox aptTypeComboBox;
     }
 }

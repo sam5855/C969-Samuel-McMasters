@@ -23,8 +23,12 @@ namespace C969_Samuel_McMasters.Services
     class Service
     {
         //Class to handle database operations
-        public static string vmConnectionString = "server=127.0.0.1;uid=sqlUser;pwd=Passw0rd!;database=client_schedule";
-        public static string homeConnectionString = "server=127.0.0.1;uid=root;pwd=5855;database=client_schedule";
+        
+        //Database details for local machine
+        //public static string homeConnectionString = "server=127.0.0.1;uid=root;pwd=5855;database=client_schedule";
+
+        //Database details for test server
+        public static string homeConnectionString = "server=127.0.0.1;uid=sqlUser;pwd=Passw0rd!;database=client_schedule";
 
 
 

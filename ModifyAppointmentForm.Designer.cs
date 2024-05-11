@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
             this.userIdTextBox = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.customerDGV = new System.Windows.Forms.DataGridView();
@@ -45,17 +44,6 @@
             this.aptTypeComboBox = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.customerDGV)).BeginInit();
             this.SuspendLayout();
-            // 
-            // button1
-            // 
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Location = new System.Drawing.Point(122, 377);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(132, 23);
-            this.button1.TabIndex = 30;
-            this.button1.Text = "Clear Inputs";
-            this.button1.UseVisualStyleBackColor = false;
             // 
             // userIdTextBox
             // 
@@ -194,7 +182,6 @@
             this.Controls.Add(this.aptTypeComboBox);
             this.Controls.Add(this.aptIdTextBox);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.userIdTextBox);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.customerDGV);
@@ -217,8 +204,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TextBox userIdTextBox;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.DataGridView customerDGV;
