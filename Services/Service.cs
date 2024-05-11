@@ -15,6 +15,8 @@ using System.Globalization;
 using System.Windows.Forms;
 using Org.BouncyCastle.Asn1.X509;
 using System.Configuration;
+using System.Runtime.Remoting.Messaging;
+using System.Drawing;
 
 namespace C969_Samuel_McMasters.Services
 {
@@ -204,6 +206,39 @@ namespace C969_Samuel_McMasters.Services
 
             return 0;
         }
+
+        //Gets user Id
+        static public int GetUserId(string search)
+        {
+            int customerId;
+            string query;
+
+            if (int.TryParse(search, out customerId))
+            {
+                query = $"SELECT userId FROM user WHERE userName = '{search}'";
+            }
+            else
+            {
+                query = $"SELECT userId FROM user WHERE userName LIKE '{search}'";
+            }
+
+            MySqlConnection c = new MySqlConnection(homeConnectionString);
+            c.Open();
+            MySqlCommand cmd = new MySqlCommand(query, c);
+            MySqlDataReader rdr = cmd.ExecuteReader();
+
+            if (rdr.HasRows)
+            {
+                rdr.Read();
+                customerId = Convert.ToInt32(rdr[0]);
+                rdr.Close();
+                c.Close();
+                return customerId;
+            }
+
+            return 0;
+        }
+
 
         //Update customer information
         static public bool UpdateCustomer(Dictionary<string, string> updatedCustomer)
@@ -676,92 +711,210 @@ namespace C969_Samuel_McMasters.Services
             return customerList;
         }
         
-        //Generates first report
+        ////Generates first report
+        //static public string GenerateReport1(DateTime month, string type)
+        //{
+        //    List<int> appointmentList = new List<int>();
+        //    MySqlConnection c = new MySqlConnection(homeConnectionString);
+        //    DateTime currentDate = month;
+
+        //    DateTime startOfMonth = new DateTime(currentDate.Year, currentDate.Month, 1);
+
+        //    DateTime endOfMonth = startOfMonth.AddMonths(1).AddDays(-1);
+        //    int appointmentCount = 0;
+
+        //    try
+        //    {
+
+
+        //        c.Open();
+        //        MySqlCommand cmd = c.CreateCommand();
+        //        cmd.CommandText = "SELECT COUNT(*) FROM appointment WHERE type = @type AND start >= @start AND end <= @end";
+        //        cmd.Parameters.AddWithValue("@type", type);
+        //        cmd.Parameters.AddWithValue("@start", startOfMonth.ToUniversalTime().ToString("yyyyMMddHHmmss"));
+        //        cmd.Parameters.AddWithValue("@end", endOfMonth.ToUniversalTime().ToString("yyyyMMddHHmmss"));
+
+        //        appointmentCount = Convert.ToInt32(cmd.ExecuteScalar());
+        //        return appointmentCount.ToString();
+                
+               
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Console.WriteLine("Exception thrown when getting current week appointments: " + ex);
+        //        return appointmentCount.ToString();
+        //    }
+
+        //    finally
+        //    {
+        //        c.Close();
+        //    }
+
+
+            
+
+        //}
+
+        //Generates second report
+        //static public string GenerateReport2(int userId)
+        //{
+        //    string x = "x";
+        //    return x;
+        //}
+
+        //Generates third report
+        //static public string GenerateReport3(string customerName)
+        //{
+        //    int customerId = GetCustomerId(customerName);
+        //    MySqlConnection c = new MySqlConnection(homeConnectionString);
+         
+        //    int appointmentCount = 0;
+
+        //    try
+        //    {
+
+
+        //        c.Open();
+        //        MySqlCommand cmd = c.CreateCommand();
+        //        cmd.CommandText = "SELECT COUNT(*) FROM appointment WHERE customerId = @customerId";
+        //        cmd.Parameters.AddWithValue("@customerId", customerId);
+                
+
+        //        appointmentCount = Convert.ToInt32(cmd.ExecuteScalar());
+        //        Console.WriteLine($"Appoint Count: {appointmentCount}");
+
+        //        return appointmentCount.ToString();
+
+
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Console.WriteLine("Exception thrown when getting current week appointments: " + ex);
+        //        return appointmentCount.ToString();
+        //    }
+
+        //    finally
+        //    {
+        //        c.Close();
+        //    }
+        //}
+
+
+
+
+
+
+        //=====================================================================
+        //Delegate and Lambda functionality below
+        //=====================================================================
+
+
+
+
+       
+
+        //This lambda expression encapsultaes the database query to count the number of appointment, providing a more concise and readable approach
+        public static Func<MySqlCommand, int> countAppointments = (cmd) =>
+        {
+            int appointmentCount = 0;
+            try
+            {
+                appointmentCount = Convert.ToInt32(cmd.ExecuteScalar());
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Exception thrown when getting appointment count: " + ex);
+            }
+            return appointmentCount;
+        };
+
+        //This lambda expression encapsulates the creation of an Appointment objects from the data reader, providing a more concise and readable approach
+        public static Func<MySqlDataReader, Appointment> createAppointment = (reader) =>
+        {
+            DateTime startDate = Convert.ToDateTime(reader["start"]);
+            DateTime endDate = Convert.ToDateTime(reader["end"]);
+            return new Appointment()
+            {
+                StartDate = startDate.ToLocalTime(),
+                EndDate = endDate.ToLocalTime(),
+                Type = reader["type"].ToString(),
+                AppointmentId = Convert.ToInt32(reader["appointmentId"]),
+                CustomerId = Convert.ToInt32(reader["customerId"]),
+                //UserId = userId
+            };
+        };
+
+        //!!!!!!This is working with lambda
         static public string GenerateReport1(DateTime month, string type)
         {
             List<int> appointmentList = new List<int>();
             MySqlConnection c = new MySqlConnection(homeConnectionString);
             DateTime currentDate = month;
-
             DateTime startOfMonth = new DateTime(currentDate.Year, currentDate.Month, 1);
-
             DateTime endOfMonth = startOfMonth.AddMonths(1).AddDays(-1);
-            int appointmentCount = 0;
+            c.Open();
+            MySqlCommand cmd = c.CreateCommand();
+            cmd.CommandText = "SELECT COUNT(*) FROM appointment WHERE type = @type AND start >= @start AND end <= @end";
+            cmd.Parameters.AddWithValue("@type", type);
+            cmd.Parameters.AddWithValue("@start", startOfMonth.ToUniversalTime().ToString("yyyyMMddHHmmss"));
+            cmd.Parameters.AddWithValue("@end", endOfMonth.ToUniversalTime().ToString("yyyyMMddHHmmss"));
+            int appointmentCount = countAppointments(cmd); //Use of delegate and lambda above
+            c.Close();
+            return appointmentCount.ToString();
+            
+        }
 
+        //!!!!!!This is working with lambda
+        static public List<Appointment> GenerateReport2(int userId)
+        {
+            MySqlConnection c = new MySqlConnection(homeConnectionString);
+            List<Appointment> appointmentList = new List<Appointment>();
             try
             {
-
-
                 c.Open();
-                MySqlCommand cmd = c.CreateCommand();
-                cmd.CommandText = "SELECT COUNT(*) FROM appointment WHERE type = @type AND start >= @start AND end <= @end";
-                cmd.Parameters.AddWithValue("@type", type);
-                cmd.Parameters.AddWithValue("@start", startOfMonth.ToUniversalTime().ToString("yyyyMMddHHmmss"));
-                cmd.Parameters.AddWithValue("@end", endOfMonth.ToUniversalTime().ToString("yyyyMMddHHmmss"));
-
-                appointmentCount = Convert.ToInt32(cmd.ExecuteScalar());
-                return appointmentCount.ToString();
-                
-               
+                MySqlCommand cmd = new MySqlCommand(
+                    "SELECT * FROM appointment WHERE userID = @userId",
+                    c
+                );
+                cmd.Parameters.AddWithValue("@userId", userId);
+                cmd.ExecuteNonQuery();
+                using (MySqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read()) //Use of delegate and lambda above
+                    {
+                        appointmentList.Add(createAppointment(reader));
+                    }
+                }
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Exception thrown when getting current week appointments: " + ex);
-                return appointmentCount.ToString();
+                Console.WriteLine("Exception thrown when getting current week appointments: " + ex);               
             }
-
             finally
             {
                 c.Close();
             }
-
-
-            
-
+            return appointmentList;
         }
 
-        //Generates third report
+        //!!!!!!This is working with lambda
         static public string GenerateReport3(string customerName)
         {
             int customerId = GetCustomerId(customerName);
             MySqlConnection c = new MySqlConnection(homeConnectionString);
-         
-            int appointmentCount = 0;
-
-            try
-            {
-
-
-                c.Open();
-                MySqlCommand cmd = c.CreateCommand();
-                cmd.CommandText = "SELECT COUNT(*) FROM appointment WHERE customerId = @customerId";
-                cmd.Parameters.AddWithValue("@customerId", customerId);
-                
-
-                appointmentCount = Convert.ToInt32(cmd.ExecuteScalar());
-                Console.WriteLine($"Appoint Count: {appointmentCount}");
-
-                return appointmentCount.ToString();
-
-
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Exception thrown when getting current week appointments: " + ex);
-                return appointmentCount.ToString();
-            }
-
-            finally
-            {
-                c.Close();
-            }
-
-
-
-
+            c.Open();
+            MySqlCommand cmd = c.CreateCommand();
+            cmd.CommandText = "SELECT COUNT(*) FROM appointment WHERE customerId = @customerId";
+            cmd.Parameters.AddWithValue("@customerId", customerId);
+            int appointmentCount = countAppointments(cmd); //Use of delegate and lambda above 
+            c.Close();
+            return appointmentCount.ToString();
         }
 
-        
+
+
+
+
     }
 
 }
