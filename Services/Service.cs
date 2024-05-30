@@ -612,61 +612,36 @@ namespace C969_Samuel_McMasters.Services
         //Alerts user if appointment is within 15 minutes of log-in time
         static public void AlertUser(int userId)
         {
-            //DateTime currentTime = DateTime.UtcNow;
+            DateTime currentTime = DateTime.UtcNow;
 
-            ////DateTime currentTime = DateTime.Now;
-            ////currentTime.ToUniversalTime();
+            MySqlConnection c = new MySqlConnection(homeConnectionString);
 
+            try
+            {
+                c.Open();
+                MySqlCommand cmd = c.CreateCommand();              
 
-            //MySqlConnection c = new MySqlConnection(homeConnectionString);
+                //Interval in SQL command set to 16 to include appointments beginning on the 15th minute
+                cmd.CommandText = $"SELECT COUNT(*) FROM appointment WHERE userId = @userId AND start BETWEEN @currentTime AND @currentTime + INTERVAL 16 MINUTE";
+                cmd.Parameters.AddWithValue("@userId", userId);
+                cmd.Parameters.AddWithValue("@currentTime", currentTime.ToString("yyyyMMddHHmmss"));
+                Console.WriteLine(currentTime.ToString("yyyyMMddHHmmss"));
+                int appointmentCount = Convert.ToInt32(cmd.ExecuteScalar());
 
-            ////try
-            ////{
-            ////    c.Open();
-            ////    MySqlCommand cmd = c.CreateCommand();
-            ////    cmd.CommandText = $"SELECT COUNT(*) FROM appointment WHERE userId = @userId AND TIMESTAMPDIFF(MINUTE, start, @currentTime) <= 15 AND TIMESTAMPDIFF(MINUTE, start, @currentTime) >= 0";
-            ////    cmd.Parameters.AddWithValue("@userId", userId);
-            ////    cmd.Parameters.AddWithValue("@currentTime", currentTime.ToString("yyyyMMddHHmmss"));
+                if (appointmentCount > 0)
+                {
+                   MessageBox.Show("Upcoming appointment within 15 minutes!");
+                }
 
-            ////    int appointmentCount = Convert.ToInt32(cmd.ExecuteScalar());
-
-            ////    if (appointmentCount > 0)
-            ////    {
-
-            ////        //MessageBox.Show("Upcoming appointment within 15 minutes!?");
-            ////    }
-
-            ////}
-            ////catch (Exception ex)
-            ////{
-            ////    Console.WriteLine("Exception thrown when checking for overlapping appointments." + ex);
-            ////}
-            ////finally
-            ////{
-            ////    c.Close();
-            ////}
-
-            
-            //    c.Open();
-            //    MySqlCommand cmd = c.CreateCommand();
-            //    cmd.CommandText = $"SELECT COUNT(*) FROM appointment WHERE userId = @userId AND TIMESTAMPDIFF(MINUTE, start, @currentTime) <= 15 AND TIMESTAMPDIFF(MINUTE, start, @currentTime) >= 0";
-            //    cmd.Parameters.AddWithValue("@userId", userId);
-            //    cmd.Parameters.AddWithValue("@currentTime", currentTime.ToString("yyyyMMddHHmmss"));
-
-            //    int appointmentCount = Convert.ToInt32(cmd.ExecuteScalar());
-
-            //    if (appointmentCount > 0)
-            //    {
-            //        MessageBox.Show("Test");
-            //    }
-
-            
-           
-            //    c.Close();
-            
-
-
-
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Exception thrown when checking for overlapping appointments." + ex);
+            }
+            finally
+            {
+                c.Close();
+            }
 
         }
 
