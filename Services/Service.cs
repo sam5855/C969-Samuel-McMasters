@@ -451,7 +451,7 @@ namespace C969_Samuel_McMasters.Services
 
             DateTime startOfMonth = new DateTime(currentDate.Year, currentDate.Month, 1);
 
-            //DateTime endOfMonth = startOfMonth.AddMonths(1).AddDays(-1);
+            
             DateTime endOfMonth = startOfMonth.AddMonths(1);
 
             try
