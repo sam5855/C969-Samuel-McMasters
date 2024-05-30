@@ -720,13 +720,15 @@ namespace C969_Samuel_McMasters.Services
         }
    
 
+
+
         //=====================================================================
         //Delegate and Lambda functionality below
         //=====================================================================
 
 
 
-        //This lambda expression encapsultaes the database query to count the number of appointment, providing a more concise and readable approach
+        //This lambda expression is used in report1, it encapsultaes the database query to count the number of appointment, providing a more concise and readable approach
         public static Func<MySqlCommand, int> countAppointments = (cmd) =>
         {
             int appointmentCount = 0;
@@ -741,7 +743,7 @@ namespace C969_Samuel_McMasters.Services
             return appointmentCount;
         };
 
-        //This lambda expression encapsulates the creation of an Appointment objects from the data reader, providing a more concise and readable approach
+        //This lambda expression is used in report2, it encapsulates the creation of an Appointment objects from the data reader, providing a more concise and readable approach
         public static Func<MySqlDataReader, Appointment> createAppointment = (reader) =>
         {
             DateTime startDate = Convert.ToDateTime(reader["start"]);
@@ -757,7 +759,22 @@ namespace C969_Samuel_McMasters.Services
             };
         };
 
-        //!!!!!!This is working with lambda
+        //This lambda expression is used in report 3, it provides a more concise and readable approach to the report3 functionality
+        public static Func<MySqlCommand, int> appointmentCount = (cmd) =>
+        {
+            int appointmentCount = 0;
+            try
+            {
+                appointmentCount = Convert.ToInt32(cmd.ExecuteScalar());
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Exception thrown when getting appointment count: " + ex);
+            }
+            return appointmentCount;
+        };
+
+        //Report 1, lambda function line 791
         static public string GenerateReport1(DateTime month, string type)
         {
             List<int> appointmentList = new List<int>();
@@ -777,7 +794,7 @@ namespace C969_Samuel_McMasters.Services
             
         }
 
-        //!!!!!!This is working with lambda
+        //Report 2, lambda function line 815
         static public List<Appointment> GenerateReport2(int userId)
         {
             MySqlConnection c = new MySqlConnection(homeConnectionString);
@@ -793,9 +810,9 @@ namespace C969_Samuel_McMasters.Services
                 cmd.ExecuteNonQuery();
                 using (MySqlDataReader reader = cmd.ExecuteReader())
                 {
-                    while (reader.Read()) //Use of delegate and lambda above
+                    while (reader.Read()) 
                     {
-                        appointmentList.Add(createAppointment(reader));
+                        appointmentList.Add(createAppointment(reader));//Use of delegate and lambda above
                     }
                 }
             }
@@ -810,7 +827,7 @@ namespace C969_Samuel_McMasters.Services
             return appointmentList;
         }
 
-        //!!!!!!This is working with lambda
+        //Report 3, lambda function line 839
         static public string GenerateReport3(string customerName)
         {
             int customerId = GetCustomerId(customerName);
@@ -819,9 +836,9 @@ namespace C969_Samuel_McMasters.Services
             MySqlCommand cmd = c.CreateCommand();
             cmd.CommandText = "SELECT COUNT(*) FROM appointment WHERE customerId = @customerId";
             cmd.Parameters.AddWithValue("@customerId", customerId);
-            int appointmentCount = countAppointments(cmd); //Use of delegate and lambda above 
+            int aptCount = appointmentCount(cmd); //Use of delegate and lambda above 
             c.Close();
-            return appointmentCount.ToString();
+            return aptCount.ToString();
         }
 
 
