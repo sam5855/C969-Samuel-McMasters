@@ -451,7 +451,6 @@ namespace C969_Samuel_McMasters.Services
 
             DateTime startOfMonth = new DateTime(currentDate.Year, currentDate.Month, 1);
 
-            
             DateTime endOfMonth = startOfMonth.AddMonths(1);
 
             try
@@ -614,10 +613,40 @@ namespace C969_Samuel_McMasters.Services
         static public void AlertUser(int userId)
         {
             DateTime currentTime = DateTime.UtcNow;
+
+            //DateTime currentTime = DateTime.Now;
+            //currentTime.ToUniversalTime();
+
+
             MySqlConnection c = new MySqlConnection(homeConnectionString);
 
-            try
-            {
+            //try
+            //{
+            //    c.Open();
+            //    MySqlCommand cmd = c.CreateCommand();
+            //    cmd.CommandText = $"SELECT COUNT(*) FROM appointment WHERE userId = @userId AND TIMESTAMPDIFF(MINUTE, start, @currentTime) <= 15 AND TIMESTAMPDIFF(MINUTE, start, @currentTime) >= 0";
+            //    cmd.Parameters.AddWithValue("@userId", userId);
+            //    cmd.Parameters.AddWithValue("@currentTime", currentTime.ToString("yyyyMMddHHmmss"));
+
+            //    int appointmentCount = Convert.ToInt32(cmd.ExecuteScalar());
+
+            //    if (appointmentCount > 0)
+            //    {
+
+            //        //MessageBox.Show("Upcoming appointment within 15 minutes!?");
+            //    }
+
+            //}
+            //catch (Exception ex)
+            //{
+            //    Console.WriteLine("Exception thrown when checking for overlapping appointments." + ex);
+            //}
+            //finally
+            //{
+            //    c.Close();
+            //}
+
+            
                 c.Open();
                 MySqlCommand cmd = c.CreateCommand();
                 cmd.CommandText = $"SELECT COUNT(*) FROM appointment WHERE userId = @userId AND TIMESTAMPDIFF(MINUTE, start, @currentTime) <= 15 AND TIMESTAMPDIFF(MINUTE, start, @currentTime) >= 0";
@@ -628,18 +657,16 @@ namespace C969_Samuel_McMasters.Services
 
                 if (appointmentCount > 0)
                 {
-                    MessageBox.Show("Upcoming appointment within 15 minutes!");
-
+                    MessageBox.Show("Test");
                 }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Exception thrown when checking for overlapping appointments." + ex);
-            }
-            finally
-            {
+
+            
+           
                 c.Close();
-            }
+            
+
+
+
 
         }
 
@@ -762,7 +789,7 @@ namespace C969_Samuel_McMasters.Services
             MySqlConnection c = new MySqlConnection(homeConnectionString);
             DateTime currentDate = month;
             DateTime startOfMonth = new DateTime(currentDate.Year, currentDate.Month, 1);
-            DateTime endOfMonth = startOfMonth.AddMonths(1).AddDays(-1);
+            DateTime endOfMonth = startOfMonth.AddMonths(1);
             c.Open();
             MySqlCommand cmd = c.CreateCommand();
             cmd.CommandText = "SELECT COUNT(*) FROM appointment WHERE type = @type AND start >= @start AND end <= @end";
