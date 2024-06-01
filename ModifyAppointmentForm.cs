@@ -17,6 +17,10 @@ namespace C969_Samuel_McMasters
 
     public partial class ModifyAppointmentForm : Form
     {
+        
+        
+
+
 
         public static Dictionary<string, string> appointmentDict = new Dictionary<string, string>();
 
@@ -104,7 +108,7 @@ namespace C969_Samuel_McMasters
 
                 if (DataHelper.CheckBusinessHours(startDate, endDate))
                 {
-                    if (Service.CheckOverlappingAppointments(startDate, endDate, userId))
+                    if (Service.CheckOverlappingAppointments(startDate.ToUniversalTime(), endDate.ToUniversalTime(), userId))
                     {
                         MessageBox.Show("Appointment overlap error.");
                     }
