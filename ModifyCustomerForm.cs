@@ -51,7 +51,7 @@ namespace C969_Samuel_McMasters
         {
 
             if (string.IsNullOrEmpty(modCustomerNameTextBox.Text) || string.IsNullOrEmpty(modCustomerAddressTextBox.Text) || string.IsNullOrEmpty(modCustomerCityTextBox.Text) || string.IsNullOrEmpty(modCustomerCountryTextBox.Text)
-                || string.IsNullOrEmpty(modCustomerPostalCodeTextBox.Text) || string.IsNullOrEmpty(maskedPhoneNumber.Text))
+                || string.IsNullOrEmpty(modCustomerPostalCodeTextBox.Text) || !maskedPhoneNumber.MaskCompleted)
             {
                 MessageBox.Show("Please fill out all customer information");
             }

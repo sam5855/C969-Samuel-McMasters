@@ -32,7 +32,7 @@ namespace C969_Samuel_McMasters
         private void saveButton_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(customerNameTextBox.Text) || string.IsNullOrEmpty(customerAddressTextBox.Text) || string.IsNullOrEmpty(customerCityTextBox.Text) || string.IsNullOrEmpty(customerCountryTextBox.Text)
-                || string.IsNullOrEmpty(customerPostalCodeTextBox.Text) || string.IsNullOrEmpty(maskedPhoneNumber.Text))
+                || string.IsNullOrEmpty(customerPostalCodeTextBox.Text) || !maskedPhoneNumber.MaskCompleted)
             {
                 MessageBox.Show("Please fill out all customer information");
             }
