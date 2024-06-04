@@ -30,6 +30,7 @@
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.report1 = new System.Windows.Forms.TabPage();
+            this.label11 = new System.Windows.Forms.Label();
             this.monthLabel = new System.Windows.Forms.Label();
             this.typeLabel = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -42,11 +43,13 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.report2 = new System.Windows.Forms.TabPage();
+            this.label10 = new System.Windows.Forms.Label();
             this.generateReport2Button = new System.Windows.Forms.Button();
             this.userComboBox = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.reportTwoDGV = new System.Windows.Forms.DataGridView();
             this.report3 = new System.Windows.Forms.TabPage();
+            this.label12 = new System.Windows.Forms.Label();
             this.appointmentCountLabel = new System.Windows.Forms.Label();
             this.customerLabel = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
@@ -55,9 +58,6 @@
             this.customerComboBox = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.exitButton = new System.Windows.Forms.Button();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.report1.SuspendLayout();
             this.report2.SuspendLayout();
@@ -97,6 +97,16 @@
             this.report1.Size = new System.Drawing.Size(613, 255);
             this.report1.TabIndex = 0;
             this.report1.Text = "Number of Appointments";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(6, 16);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(337, 13);
+            this.label11.TabIndex = 14;
+            this.label11.Text = "Select the month and appointment type to view the report.";
             // 
             // monthLabel
             // 
@@ -180,7 +190,7 @@
             // 
             this.aptTypeComboBox.FormattingEnabled = true;
             this.aptTypeComboBox.Items.AddRange(new object[] {
-            "Presentation ",
+            "Presentation",
             "Scrum",
             "Review"});
             this.aptTypeComboBox.Location = new System.Drawing.Point(145, 129);
@@ -222,6 +232,16 @@
             this.report2.Size = new System.Drawing.Size(613, 255);
             this.report2.TabIndex = 1;
             this.report2.Text = "User Schedule";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Location = new System.Drawing.Point(6, 22);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(205, 13);
+            this.label10.TabIndex = 8;
+            this.label10.Text = "Select a user to see their schedule";
             // 
             // generateReport2Button
             // 
@@ -281,6 +301,16 @@
             this.report3.Size = new System.Drawing.Size(613, 255);
             this.report3.TabIndex = 2;
             this.report3.Text = "Number of Appointments by Customer";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.Location = new System.Drawing.Point(3, 20);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(345, 13);
+            this.label12.TabIndex = 14;
+            this.label12.Text = "Select a customer to see their total number of appointments";
             // 
             // appointmentCountLabel
             // 
@@ -366,36 +396,6 @@
             this.exitButton.Text = "Exit";
             this.exitButton.UseVisualStyleBackColor = false;
             this.exitButton.Click += new System.EventHandler(this.exitButton_Click);
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(6, 22);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(205, 13);
-            this.label10.TabIndex = 8;
-            this.label10.Text = "Select a user to see their schedule";
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(6, 16);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(337, 13);
-            this.label11.TabIndex = 14;
-            this.label11.Text = "Select the month and appointment type to view the report.";
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(3, 20);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(345, 13);
-            this.label12.TabIndex = 14;
-            this.label12.Text = "Select a customer to see their total number of appointments";
             // 
             // ReportsForm
             // 
